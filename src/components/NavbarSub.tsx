@@ -1,19 +1,19 @@
 "use client";
-import React from "react";
+import React, { memo } from "react";
 import Link from "../../node_modules/next/link";
-import { usePathname } from "../../node_modules/next/navigation";
+// import { usePathname } from "../../node_modules/next/navigation";
 
-export default function NavbarSub() {
-  let pathname = usePathname();
-  console.log("check", pathname);
+function NavbarSub() {
+  // let pathname = usePathname();
+  // console.log("check", pathname);
 
   return (
     <div className="navbar__sub absolute bg-pink-50 dark:bg-[color:var(--navbar-color)] object-cover z-10">
       {/* <div className="navbar__sub__items border-b border-slate-600 dark:border-slate-700 mb-4 ps-7 pe-10"></div> */}
       <div className="navbar__sub__items   object-cover">
         {/* <div className="item dark:hover:bg-[color:var(--navbar-hover-color)] border-b border-white dark:border-slate-400 mb-4"></div> */}
-        <div className="item hover:bg-pink-200  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10 pt-4 bg-pink-300 dark:bg-[color:var(--active-dark)]">
-          <Link className="flex items-center" href="/">
+        <div className="item hover:bg-pink-100  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10 pt-4 bg-pink-300 dark:bg-[color:var(--active-dark)]">
+          <Link className="flex items-center" href="/layout/home">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -34,7 +34,7 @@ export default function NavbarSub() {
           </Link>
         </div>
         <div className="item hover:bg-pink-200  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10 border-b border-pink-200 dark:border-slate-700">
-          <Link className="flex items-center " href="/explore">
+          <Link className="flex items-center " href="/layout/explore">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -55,7 +55,7 @@ export default function NavbarSub() {
           </Link>
         </div>
         <div className="item hover:bg-pink-200  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10">
-          <Link className="flex items-center " href={"/search"}>
+          <Link className="flex items-center " href={"/layout/search"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -76,7 +76,7 @@ export default function NavbarSub() {
               />
             </svg>
             <label
-              htmlFor=""
+              // htmlFor=""
               className="cursor-pointer text-sm ms-6 text-black dark:text-white"
             >
               Top luot xem
@@ -84,7 +84,7 @@ export default function NavbarSub() {
           </Link>
         </div>
         <div className="item hover:bg-pink-200  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10">
-          <Link className="flex items-center " href={""}>
+          <Link className="flex items-center " href={"/layout/anime-vietsub"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -148,7 +148,7 @@ export default function NavbarSub() {
             </svg>
 
             <label
-              htmlFor=""
+              // htmlFor=""
               className="cursor-pointer text-sm ms-6 text-black dark:text-white"
             >
               18+
@@ -173,7 +173,7 @@ export default function NavbarSub() {
             </svg>
 
             <label
-              htmlFor=""
+              // htmlFor=""
               className="cursor-pointer text-sm ms-6 text-black dark:text-white"
             >
               Phim da xem
@@ -198,7 +198,7 @@ export default function NavbarSub() {
             </svg>
 
             <label
-              htmlFor=""
+              // htmlFor=""
               className="cursor-pointer text-sm ms-6 text-black dark:text-white"
             >
               Phim da luu
@@ -226,7 +226,7 @@ export default function NavbarSub() {
             </svg>
 
             <label
-              htmlFor=""
+              // htmlFor=""
               className="cursor-pointer text-sm ms-6 text-black dark:text-white"
             >
               Saucemoe
@@ -237,3 +237,5 @@ export default function NavbarSub() {
     </div>
   );
 }
+
+export default memo(NavbarSub);

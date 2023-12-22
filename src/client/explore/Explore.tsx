@@ -4,7 +4,10 @@ import React from "react";
 
 export default function Explore() {
   return (
-    <div className="explore__container container py-4 max-w-[1440px] ">
+    <div
+      className="explore__container container max-w-[1440px] "
+      style={{ padding: "16px" }}
+    >
       <Branch />
       <Category />
     </div>
