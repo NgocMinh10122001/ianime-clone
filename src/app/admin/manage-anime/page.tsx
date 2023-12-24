@@ -1,5 +1,5 @@
-import Dashboard from "@/components/admin/Dashboard";
-import ManageAnime from "@/components/admin/ManageAnime";
+import Dashboard from "@/client/admin/Dashboard";
+import ManageAnime from "@/client/admin/ManageAnime";
 import { NextApiRequest } from "next";
 import { NextRequest } from "next/server";
 

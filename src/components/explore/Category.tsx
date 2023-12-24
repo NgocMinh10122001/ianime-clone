@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 function Category() {
   return (
@@ -24,4 +24,4 @@ function Category() {
   );
 }
 
-export default Category;
+export default memo(Category);

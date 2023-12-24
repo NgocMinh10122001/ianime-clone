@@ -2,11 +2,11 @@
 import Input from "@/components/re-components/Input";
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import { Router } from "react-router-dom";
 import { FaGooglePlusG, FaGithub } from "react-icons/fa";
 import axios from "axios";
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -138,3 +138,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default memo(Login);

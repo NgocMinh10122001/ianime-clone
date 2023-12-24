@@ -1,38 +1,24 @@
-import { NextApiRequest } from "next";
+import { verifyJwt } from "@/jwt-protected/jwt";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "../../../../lib/prismadb";
+import { options } from "../auth/[...nextauth]/options";
 
 export async function GET(req: NextRequest) {
-  // console.log("hcek req", req.query);
-
-  // let page: any = await req.nextUrl.searchParams.get("page");
-  // let limit: any = await req.nextUrl.searchParams.get("limit");
-
-  // let pageNumber: number = await req.body.page;
-  // let limitNumber: number = await req.body.limit;
-  // das
-
-  // let pageNumber = Number(page);
-  // let limitNumber = Number(limit);
-
-  // let { searchParams } = await new URL(req.url);
-
-  // searchParams.set()
-  // let page: any = searchParams.get("page");
-  // let limit: any = searchParams.get("limit");
-
-  // let itemSkip = (+page - 1) * +limit;
-
-  // console.log("check ", page, limit);
-
+  const accessToken = req.headers.get("token");
   try {
     // console.log("check ", req.query);
-    let totalRecord = await prismadb.user.count();
+    if (!accessToken)
+      return NextResponse.json({ errorMes: "Unauthenticated!" });
+    let verified = verifyJwt(accessToken, process.env.JWT_ACCESS_KEY as string);
+    if (verified) {
+      let totalRecord = await prismadb.user.count();
 
-    let users = await prismadb.user.findMany();
-    // console.log("check users", users);
+      let users = await prismadb.user.findMany();
+      // console.log("check users", users);
 
-    return NextResponse.json({ users, totalRecord }, { status: 200 });
+      return NextResponse.json({ users, totalRecord }, { status: 200 });
+    } else return NextResponse.json({ errorMes: "Unauthenticated!" });
   } catch (error) {
     console.log(error);
 

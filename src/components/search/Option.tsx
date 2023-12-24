@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function Option() {
+function Option() {
   return (
     <div className="options__container flex flex-wrap  ">
       <div className="option me-2 mt-2 sm:mt-4 bg-[var(--color-btn-sun)] dark:bg-[var(--navbar-hover-color)] dark:hover:bg-neutral-700 duration-200 ease-in hover:bg-pink-500 w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer ">
@@ -130,3 +130,4 @@ export default function Option() {
     </div>
   );
 }
+export default memo(Option);

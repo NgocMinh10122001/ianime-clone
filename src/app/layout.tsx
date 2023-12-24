@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import StyledComponentsRegistry from "./_lib/AntdRegistry";
 import NextNProgressClient from "@/components/re-components/ProgressBar";
+import AuthProvider from "@/components/context/AuthProvider";
+import { getServerSession } from "next-auth";
 
 // import NextNProgress from "nextjs-progressbar";
 const inter = Inter({ subsets: ["latin"] });
@@ -14,20 +16,23 @@ export const metadata: Metadata = {
   description: "Anime 18+",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
   return (
     <html lang="en">
       <body
         className={`relative dark:bg-[var(--bg-explore)] bg-white ${inter.className} `}
       >
-        <StyledComponentsRegistry>
-          <NextNProgressClient />
-          {children}
-        </StyledComponentsRegistry>
+        <AuthProvider session={session}>
+          <StyledComponentsRegistry>
+            <NextNProgressClient />
+            {children}
+          </StyledComponentsRegistry>
+        </AuthProvider>
       </body>
     </html>
   );

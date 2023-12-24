@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function Branch() {
+function Branch() {
   return (
     <div className="branch__container grid grid-cols-2 gap-0 sm:flex sm:justify-center overflow-hidden">
       <div className="branch__content bg-[url('/anime.webp')] bg-cover bg-center bg-no-repeat w-300 sm:w-304 h-564 sm:h-572 relative sm:hover:scale-105 duration-300 sm:hover:cursor-pointer sm:hover:transition-transform">
@@ -38,3 +38,5 @@ export default function Branch() {
     </div>
   );
 }
+
+export default memo(Branch);

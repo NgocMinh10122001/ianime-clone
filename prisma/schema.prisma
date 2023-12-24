@@ -11,16 +11,17 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  image       String?
-  email       String   @unique
-  password    String
-  role        String
-  createAt    DateTime @default(now())
-  updateAt    DateTime @updatedAt
-  accessToken String?
-  expires     Int?
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  image        String?
+  email        String   @unique
+  password     String
+  role         String
+  createAt     DateTime @default(now())
+  updateAt     DateTime @updatedAt
+  accessToken  String?
+  refreshToken String?
+  expires      Int?
 }
 
 model Anime {
@@ -43,4 +44,9 @@ model Genre {
   genre    String   @unique
   animes   Anime[]  @relation(fields: [animeIds], references: [id])
   animeIds String[] @db.ObjectId
+}
+
+model RefreshToken {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  refreshToken String
 }

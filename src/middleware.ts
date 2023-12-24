@@ -16,7 +16,7 @@ export default withAuth(
     //   return NextResponse.rewrite(new URL("/error", request.url));
     // }
     if (
-      request.nextUrl.pathname.startsWith("/admin/dashboard") &&
+      request.nextUrl.pathname.startsWith("/admin") &&
       request.nextauth.token?.role !== "admin"
     ) {
       return NextResponse.rewrite(new URL("/error", request.url));
@@ -41,6 +41,8 @@ export const config = {
     "/layout/explore",
     "/layout/search",
     "/error",
-    "/admin/dashboard",
+    "/admin",
+    "/admin/manage-user",
+    "/admin/manage-anime",
   ],
 };

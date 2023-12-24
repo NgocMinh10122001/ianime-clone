@@ -1,3 +1,5 @@
+import { GoogleProfile } from "next-auth/providers/google";
+// import { axios } from 'axios';
 import { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -6,9 +8,21 @@ import GoogleProvider from "next-auth/providers/google";
 import { compare } from "bcrypt";
 import prismadb from "../../../../../lib/prismadb";
 import jwt from "jsonwebtoken";
+import { signJwtAccessToken, signJwtRefeshToken } from "@/jwt-protected/jwt";
+import { jwtDecode } from "jwt-decode";
 export const options: NextAuthOptions = {
   providers: [
     GoogleProvider({
+      profile(profile: GoogleProfile) {
+        return {
+          ...profile,
+          role: profile.role ?? "user",
+          id: profile.sub,
+          image: profile.picture,
+          accessToken: profile.accessToken ?? null,
+          refreshToken: profile.refreshToken ?? null,
+        };
+      },
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_SECRET as string,
     }),
@@ -19,6 +33,8 @@ export const options: NextAuthOptions = {
           role: profile.role ?? "user",
           id: profile.id.toString(),
           image: profile.avatar_url,
+          accessToken: profile.accessToken ?? null,
+          refreshToken: profile.refreshToken ?? null,
         };
       },
       clientId: process.env.GITHUB_ID as string,
@@ -52,62 +68,109 @@ export const options: NextAuthOptions = {
         if (!isCorrectPassword) {
           throw new Error("Incorrect Password!");
         }
+        let accessToken = signJwtAccessToken({
+          id: user.id,
+          role: user.role,
+        });
+        // console.log("check acc1", accessToken);
 
-        const accessToken = jwt.sign(
-          {
-            id: user.id,
-            role: user.role,
-          },
-          process.env.JWT_ACCESS_KEY as string,
-          { expiresIn: "60s" }
-        );
-        // console.log("check access token", accessToken);
+        let refreshToken = signJwtRefeshToken({
+          id: user.id,
+          role: user.role,
+        });
 
         const { password, ...other } = user;
+
         other.accessToken = accessToken;
+        other.refreshToken = refreshToken;
         // console.log("chek user", other);
 
         return other;
-
-        // const user = { id: "42", name: "Minh@gmail.com", password: "10122001", role : "admin" }
-        //  const response = await fetch("https://reqres.in/api/users/2");
-        // const user = await response.json();
-        // console.log("check", movies);
-
-        // if (credentials?.email === user?.name && credentials?.password === user?.password) {
-        //     return user
-        // }
-        // else {
-        //     return null
-        // }
       },
     }),
   ],
   pages: {
     signIn: "/api/auth/login",
   },
+  // jwt: {
+  //   maxAge: 1 * 60,
+  // },
   callbacks: {
     async jwt({ token, user, account }) {
-      // console.log("Accout", account);
-      // console.log("User", user);
+      // console.log("check token", token);
+      // console.log("check token 1", user);
+      // console.log("check token 2", account);
+      if (user?.role === "user") {
+        token = {
+          ...token,
+          role: user.role,
+        };
+        return token;
+      }
+      if (user?.role === "admin" && account) {
+        token = {
+          ...token,
+          user,
+          role: user.role,
+          accessToken: user.accessToken as string,
+          refreshToken: user.refreshToken as string,
+          expiresAccessToken:
+            (jwtDecode(user.accessToken as string).exp as number) * 1000,
+        };
+        // console.log("firts time login", token);
+        return token;
+      }
+      if (
+        token.role === "admin" &&
+        Date.now() + 5000 < token.expiresAccessToken
+      ) {
+        // console.log("access token still valid returning token", token);
 
-      // Persist the OAuth access_token and or the user id to the token right after signin
+        return (token = {
+          ...token,
+        });
+      } else if (token.role === "admin") {
+        console.log("refreshing token");
+        const res = await fetch(
+          "http://localhost:3000/api/auth/refreshtoken",
 
-      if (user && user.role) token.role = user.role;
-      // console.log("check user 1", token);
+          {
+            method: "POST",
+            body: JSON.stringify({
+              token: token.refreshToken,
+              id: token.sub,
+              role: token.role,
+            }),
+          }
+        );
+        const data = await res.json();
+        // console.log("hceck data", data);
 
-      return token;
+        token = {
+          ...token,
+          user,
+          accessToken: data.accessToken as string,
+          refreshToken: token.refreshToken as string,
+          expiresAccessToken:
+            (jwtDecode(data.accessToken as string).exp as number) * 1000,
+        };
+        // console.log("firts time login", token);
+        return token;
+      } else return (token = { ...token });
     },
 
     async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
-      console.log("check session 1", session);
 
-      if (session?.user) {
+      if (session?.user && token.role === "admin") {
         session.user.role = token.role;
+        session.user.accessToken = token.accessToken;
+        return (session = {
+          ...session,
+        });
       }
-
-      return session;
+      // console.log("check sess tion 1", session);
+      return (session = { ...session });
     },
   },
 };

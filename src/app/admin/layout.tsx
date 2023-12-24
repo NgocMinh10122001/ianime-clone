@@ -1,4 +1,4 @@
-import MenuManage from "@/components/admin/MenuManage";
+import MenuManage from "@/client/admin/MenuManage";
 
 export default function DashboardLayout({
   children,

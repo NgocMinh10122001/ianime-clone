@@ -1,17 +1,13 @@
 "use client";
-import React, { useCallback, useEffect } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 import Image from "../../../node_modules/next/image";
 import Anime from "../re-components/Anime";
 import { signOut } from "next-auth/react";
 import axios from "axios";
 
-interface IProp {
-  token: any | {};
-}
-
 // import { cookies } from "../../../node_modules/next/dist/client/components/headers";
 
-export default function FreshLoad(props: IProp) {
+const FreshLoad = () => {
   // const { token } = props;
   // console.log("check token");
   // const getUser = useCallback(async () => {
@@ -45,4 +41,6 @@ export default function FreshLoad(props: IProp) {
       <Anime />
     </div>
   );
-}
+};
+
+export default memo(FreshLoad);

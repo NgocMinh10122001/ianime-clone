@@ -6,22 +6,47 @@ import {
 } from "@ant-design/icons";
 import { Button, Form, Modal, Table, Input } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
-import Paginate from "../pagination/Paginate";
+import Paginate from "../../components/pagination/Paginate";
 import type { ColumnsType } from "antd/es/table";
 import { User } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AddForm from "./form/AddForm";
 import { toast, ToastContainer } from "react-toastify";
-import loading from "@/app/admin/manage-user/loading";
+import loading from "@/app/admin/manage-anime/loading";
+import AddFormAnime from "./form/AddFormAnime";
+// import { useSession } from "next-auth/react";
 
 interface ICurrent {
   current: any;
   pageSize: any;
   total: any;
 }
-interface Iprops {
-  users: User[] | [];
+interface IAnime {
+  id: string;
+  title: string;
+  des: string;
+  duration: string | null;
+  videoUrl: string;
+  thumbnailUrl: string;
+  view: number | null;
+  rating: number | null;
+  genreIds: [];
+}
+interface Igenre {
+  id: string;
+  genre: string;
+}
+
+interface Ititle {
+  title: string;
+  des: string;
+  duration: string | null;
+}
+interface IAnimeProps {
+  animes: IAnime[] | [];
   meta: ICurrent;
+  genres: Igenre[];
+  title: Ititle;
 }
 
 // interface DataType {
@@ -34,70 +59,66 @@ interface Iprops {
 
 const { Search } = Input;
 
-export default function Dashboard(props: Iprops) {
+export default function ManageAnime(props: IAnimeProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
-  let [user, setUser] = useState({});
+  let [anime, setAnime] = useState({});
   let [action, setAction] = useState("");
   let [isFetching, setIsFetching] = useState<boolean>(false);
   let [isPaginate, setIsPaginate] = useState<boolean>(true);
-  let { users, meta } = props;
-  // let listUsers = props.users;
-  // console.log(users);
+  let { animes, meta, title, genres } = props;
+  // let listUsers = props.animes;
 
-  let [usersL, setUsersL] = useState(users);
+  let [animeL, setAnimeL] = useState(animes);
   // console.log(usersL);
-
+  // const { data: session } = useSession({ required: true });
+  // console.log("data", session);
   useEffect(() => {
-    setUsersL(users);
-  }, [users]);
+    setAnimeL(animes);
+  }, [animes]);
   useEffect(() => {
-    if (users) setIsFetching(false);
-  }, [users]);
+    if (animes) setIsFetching(false);
+  }, [animes]);
   // let { current, pageSize, totalPage } = meta;
   // console.log("check user", page);
 
-  const handleEditUser = (user: any) => {
-    // console.log("check user", user);
-    setUser(user);
+  const capitalizeFirstLetter = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  const handleEditUser = (anime: any) => {
+    anime.genre = anime.genres.map((item: any) => {
+      return { label: capitalizeFirstLetter(item.genre), value: item.id };
+    });
+    // console.log("check user", anime);
+    setAnime(anime);
     setAction("Edit");
     showModal();
   };
 
-  const handleDeleteUser = (user: any) => {
-    setUser(user);
+  const handleDeleteUser = (anime: any) => {
+    setAnime(anime);
     setAction("Delete");
     showModal();
   };
 
-  const dataSource = [
+  const columns: ColumnsType<IAnime> = [
     {
-      id: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
-
-  const columns: ColumnsType<User> = [
-    {
-      title: "Name",
-      dataIndex: "name",
+      title: `${title.title}`,
+      dataIndex: "title",
       // key: "name",
     },
     {
-      title: "Email",
-      dataIndex: "email",
+      title: `${title.des}`,
+      dataIndex: "des",
+      // key: "age",
+    },
+    {
+      title: `${title.duration}`,
+      dataIndex: "duration",
       // key: "age",
     },
     {
@@ -157,25 +178,25 @@ export default function Dashboard(props: Iprops) {
   };
 
   const handleAddNewUser = () => {
-    setUser({});
+    setAnime({});
     setAction("Add");
     showModal();
   };
 
   const handleSearchInput = (value: string, event: any, source: any) => {
-    // console.log(value);
+    console.log(value);
     // console.log(source.source);
 
     if (source.source === "input") {
-      let usersCopy = [...users];
-      usersCopy = usersCopy.filter((item) => {
-        if (item.name.toLowerCase().includes(value.toLowerCase())) {
+      let animesCopy = [...animes];
+      animesCopy = animesCopy.filter((item) => {
+        if (item.title.toLowerCase().includes(value.toLowerCase())) {
           return item;
         }
       });
-      meta.total = usersCopy.length;
-      // console.log(number);
-      setUsersL(usersCopy);
+      meta.total = animesCopy.length;
+      console.log(animesCopy);
+      setAnimeL(animesCopy);
       setIsFetching(true);
       setIsPaginate(false);
 
@@ -185,11 +206,11 @@ export default function Dashboard(props: Iprops) {
     } else if (source.source === "clear") {
       // console.log("hceck", listUsers);
 
-      setUsersL(users);
-      meta.total = users.length;
+      setAnimeL(animes);
+      meta.total = animes.length;
       setIsPaginate(true);
     } else {
-      setUsersL(users);
+      setAnimeL(animes);
       setIsPaginate(true);
     }
   };
@@ -221,7 +242,7 @@ export default function Dashboard(props: Iprops) {
         rowKey="id"
         className=" "
         bordered
-        dataSource={usersL}
+        dataSource={animeL}
         columns={columns}
         pagination={
           isPaginate
@@ -273,10 +294,11 @@ export default function Dashboard(props: Iprops) {
         onCancel={handleCancel}
         footer={null}
       >
-        <AddForm
+        <AddFormAnime
           onCancel={handleCancel}
-          userParent={user}
+          animeParent={anime}
           action={action}
+          genres={genres}
           // onToast={onToast}
           // onRefesh={onChange}
         />

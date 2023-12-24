@@ -1,8 +1,8 @@
 import Branch from "@/components/explore/Branch";
 import Category from "@/components/explore/Category";
-import React from "react";
+import React, { memo } from "react";
 
-export default function Explore() {
+function Explore() {
   return (
     <div
       className="explore__container container max-w-[1440px] "
@@ -13,3 +13,5 @@ export default function Explore() {
     </div>
   );
 }
+
+export default memo(Explore);

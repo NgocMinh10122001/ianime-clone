@@ -1,12 +1,17 @@
-import Dashboard from "@/components/admin/Dashboard";
+import Dashboard from "@/client/admin/Dashboard";
 import { NextApiRequest } from "next";
 import { NextRequest } from "next/server";
+import { getServerSession } from "next-auth/next";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 
 // interface IPage {
 //   page : number
 // }
 
 export default async function page(props: any) {
+  const session = await getServerSession(options);
+  // console.log("check session", session);
+
   let { searchParams } = props;
   let page = props?.searchParams?.page ?? 1;
   let limit = 6;
@@ -25,6 +30,7 @@ export default async function page(props: any) {
 
     {
       method: "GET",
+      headers: { token: `${session?.user.accessToken}` },
       next: { tags: ["manage-user"] },
     }
   );

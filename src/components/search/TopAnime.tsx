@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import Anime from "../re-components/Anime";
 import Pagination from "../re-components/Pagination";
 
-export default function TopAnime() {
+function TopAnime() {
   return (
     <div className="top__anime__container">
       <Pagination />
@@ -11,3 +11,5 @@ export default function TopAnime() {
     </div>
   );
 }
+
+export default memo(TopAnime);

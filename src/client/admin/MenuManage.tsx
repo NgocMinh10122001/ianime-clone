@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { GithubOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
@@ -62,4 +62,4 @@ const MenuManage: React.FC = () => {
   );
 };
 
-export default MenuManage;
+export default memo(MenuManage);

@@ -1,13 +1,13 @@
 "use client";
 import { signOut } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import NavbarSub from "./NavbarSub";
 import useDarkMode from "./useDarkMode";
 import { FaUserEdit } from "react-icons/fa";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 
-export default function Navbar() {
+function Navbar() {
   let { isDarkMode, toggleDarkMode } = useDarkMode();
   let [isToggleSubMenu, setToggleSubMenu] = useState(false);
   let [isToggleMenuUser, setToggleMenuUser] = useState(false);
@@ -208,3 +208,5 @@ export default function Navbar() {
     </header>
   );
 }
+
+export default memo(Navbar);
