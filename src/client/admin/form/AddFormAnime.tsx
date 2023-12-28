@@ -27,13 +27,20 @@ interface IProps {
   animeParent: any;
   action: string;
   genres: any;
+  firms: any;
+  releases: any;
   // onToast: any;
 }
 
 export default function AddFormAnime(props: IProps) {
   let [isLoading, setIsLoading] = useState<boolean>(false);
-  let { onCancel, animeParent, action, genres } = props;
+  let { onCancel, animeParent, action, genres, firms, releases } = props;
   const options: SelectProps["options"] = [];
+  const optionsFirm: SelectProps["options"] = [];
+  const optionsRelease: SelectProps["options"] = [];
+
+  // console.log("check parten", releases);
+
   const [form] = Form.useForm();
   useEffect(() => {
     // console.log("check action", animeParent);
@@ -110,9 +117,9 @@ export default function AddFormAnime(props: IProps) {
 
     onCancel();
   };
-  const capitalizeFirstLetter = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  // const capitalizeFirstLetter = (string: string) => {
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // };
 
   const handleChange = (value: string) => {
     // console.log(`selected ${value}`);
@@ -124,11 +131,31 @@ export default function AddFormAnime(props: IProps) {
       genres.genres.map((item: any) => {
         options.push({
           value: item.id,
-          label: capitalizeFirstLetter(item.genre),
+          label: item.genre,
+        });
+      });
+  }
+  {
+    firms?.firms &&
+      firms.firms.length > 0 &&
+      firms.firms.map((item: any) => {
+        optionsFirm.push({
+          value: item.id,
+          label: item.name,
         });
       });
   }
 
+  {
+    releases?.releases &&
+      releases.releases.length > 0 &&
+      releases.releases.map((item: any) => {
+        optionsRelease.push({
+          value: item.id,
+          label: item.year as string,
+        });
+      });
+  }
   return (
     <>
       <Form
@@ -176,44 +203,37 @@ export default function AddFormAnime(props: IProps) {
             <Form.Item name="view" label="View">
               <Input />
             </Form.Item>
-            <Form.Item name="rating" label="Rating">
+            <Form.Item name="rating" label="Episode">
               <Input />
             </Form.Item>
-            {/* {animeParent?.password ? (
-              ""
-            ) : (
-              <Form.Item
-                name="password"
-                label="Password"
-                rules={[{ required: true }]}
-              >
-                <Input type="password" />
-              </Form.Item>
-            )} */}
-            <Form.Item name="genre" label="Genre" rules={[{ required: true }]}>
-              {/* <Select
-                placeholder="Select a role"
-                //   onChange={onGenderChange}
-                allowClear
-              >
-                {genres?.genres &&
-                  genres.genres.length > 0 &&
-                  genres.genres.map((item: any) => {
-                    return (
-                      <Option key={item.id} value={item.id}>
-                        {capitalizeFirstLetter(item.genre)}
-                      </Option>
-                    );
-                  })}
-               
-              </Select> */}
 
+            <Form.Item name="genre" label="Genre" rules={[{ required: true }]}>
               <Select
                 mode="tags"
                 style={{ width: "100%" }}
                 onChange={handleChange}
                 tokenSeparators={[","]}
                 options={options}
+              />
+            </Form.Item>
+            <Form.Item name="firms" label="Firm" rules={[{ required: true }]}>
+              <Select
+                style={{ width: "100%" }}
+                onChange={handleChange}
+                tokenSeparators={[","]}
+                options={optionsFirm}
+              />
+            </Form.Item>
+            <Form.Item
+              name="releases"
+              label="Release"
+              rules={[{ required: true }]}
+            >
+              <Select
+                style={{ width: "100%" }}
+                onChange={handleChange}
+                tokenSeparators={[","]}
+                options={optionsRelease}
               />
             </Form.Item>
             {/* <Form.Item

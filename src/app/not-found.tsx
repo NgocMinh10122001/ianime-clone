@@ -1,28 +1,20 @@
 import Link from "next/link";
 import React from "react";
-import "./404.css";
 
 export default function NotFound() {
   return (
-    <div className="text-black">
-      <h1>404 Error Page</h1>
-      <p className="zoom-area">
-        <b>CSS</b> animations to make a cool 404 page.{" "}
-      </p>
-      <section className="error-container">
-        <span className="four">
-          <span className="screen-reader-text">4</span>
-        </span>
-        <span className="zero">
-          <span className="screen-reader-text">0</span>
-        </span>
-        <span className="four">
-          <span className="screen-reader-text">4</span>
-        </span>
-      </section>
-      <div className="link-container">
-        <Link href="/layout/home" className="more-link">
-          Visit the original article
+    <div className="min-h-screen flex flex-grow items-center justify-center bg-gray-50">
+      <div className="rounded-lg bg-white p-8 text-center shadow-xl">
+        <h1 className="mb-4 text-4xl font-bold text-black">404</h1>
+        <p className="text-gray-600">
+          Oops! The page you are looking for could not be found.
+        </p>
+        <Link
+          href="/layout/home"
+          className="mt-4 inline-block rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600"
+        >
+          {" "}
+          Go back to Home{" "}
         </Link>
       </div>
     </div>

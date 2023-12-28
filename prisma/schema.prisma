@@ -35,6 +35,10 @@ model Anime {
   rating       Int?
   genres       Genre[]  @relation(fields: [genreIds], references: [id])
   genreIds     String[] @db.ObjectId
+  firm         TheFirm  @relation(fields: [firmId], references: [id])
+  firmId       String   @db.ObjectId
+  release      Release  @relation(fields: [releaseId], references: [id])
+  releaseId    String   @db.ObjectId
 
   @@unique([videoUrl, thumbnailUrl])
 }
@@ -49,4 +53,16 @@ model Genre {
 model RefreshToken {
   id           String @id @default(auto()) @map("_id") @db.ObjectId
   refreshToken String
+}
+
+model TheFirm {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  animes Anime[]
+}
+
+model Release {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  year   Int
+  animes Anime[]
 }

@@ -1,5 +1,5 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import React, { memo, useEffect, useState } from "react";
 import NavbarSub from "./NavbarSub";
 import useDarkMode from "./useDarkMode";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 
 function Navbar() {
+  const { data: session } = useSession();
   let { isDarkMode, toggleDarkMode } = useDarkMode();
   let [isToggleSubMenu, setToggleSubMenu] = useState(false);
   let [isToggleMenuUser, setToggleMenuUser] = useState(false);
@@ -182,25 +183,33 @@ function Navbar() {
                 />
               </svg>
             )}
-            {isToggleMenuUser ? (
-              <div className="absolute bg-pink-200 dark:bg-white ps-2 py-2  sm:py-4 w-fit h-fit top-[51px] sm:top-[54px] -left-[76px] right-0 bottom-0  z-10">
-                <Link
-                  href={"/admin"}
-                  className="text-xs text-black dark:text-black hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:text-base sm:py-2"
-                >
-                  <span>Dashboard</span>
-                </Link>
-                <button
-                  className=" dark:text-black text-black text-xs cursor-pointer sm:text-base hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:py-2"
-                  type="button"
-                  onClick={() => signOut()}
-                >
-                  Log out
-                </button>
-              </div>
-            ) : (
-              ""
-            )}
+            <>
+              {isToggleMenuUser ? (
+                <div className="absolute bg-pink-200 dark:bg-white ps-2 py-2  sm:py-4 w-24 h-fit top-[48px] sm:top-[54px] -left-[76px] right-0 bottom-0  z-10">
+                  <>
+                    {session?.user?.role === "admin" ? (
+                      <Link
+                        href={"/admin"}
+                        className="text-xs text-black dark:text-black hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:text-base sm:py-2"
+                      >
+                        <span>Dashboard</span>
+                      </Link>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                  <button
+                    className=" dark:text-black text-black text-xs cursor-pointer sm:text-base hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:py-2"
+                    type="button"
+                    onClick={() => signOut()}
+                  >
+                    Log out
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
+            </>
           </div>
         </div>
       </nav>

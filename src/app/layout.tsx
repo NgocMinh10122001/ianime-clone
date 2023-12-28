@@ -14,6 +14,12 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Phim Anime Vietsub, Xem Anime Hay",
   description: "Anime 18+",
+  icons: {
+    icon: ["/favicon.ico?v=4"],
+    apple: ["/apple-touch-icon.png?v=4"],
+    shortcut: ["/apple-touch-icon.png"],
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default async function RootLayout({

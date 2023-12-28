@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect } from "react";
 import Link from "../../node_modules/next/link";
 import { Ianime, partner, toy, contract } from "./constant/index";
@@ -8,7 +9,12 @@ export default function Footer() {
     <footer className="bg-[color:var(--bg-footer-sun)] dark:bg-[color:var(--navbar-color)] px-20 sm:px-32">
       <div className="container__footer grid grid-cols-3  pt-14 pb-14 sm:pb-10  sm:grid-cols-5 sm:grid-rows-1">
         <div className="footer__logo grid col-start-2 col-span-1 justify-center sm:col-span-1  sm:pt-0 sm:col-start-1 ">
-          <img src="/favicon.ico" alt="ko co hinh" className="w-12 h-12" />
+          <Image
+            src="/favicon.ico"
+            width={48}
+            height={48}
+            alt="Picture of the author"
+          />
         </div>
         <div className="footer__ianime grid justify-center pt-8 col-start-1 col-span-1 sm:col-span-1  sm:pt-0 sm:col-start-2 gap-y-3 ">
           <span className="pb-2 flex justify-center text-black dark:text-white sm:justify-normal items-center text-sm font-bold">

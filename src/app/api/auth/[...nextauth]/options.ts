@@ -7,7 +7,6 @@ import { GithubProfile } from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { compare } from "bcrypt";
 import prismadb from "../../../../../lib/prismadb";
-import jwt from "jsonwebtoken";
 import { signJwtAccessToken, signJwtRefeshToken } from "@/jwt-protected/jwt";
 import { jwtDecode } from "jwt-decode";
 export const options: NextAuthOptions = {

@@ -62,8 +62,18 @@ export async function deleteNewUser(id: string) {
 export async function createNewAnime(values: any) {
   // console.log("check anime", values);
 
-  let { title, des, duration, videoUrl, thumbnailUrl, view, rating, genre } =
-    values;
+  let {
+    title,
+    des,
+    duration,
+    videoUrl,
+    thumbnailUrl,
+    view,
+    rating,
+    genre,
+    firms,
+    releases,
+  } = values;
   // console.log("check values", values);
 
   let genres = genre.map((item: any) => {
@@ -83,17 +93,33 @@ export async function createNewAnime(values: any) {
         genres: {
           connect: genres,
         },
+        firm: {
+          connect: { id: firms },
+        },
+        release: {
+          connect: { id: releases },
+        },
       },
     });
-    revalidateTag("manage-anime");
+    revalidateTag("manage-animes");
   } catch (error) {
     console.log(error);
   }
 }
 
 export async function updateNewAnime(values: any, id: string) {
-  let { title, des, duration, videoUrl, thumbnailUrl, view, rating, genre } =
-    values;
+  let {
+    title,
+    des,
+    duration,
+    videoUrl,
+    thumbnailUrl,
+    view,
+    rating,
+    genre,
+    firms,
+    releases,
+  } = values;
   // console.log("check values", values);
   try {
     // let genreAnime = await prismadb.anime.findFirst({
@@ -130,10 +156,16 @@ export async function updateNewAnime(values: any, id: string) {
             genres: {
               connect: genres,
             },
+            firm: {
+              connect: { id: firms[0].value },
+            },
+            release: {
+              connect: { id: releases[0].value },
+            },
           },
         });
       });
-    revalidateTag("manage-anime");
+    revalidateTag("manage-animes");
   } catch (error) {
     console.log(error);
   }
@@ -158,7 +190,7 @@ export async function deleteNewAnime(id: string) {
           })
       );
 
-    revalidateTag("manage-anime");
+    revalidateTag("manage-animes");
   } catch (error) {
     console.log(error);
   }

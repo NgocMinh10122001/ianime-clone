@@ -36,6 +36,14 @@ interface Igenre {
   id: string;
   genre: string;
 }
+interface IFirm {
+  id: string;
+  name: string;
+}
+interface IRelease {
+  id: string;
+  year: string;
+}
 
 interface Ititle {
   title: string;
@@ -47,6 +55,8 @@ interface IAnimeProps {
   meta: ICurrent;
   genres: Igenre[];
   title: Ititle;
+  firms: IFirm[];
+  releases: IRelease[];
 }
 
 // interface DataType {
@@ -70,7 +80,7 @@ export default function ManageAnime(props: IAnimeProps) {
   let [action, setAction] = useState("");
   let [isFetching, setIsFetching] = useState<boolean>(false);
   let [isPaginate, setIsPaginate] = useState<boolean>(true);
-  let { animes, meta, title, genres } = props;
+  let { animes, meta, title, genres, firms, releases } = props;
   // let listUsers = props.animes;
 
   let [animeL, setAnimeL] = useState(animes);
@@ -86,12 +96,26 @@ export default function ManageAnime(props: IAnimeProps) {
   // let { current, pageSize, totalPage } = meta;
   // console.log("check user", page);
 
-  const capitalizeFirstLetter = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  // const capitalizeFirstLetter = (string: string) => {
+  //   console.log("check string", string);
+
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // };
   const handleEditUser = (anime: any) => {
+    console.log("check anime", anime);
+
     anime.genre = anime.genres.map((item: any) => {
-      return { label: capitalizeFirstLetter(item.genre), value: item.id };
+      return { label: item.genre, value: item.id };
+    });
+
+    anime.firms = [{ ...anime.firm }].map((item: any) => {
+      return { label: item.name, value: item.id };
+    });
+    anime.releases = [{ ...anime.release }].map((item: any) => {
+      return {
+        label: item.year as string,
+        value: item.id,
+      };
     });
     // console.log("check user", anime);
     setAnime(anime);
@@ -125,15 +149,14 @@ export default function ManageAnime(props: IAnimeProps) {
       title: "Options",
       align: "center",
       render: (text, record, index) => {
+        {
+          // console.log("check record", record);
+        }
         return (
           <div className="flex items-center gap-4 sm:gap-8 justify-center">
             <EditOutlined
               className="cursor-pointer text-yellow-500"
-              onClick={
-                // showModal
-                () => handleEditUser(record)
-              }
-              // onOk={ handleOk}
+              onClick={() => handleEditUser(record)}
             />
             <DeleteOutlined
               className="cursor-pointer text-red-500"
@@ -299,6 +322,8 @@ export default function ManageAnime(props: IAnimeProps) {
           animeParent={anime}
           action={action}
           genres={genres}
+          firms={firms}
+          releases={releases}
           // onToast={onToast}
           // onRefesh={onChange}
         />

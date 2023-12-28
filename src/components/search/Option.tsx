@@ -2,7 +2,7 @@ import React, { memo } from "react";
 
 function Option() {
   return (
-    <div className="options__container flex flex-wrap  ">
+    <div className="options__container flex flex-wrap  mb-4">
       <div className="option me-2 mt-2 sm:mt-4 bg-[var(--color-btn-sun)] dark:bg-[var(--navbar-hover-color)] dark:hover:bg-neutral-700 duration-200 ease-in hover:bg-pink-500 w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer ">
         <svg
           xmlns="http://www.w3.org/2000/svg"

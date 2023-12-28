@@ -1,35 +1,41 @@
 "use client";
-import React, { memo, useCallback, useEffect } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import Image from "../../../node_modules/next/image";
 import Anime from "../re-components/Anime";
 import { signOut } from "next-auth/react";
 import axios from "axios";
 
 // import { cookies } from "../../../node_modules/next/dist/client/components/headers";
+interface IProps {
+  limit: number;
+  genre: string;
+  title: string;
+}
+const FreshLoad = (props: IProps) => {
+  let { limit, genre, title } = props;
+  let [animes, setAnimes] = useState([]);
 
-const FreshLoad = () => {
-  // const { token } = props;
-  // console.log("check token");
-  // const getUser = useCallback(async () => {
-  //   const response = await axios.get("/api/get-all-users");
-  // }, []);
+  const getAnimes = useCallback(async () => {
+    await axios
+      .get(`/api/animes?limit=${limit}&&genre=${genre}`)
+      .then((res) => {
+        setAnimes(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    getAnimes();
+  }, []);
 
   return (
     <div className="fresh__load__container container max-w-full my-12 ">
-      {/* <div className="py-8">
-        <button
-          className="border-2 rounded-md border-transparent dark:bg-white bg-black dark:text-black text-white p-4"
-          type="button"
-          onClick={() => signOut()}
-        >
-          Log-out
-        </button>
-      </div> */}
-      {/* <div className=""></div> */}
-
+      <>{/* {console.log("check animes", )} */}</>
       <div className="title flex justify-between  pb-4">
         <div className="text-black dark:text-white text-3xl tracking-normal">
-          Mới tải lên
+          {title}
         </div>
         <button
           // onClick={getUser}
@@ -38,7 +44,7 @@ const FreshLoad = () => {
           Tất cả
         </button>
       </div>
-      <Anime />
+      <Anime animes={animes} />
     </div>
   );
 };

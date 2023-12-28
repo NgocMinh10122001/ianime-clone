@@ -26,6 +26,7 @@ export default async function page(props: any) {
 
     {
       method: "GET",
+      // cache: "no-store",
       next: { tags: ["manage-animes"] },
     }
   );
@@ -42,17 +43,42 @@ export default async function page(props: any) {
   );
   const dataGenres = await genres.json();
   // console.log("check data", dataGenres);
+
+  const firms = await fetch(
+    `${process.env.HTTP_API_URL}/api/admin/firms`,
+
+    {
+      method: "GET",
+      next: { tags: ["firms"] },
+    }
+  );
+  const dataFirms = await firms.json();
+  // console.log("check data", dataFirms);
+
+  const releases = await fetch(
+    `${process.env.HTTP_API_URL}/api/admin/releases`,
+
+    {
+      method: "GET",
+      next: { tags: ["releases"] },
+    }
+  );
+  const dataReleases = await releases.json();
+  // console.log("check data", dataReleases);
+
   return (
     <div className="">
       <ManageAnime
         genres={dataGenres ? dataGenres : []}
+        firms={dataFirms ? dataFirms : []}
+        releases={dataReleases ? dataReleases : []}
         animes={data?.animes ? data.animes : []}
         meta={{
           current: page,
           pageSize: limit,
-          total: 1,
+          // total: 1,
 
-          // total: data?.totalRecord ? data.totalRecord : 1,
+          total: data?.totalRecord ? data.totalRecord : 1,
         }}
         title={{
           title: "Name Anime",
