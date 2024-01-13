@@ -17,11 +17,14 @@ export async function GET(req: NextRequest) {
         genres: true,
         firm: true,
         release: true,
+        locale: true,
       },
     });
-    // console.log("check users", users);
 
-    return NextResponse.json({ animes, totalRecord }, { status: 200 });
+    return NextResponse.json(
+      { animes, totalRecord, errCode: 0, errMes: "Success!" },
+      { status: 200 }
+    );
   } catch (error) {
     console.log(error);
 

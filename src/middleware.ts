@@ -1,5 +1,6 @@
 import { withAuth, NextRequestWithAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import cors from "./cors";
 
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
@@ -9,6 +10,7 @@ export default withAuth(
     ) {
       return NextResponse.rewrite(new URL("/error", request.url));
     }
+    // return cors((req, res) => res.next())(req, res);
   },
   {
     callbacks: {
@@ -22,9 +24,10 @@ export const config = {
     "/layout/home",
     "/layout/explore",
     "/layout/search",
+    "/layout/vietsub",
+    "/test",
     "/error",
-    "/admin",
     "/admin/manage-user",
-    "/admin/manage-anime",
+    "/admin/manage-user",
   ],
 };

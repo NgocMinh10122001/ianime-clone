@@ -1,26 +1,64 @@
+"use client";
+import { useRouter } from "next/navigation";
 import React, { memo } from "react";
+interface IArray {
+  thumbnailUrl: string;
+}
+interface ICategory {
+  id: string;
+  genre: string;
+  des: string;
+  animes: IArray[];
+}
 
-function Category() {
+interface IProps {
+  genre: ICategory[];
+}
+function Category(props: IProps) {
+  let { genre } = props;
+  const router = useRouter();
+  const handleRedirect = (genre: string) => {
+    router.push(`/layout/category?category=${genre}`);
+  };
   return (
-    <div className="category__container pt-8 ">
-      <div className="border-6 dark:border-white  border-black rounded-lg w-24 sm:w-60"></div>
-      <div className="category__title  text-[var(--text-black)] dark:text-[var(--text-white)] font-bold uppercase text-3xl sm:text-4xl tracking-wide pb-8 pt-5  ">
-        Thể loại
-      </div>
-      <div className="category__content grid grid-cols-2 gap-2 sm:grid-cols-5">
-        <div className="cate__img bg-[url('/anime.webp')] bg-cover bg-center bg-no-repeat w-296 sm:w-268 h-228 sm:h-206 relative rounded-md sm:hover:scale-105 sm:hover:cursor-pointer duration-300">
-          <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 left-0 right-0 rounded-md"></div>
-          <div className="cate__title absolute left-2 bottom-2">
-            <div className="title text-lg font-medium text-[var(--text-white)]">
-              Dark Skin <span>(163)</span>
-            </div>
-            <div className="des text-xs text-[var(--text-white)]">
-              Cô gái da đen, da rắm nắng... cũng có sức cuốn hút riêng đó
-            </div>
-          </div>
+    <>
+      <div className="category__container  ">
+        <div className="border-6 dark:border-white  border-black rounded-lg w-24 sm:w-60"></div>
+        <div className="category__title  text-[var(--text-black)] dark:text-[var(--text-white)] font-bold uppercase text-3xl sm:text-4xl tracking-wide pb-8 pt-5  ">
+          Thể loại
+        </div>
+        <div className="category__content grid grid-cols-2 gap-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-4 lg:gap-3 xl:grid-cols-5 ">
+          {genre?.length > 0 &&
+            genre.map((item, index: number) => {
+              return (
+                <div
+                  className="w-full  h-228 sm:h-206"
+                  key={item.id}
+                  title={item.genre}
+                  onClick={() => handleRedirect(item.id)}
+                >
+                  <div
+                    className="cate__img  bg-cover bg-top bg-no-repeat w-full h-full relative rounded-md sm:hover:scale-105 sm:hover:cursor-pointer duration-300"
+                    style={{
+                      backgroundImage: `url("${genre[index].animes[0]?.thumbnailUrl}")`,
+                    }}
+                  >
+                    <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 left-0 right-0 rounded-md"></div>
+                    <div className="cate__title absolute left-2 bottom-2">
+                      <div className="title text-lg font-medium text-[var(--text-white)] uppercase">
+                        {item.genre}
+                      </div>
+                      <div className="des text-xs text-[var(--text-white)]">
+                        {item.des}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

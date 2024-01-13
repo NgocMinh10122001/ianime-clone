@@ -73,6 +73,7 @@ export async function createNewAnime(values: any) {
     genre,
     firms,
     releases,
+    locales,
   } = values;
   // console.log("check values", values);
 
@@ -99,6 +100,9 @@ export async function createNewAnime(values: any) {
         release: {
           connect: { id: releases },
         },
+        locale: {
+          connect: { id: locales },
+        },
       },
     });
     revalidateTag("manage-animes");
@@ -108,6 +112,8 @@ export async function createNewAnime(values: any) {
 }
 
 export async function updateNewAnime(values: any, id: string) {
+  // console.log(values);
+
   let {
     title,
     des,
@@ -119,6 +125,7 @@ export async function updateNewAnime(values: any, id: string) {
     genre,
     firms,
     releases,
+    locales,
   } = values;
   // console.log("check values", values);
   try {
@@ -161,6 +168,9 @@ export async function updateNewAnime(values: any, id: string) {
             },
             release: {
               connect: { id: releases[0].value },
+            },
+            locale: {
+              connect: { id: locales[0].value },
             },
           },
         });

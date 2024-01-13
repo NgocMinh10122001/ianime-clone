@@ -1,25 +1,37 @@
 "use client";
-import React from "react";
+import { IAnime } from "@/types/index";
+import { useRouter } from "next/navigation";
 
 interface IAnimes {
-  animes: any[];
+  animes: IAnime[];
 }
 export default function Anime(props: IAnimes) {
   let { animes } = props;
+  // console.log(animes);
+  let router = useRouter();
+
+  const handleRedirect = (item: any) => {
+    // console.log(item);
+
+    router.push(
+      `/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`
+    );
+  };
 
   return (
-    <div className="content__container grid grid-cols-2 gap-2 sm:grid-cols-6  sm:gap-2 ">
+    <div className="content__container grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       {animes?.length > 0 &&
         animes.map((item) => {
           return (
             <div
               key={item.id}
-              className="content  bg-[color:var(--bg-footer-sun)] w-fit h-fit dark:bg-[color:var(--navbar-color)] rounded-t-lg rounded-b-lg overflow-hidden"
+              className="content  bg-[color:var(--bg-footer-sun)] w-full h-fit dark:bg-[color:var(--navbar-color)] rounded-t-md rounded-b-md overflow-hidden cursor-pointer"
               title={item.title}
+              onClick={() => handleRedirect(item)}
             >
-              <div className="w-296 h-420 sm:w-[14.25rem] sm:h-[20rem]">
+              <div className="w-full h-420  sm:h-[20rem]">
                 <div
-                  className={`hover:scale-105 duration-300 hover:cursor-pointer  rounded-t-lg  bg-cover bg-center bg-no-repeat w-full  h-full  after:ml-0.5 after:top-90 sm:after:top-85 after:left-85 sm:after:left-80 after:bottom-0 relative after:text-red-500 block after:absolute after:w-9 after:flex after:justify-center after:items-center after:h-9 after:rounded-full after:bg-pink-300 `}
+                  className={`hover:scale-105 duration-300 hover:cursor-pointer  rounded-t-md  bg-cover bg-center bg-no-repeat w-full  h-full  after:ml-0.5 after:top-90 sm:after:top-85 after:left-85 sm:after:left-80 after:bottom-0 relative after:text-red-500 block after:absolute after:w-9 after:flex after:justify-center after:items-center after:h-9 after:rounded-full after:bg-pink-300 `}
                   style={{ backgroundImage: `url("${item.thumbnailUrl}")` }}
                 >
                   <style jsx>{`
@@ -35,7 +47,7 @@ export default function Anime(props: IAnimes) {
                   {item.title}
                 </p>
               </div>
-              <div className="content__views flex justify-center pb-8 items-center gap-x-2">
+              <div className="content__views flex gap-2 justify-center pb-8 items-center ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

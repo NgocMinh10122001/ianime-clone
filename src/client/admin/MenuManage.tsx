@@ -45,10 +45,11 @@ const items: MenuProps["items"] = [
 ];
 
 const MenuManage: React.FC = () => {
-  const [current, setCurrent] = useState("mail");
+  const [current, setCurrent] = useState("user");
 
   const onClick: MenuProps["onClick"] = (e) => {
     // console.log("click ", e);
+
     setCurrent(e.key);
   };
 

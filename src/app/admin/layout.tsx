@@ -1,3 +1,4 @@
+"use client";
 import MenuManage from "@/client/admin/MenuManage";
 
 export default function DashboardLayout({

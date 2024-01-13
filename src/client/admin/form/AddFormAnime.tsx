@@ -29,15 +29,19 @@ interface IProps {
   genres: any;
   firms: any;
   releases: any;
+  locales: any;
   // onToast: any;
 }
 
 export default function AddFormAnime(props: IProps) {
   let [isLoading, setIsLoading] = useState<boolean>(false);
-  let { onCancel, animeParent, action, genres, firms, releases } = props;
+  let { onCancel, animeParent, action, genres, firms, releases, locales } =
+    props;
   const options: SelectProps["options"] = [];
   const optionsFirm: SelectProps["options"] = [];
   const optionsRelease: SelectProps["options"] = [];
+  const optionsLocale: SelectProps["options"] = [];
+  // console.log(locales);
 
   // console.log("check parten", releases);
 
@@ -156,6 +160,16 @@ export default function AddFormAnime(props: IProps) {
         });
       });
   }
+  {
+    locales?.locales &&
+      locales.locales.length > 0 &&
+      locales.locales.map((item: any) => {
+        optionsLocale.push({
+          value: item.id,
+          label: item.des,
+        });
+      });
+  }
   return (
     <>
       <Form
@@ -234,6 +248,18 @@ export default function AddFormAnime(props: IProps) {
                 onChange={handleChange}
                 tokenSeparators={[","]}
                 options={optionsRelease}
+              />
+            </Form.Item>
+            <Form.Item
+              name="locales"
+              label="Locale"
+              rules={[{ required: true }]}
+            >
+              <Select
+                style={{ width: "100%" }}
+                onChange={handleChange}
+                tokenSeparators={[","]}
+                options={optionsLocale}
               />
             </Form.Item>
             {/* <Form.Item

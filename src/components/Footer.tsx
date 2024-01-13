@@ -6,8 +6,8 @@ import { Ianime, partner, toy, contract } from "./constant/index";
 
 export default function Footer() {
   return (
-    <footer className="bg-[color:var(--bg-footer-sun)] dark:bg-[color:var(--navbar-color)] px-20 sm:px-32">
-      <div className="container__footer grid grid-cols-3  pt-14 pb-14 sm:pb-10  sm:grid-cols-5 sm:grid-rows-1">
+    <footer className="bg-[color:var(--bg-footer-sun)] dark:bg-[color:var(--navbar-color)] px-20 sm:px-32 w-full ">
+      <div className="container__footer grid grid-cols-3  pt-14 pb-14 sm:pb-10  sm:grid-cols-5 md:g sm:grid-rows-1">
         <div className="footer__logo grid col-start-2 col-span-1 justify-center sm:col-span-1  sm:pt-0 sm:col-start-1 ">
           <Image
             src="/favicon.ico"

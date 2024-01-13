@@ -8,7 +8,7 @@ function NavbarSub() {
   // console.log("check", pathname);
 
   return (
-    <div className="navbar__sub absolute bg-pink-50 dark:bg-[color:var(--navbar-color)] object-cover z-10">
+    <div className="navbar__sub absolute bg-pink-50 dark:bg-[color:var(--navbar-color)] object-cover z-20">
       {/* <div className="navbar__sub__items border-b border-slate-600 dark:border-slate-700 mb-4 ps-7 pe-10"></div> */}
       <div className="navbar__sub__items   object-cover">
         {/* <div className="item dark:hover:bg-[color:var(--navbar-hover-color)] border-b border-white dark:border-slate-400 mb-4"></div> */}
@@ -84,7 +84,7 @@ function NavbarSub() {
           </Link>
         </div>
         <div className="item hover:bg-pink-200  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10">
-          <Link className="flex items-center " href={"/layout/anime-vietsub"}>
+          <Link className="flex items-center " href={"/layout/vietsub"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -105,7 +105,7 @@ function NavbarSub() {
           </Link>
         </div>
         <div className="item hover:bg-pink-200  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10">
-          <Link className="flex items-center " href={""}>
+          <Link className="flex items-center " href={"/layout/3D"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -121,12 +121,12 @@ function NavbarSub() {
               />
             </svg>
             <label className="cursor-pointer text-sm ms-6 text-black dark:text-white">
-              Anime HD
+              Anime 3D
             </label>
           </Link>
         </div>
         <div className="item hover:bg-pink-200  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10 border-b border-pink-200 dark:border-slate-700">
-          <Link className="flex items-center " href={""}>
+          <Link className="flex items-center " href={"/layout/18+"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

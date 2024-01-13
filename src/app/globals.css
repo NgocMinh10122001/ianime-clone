@@ -11,7 +11,10 @@
   --linear-g-black: linear-gradient(to bottom, #434343 0%, black 100%);
   --navbar-color : #212121;
   --navbar-hover-color : #2a2a2a;
+  --navbar-hover-color2: #5b5b5b;
+  /* --navbar-light : #3C3C3C; */
   --active-dark : #3c3c3c;
+  --dark-2 :#1a1a1a;
   --text-white: #fff;
   --text-black:#000;
   --color-btn-sun: #f9a8d4;
@@ -25,10 +28,17 @@
   }
 }
 
+.padding-x-4 {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 body {
   box-sizing: border-box;
   color: rgb(var(--foreground-rgb));
   overflow: scroll;
+  scroll-behavior: smooth;
+  
   
   /* background: black; */
 }

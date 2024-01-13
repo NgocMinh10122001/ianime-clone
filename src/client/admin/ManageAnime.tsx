@@ -4,15 +4,11 @@ import {
   EditOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { Button, Form, Modal, Table, Input } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
-import Paginate from "../../components/pagination/Paginate";
+import { Button, Modal, Table, Input } from "antd";
+import React, { useEffect, useState } from "react";
 import type { ColumnsType } from "antd/es/table";
-import { User } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import AddForm from "./form/AddForm";
-import { toast, ToastContainer } from "react-toastify";
-import loading from "@/app/admin/manage-anime/loading";
+import { ToastContainer } from "react-toastify";
 import AddFormAnime from "./form/AddFormAnime";
 // import { useSession } from "next-auth/react";
 
@@ -44,6 +40,11 @@ interface IRelease {
   id: string;
   year: string;
 }
+interface ILocale {
+  id: string;
+  locale: string;
+  des: string;
+}
 
 interface Ititle {
   title: string;
@@ -57,15 +58,8 @@ interface IAnimeProps {
   title: Ititle;
   firms: IFirm[];
   releases: IRelease[];
+  locales: ILocale[];
 }
-
-// interface DataType {
-//   key: string;
-//   name: string;
-//   age: number;
-//   address: string;
-//   tags: string[];
-// }
 
 const { Search } = Input;
 
@@ -75,34 +69,24 @@ export default function ManageAnime(props: IAnimeProps) {
   const { replace } = useRouter();
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
   let [anime, setAnime] = useState({});
   let [action, setAction] = useState("");
   let [isFetching, setIsFetching] = useState<boolean>(false);
   let [isPaginate, setIsPaginate] = useState<boolean>(true);
-  let { animes, meta, title, genres, firms, releases } = props;
-  // let listUsers = props.animes;
+  let { animes, meta, title, genres, firms, releases, locales } = props;
+  // console.log(locales);
 
   let [animeL, setAnimeL] = useState(animes);
-  // console.log(usersL);
-  // const { data: session } = useSession({ required: true });
-  // console.log("data", session);
+
   useEffect(() => {
     setAnimeL(animes);
   }, [animes]);
   useEffect(() => {
     if (animes) setIsFetching(false);
   }, [animes]);
-  // let { current, pageSize, totalPage } = meta;
-  // console.log("check user", page);
 
-  // const capitalizeFirstLetter = (string: string) => {
-  //   console.log("check string", string);
-
-  //   return string.charAt(0).toUpperCase() + string.slice(1);
-  // };
   const handleEditUser = (anime: any) => {
-    console.log("check anime", anime);
+    // console.log("check anime", anime);
 
     anime.genre = anime.genres.map((item: any) => {
       return { label: item.genre, value: item.id };
@@ -117,7 +101,9 @@ export default function ManageAnime(props: IAnimeProps) {
         value: item.id,
       };
     });
-    // console.log("check user", anime);
+    anime.locales = [{ ...anime.locale }].map((item: any) => {
+      return { label: item.des, value: item.id };
+    });
     setAnime(anime);
     setAction("Edit");
     showModal();
@@ -148,10 +134,7 @@ export default function ManageAnime(props: IAnimeProps) {
     {
       title: "Options",
       align: "center",
-      render: (text, record, index) => {
-        {
-          // console.log("check record", record);
-        }
+      render: (record) => {
         return (
           <div className="flex items-center gap-4 sm:gap-8 justify-center">
             <EditOutlined
@@ -168,15 +151,10 @@ export default function ManageAnime(props: IAnimeProps) {
     },
   ];
 
-  const onChange = (pagination: any, filters: any, sorter: any) => {
-    // console.log("hcekc", pagination);
-
+  const onChange = (pagination: any) => {
     if (pagination && pagination.current) {
-      // console.log("chekc search param", pathname);
       const params = new URLSearchParams(searchParams);
-      // console.log("check url param1", params);
       params.set("page", pagination.current);
-      // console.log("check url param2", params);
       replace(`${pathname}?${params.toString()}`);
       setIsFetching(true);
     }
@@ -187,7 +165,6 @@ export default function ManageAnime(props: IAnimeProps) {
   };
 
   const handleOk = () => {
-    setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
     setTimeout(() => {
       setOpen(false);
@@ -279,9 +256,6 @@ export default function ManageAnime(props: IAnimeProps) {
                     </div>
                   );
                 },
-                // onChange: (page, pageSize) => {
-                //   console.log(page);
-                // },
               }
             : {
                 pageSize: 6,
@@ -324,6 +298,7 @@ export default function ManageAnime(props: IAnimeProps) {
           genres={genres}
           firms={firms}
           releases={releases}
+          locales={locales}
           // onToast={onToast}
           // onRefesh={onChange}
         />

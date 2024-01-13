@@ -19,7 +19,7 @@ function Navbar() {
     setToggleMenuUser(!isToggleMenuUser);
   };
   return (
-    <header className=" z-10 ">
+    <header className="w-full z-20 padding-x-4  bg-pink-100 dark:bg-[color:var(--navbar-color)]">
       {isToggleSubMenu ? (
         <div
           onClick={handleToggleSubMenu}
@@ -37,10 +37,10 @@ function Navbar() {
         ""
       )}
 
-      <nav className="max-w-[1440px] mx-auto flex justify-between items-center container py-3 bg-pink-100 dark:bg-[color:var(--navbar-color)] border-b border-white dark:border-black ">
+      <nav className="w-full  flex justify-between items-center  py-3 border-b border-white dark:border-black ">
         <div className="nav__left flex items-center ">
           <div
-            className="nav__left__bar cursor-pointer hover:bg-pink-300 border-none rounded-full  p-3 ms-0 dark:hover:bg-[color:var(--navbar-hover-color)] me-3 sm:me-8 relative z-10"
+            className="nav__left__bar cursor-pointer hover:bg-pink-300 border-none rounded-full  p-3 ms-0 dark:hover:bg-[color:var(--navbar-hover-color)]  relative z-10"
             onClick={handleToggleSubMenu}
           >
             {isToggleSubMenu ? (
@@ -79,7 +79,7 @@ function Navbar() {
             iAnime
           </div>
         </div>
-        <div className="nav-midle flex items-center gap-2 border border-slate-600 dark:border-slate-400 rounded hover:border-black dark:hover:border-black hover:border-1 hover:transition-all duration-600 object-cover">
+        <div className="nav-midle flex items-center  border border-slate-600 dark:border-slate-400 rounded hover:border-black dark:hover:border-black hover:border-1 hover:transition-all duration-600 object-cover">
           <div className="search__icon ps-3 py-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -100,11 +100,11 @@ function Navbar() {
             <input
               type="text"
               placeholder="Tim kiem"
-              className="bg-transparent  outline-0  sm:pe-72 text-black dark:text-white "
+              className="bg-transparent  outline-0 pe-40 sm:pe-44 md:pe-60 lg:pe-72 text-black dark:text-white "
             />
           </div>
         </div>
-        <div className="nav-right  flex justify-center items-center gap-4 sm:gap-11">
+        <div className="nav-right  flex justify-center items-center  ">
           {isDarkMode ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 sm:w-8 sm:h-8 hover:cursor-pointer z-0 fill-black dark:fill-none"
+                className="w-6 h-6  sm:h-8 hover:cursor-pointer z-0 fill-black dark:fill-none"
               >
                 <path
                   strokeLinecap="round"
@@ -174,7 +174,7 @@ function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 sm:w-8 sm:h-8 hover:cursor-pointer z-0 fill-black dark:fill-none"
+                className="w-6 h-6  sm:h-8 hover:cursor-pointer z-0 fill-black dark:fill-none"
               >
                 <path
                   strokeLinecap="round"
@@ -189,7 +189,7 @@ function Navbar() {
                   <>
                     {session?.user?.role === "admin" ? (
                       <Link
-                        href={"/admin"}
+                        href={"/admin/manage-user"}
                         className="text-xs text-black dark:text-black hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:text-base sm:py-2"
                       >
                         <span>Dashboard</span>

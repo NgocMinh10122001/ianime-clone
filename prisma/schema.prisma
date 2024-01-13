@@ -39,6 +39,8 @@ model Anime {
   firmId       String   @db.ObjectId
   release      Release  @relation(fields: [releaseId], references: [id])
   releaseId    String   @db.ObjectId
+  locale       Locale   @relation(fields: [localeId], references: [id])
+  localeId     String   @db.ObjectId
 
   @@unique([videoUrl, thumbnailUrl])
 }
@@ -46,6 +48,7 @@ model Anime {
 model Genre {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   genre    String   @unique
+  des      String
   animes   Anime[]  @relation(fields: [animeIds], references: [id])
   animeIds String[] @db.ObjectId
 }
@@ -64,5 +67,12 @@ model TheFirm {
 model Release {
   id     String  @id @default(auto()) @map("_id") @db.ObjectId
   year   Int
+  animes Anime[]
+}
+
+model Locale {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  locale String
+  des    String
   animes Anime[]
 }

@@ -4,16 +4,14 @@ import {
   EditOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { Button, Form, Modal, Table, Input } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
-import Paginate from "../../components/pagination/Paginate";
+import { Button, Modal, Table, Input } from "antd";
+import React, { useEffect, useState } from "react";
 import type { ColumnsType } from "antd/es/table";
 import { User } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AddForm from "./form/AddForm";
-import { toast, ToastContainer } from "react-toastify";
-import loading from "@/app/admin/manage-user/loading";
-// import { useSession } from "next-auth/react";
+import { ToastContainer } from "react-toastify";
+import useDarkMode from "@/components/useDarkMode";
 
 interface ICurrent {
   current: any;
@@ -36,9 +34,6 @@ interface Iprops {
 const { Search } = Input;
 
 export default function Dashboard(props: Iprops) {
-  // const { data: session } = useSession({ required: true });
-  // console.log("data", session);
-
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -50,11 +45,8 @@ export default function Dashboard(props: Iprops) {
   let [isFetching, setIsFetching] = useState<boolean>(false);
   let [isPaginate, setIsPaginate] = useState<boolean>(true);
   let { users, meta } = props;
-  // let listUsers = props.users;
-  // console.log(users);
 
   let [usersL, setUsersL] = useState(users);
-  // console.log(usersL);
 
   useEffect(() => {
     setUsersL(users);
@@ -62,8 +54,6 @@ export default function Dashboard(props: Iprops) {
   useEffect(() => {
     if (users) setIsFetching(false);
   }, [users]);
-  // let { current, pageSize, totalPage } = meta;
-  // console.log("check user", page);
 
   const handleEditUser = (user: any) => {
     // console.log("check user", user);
@@ -77,21 +67,6 @@ export default function Dashboard(props: Iprops) {
     setAction("Delete");
     showModal();
   };
-
-  const dataSource = [
-    {
-      id: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
 
   const columns: ColumnsType<User> = [
     {
@@ -128,15 +103,10 @@ export default function Dashboard(props: Iprops) {
     },
   ];
 
-  const onChange = (pagination: any, filters: any, sorter: any) => {
-    // console.log("hcekc", pagination);
-
+  const onChange = (pagination: any) => {
     if (pagination && pagination.current) {
-      // console.log("chekc search param", pathname);
       const params = new URLSearchParams(searchParams);
-      // console.log("check url param1", params);
       params.set("page", pagination.current);
-      // console.log("check url param2", params);
       replace(`${pathname}?${params.toString()}`);
       setIsFetching(true);
     }
@@ -156,7 +126,6 @@ export default function Dashboard(props: Iprops) {
   };
 
   const handleCancel = () => {
-    // console.log("Clicked cancel button");
     setOpen(false);
   };
 
@@ -166,10 +135,7 @@ export default function Dashboard(props: Iprops) {
     showModal();
   };
 
-  const handleSearchInput = (value: string, event: any, source: any) => {
-    // console.log(value);
-    // console.log(source.source);
-
+  const handleSearchInput = (value: string, source: any) => {
     if (source.source === "input") {
       let usersCopy = [...users];
       usersCopy = usersCopy.filter((item) => {
@@ -178,7 +144,6 @@ export default function Dashboard(props: Iprops) {
         }
       });
       meta.total = usersCopy.length;
-      // console.log(number);
       setUsersL(usersCopy);
       setIsFetching(true);
       setIsPaginate(false);
@@ -187,8 +152,6 @@ export default function Dashboard(props: Iprops) {
         setIsFetching(false);
       }, 300);
     } else if (source.source === "clear") {
-      // console.log("hceck", listUsers);
-
       setUsersL(users);
       meta.total = users.length;
       setIsPaginate(true);
@@ -201,13 +164,12 @@ export default function Dashboard(props: Iprops) {
   return (
     <>
       <div className=" grid  grid-cols-12 justify-between px-3">
-        {/* <>{console.log("check meta", usersL)}</> */}
         <Search
           placeholder="input search loading default"
           loading={false}
           allowClear
-          onSearch={(value, event, source) => {
-            handleSearchInput(value, event, source);
+          onSearch={(value, source) => {
+            handleSearchInput(value, source);
           }}
           className="mt-4 mb-2 col-start-1 sm:col-span-2 col-span-4"
         />
@@ -239,9 +201,6 @@ export default function Dashboard(props: Iprops) {
                     </div>
                   );
                 },
-                // onChange: (page, pageSize) => {
-                //   console.log(page);
-                // },
               }
             : {
                 pageSize: 6,
@@ -254,7 +213,6 @@ export default function Dashboard(props: Iprops) {
                 },
               }
         }
-        // scroll={{ y: 240 }}
         onChange={
           isPaginate
             ? onChange
@@ -266,9 +224,7 @@ export default function Dashboard(props: Iprops) {
               }
         }
       />
-      {/* <div className="flex justify-end pt-4">
-        <Paginate />
-      </div> */}
+
       <Modal
         title="Title"
         open={open}
