@@ -29,13 +29,13 @@ export default function Anime(props: IAnimes) {
               title={item.title}
               onClick={() => handleRedirect(item)}
             >
-              <div className="w-full h-420  sm:h-[20rem]">
+              <div className="w-full h-420  sm:h-[20rem] ">
                 <div
-                  className={`hover:scale-105 duration-300 hover:cursor-pointer  rounded-t-md  bg-cover bg-center bg-no-repeat w-full  h-full  after:ml-0.5 after:top-90 sm:after:top-85 after:left-85 sm:after:left-80 after:bottom-0 relative after:text-red-500 block after:absolute after:w-9 after:flex after:justify-center after:items-center after:h-9 after:rounded-full after:bg-pink-300 `}
+                  className={`hover:scale-105 duration-300 hover:cursor-pointer  rounded-t-md  bg-cover bg-center bg-no-repeat w-full  h-full   after:right-[6px]  after:bottom-[6px] relative after:text-red-500 block after:absolute after:w-9 after:flex after:justify-center after:items-center after:h-9 after:rounded-full after:bg-pink-300 `}
                   style={{ backgroundImage: `url("${item.thumbnailUrl}")` }}
                 >
                   <style jsx>{`
-                    .sm\:after\:top-85::after {
+                    .after\:right-\[6px\]::after {
                       content: "${item.rating}";
                     }
                   `}</style>

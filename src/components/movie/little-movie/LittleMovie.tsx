@@ -1,7 +1,7 @@
 "use client";
 import { IAnime, IRelease, ITheFirm } from "@/types/index";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { memo } from "react";
 interface INewAnime extends IAnime {
   firm: ITheFirm;
 }
@@ -11,7 +11,7 @@ interface IProps {
   theFirm: any;
   release: any;
 }
-export default function LittleMovie(props: IProps) {
+function LittleMovie(props: IProps) {
   let { animeRelate, relate, theFirm, release } = props;
   let router = useRouter();
   const handleRedirect = (item: any) => {
@@ -21,12 +21,23 @@ export default function LittleMovie(props: IProps) {
       `/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`
     );
   };
+  const handlePush = (theFirm: any, release: any) => {
+    if (theFirm && theFirm.id) {
+      router.push(`/layout/the-firm?theFirm=${theFirm.id}`);
+    } else if (release && release.id) {
+      router.push(`/layout/release?release=${release.id}`);
+    }
+    return;
+  };
   return (
     <>
       <div className="py-2 w-full h-fit">
         <p className=" text-black dark:text-white h-fit text-base font-normal pb-2">
           {relate}{" "}
-          <span className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer uppercase">
+          <span
+            className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer uppercase"
+            onClick={() => handlePush(theFirm, release)}
+          >
             {theFirm?.name || release?.year || ""}
           </span>
         </p>
@@ -40,7 +51,7 @@ export default function LittleMovie(props: IProps) {
                   className="grid grid-cols-12 gap-x-4 h-[137px] sm:h-[130px] md:h-[136px] lg:h-[90px] xl:h-[106px]  w-full cursor-pointer"
                   onClick={() => handleRedirect(item)}
                 >
-                  <div className="h-full col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-5 2xl:col-span-4 relative after:ml-0.5   after:right-[6px]  after:bottom-[6px]  after:text-red-500 block after:absolute after:w-8 after:flex after:justify-center after:items-center after:h-8 after:rounded-full after:bg-pink-300">
+                  <div className="h-full col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-5 2xl:col-span-4 relative   after:right-[6px]  after:bottom-[6px]  after:text-red-500 block after:absolute after:w-8 after:flex after:justify-center after:items-center after:h-8 after:rounded-full after:bg-pink-300">
                     <div
                       className={`    rounded-md bg-cover bg-top bg-no-repeat w-full  h-full   opacity-80 dark:opacity-40 absolute top-0 left-0 right-0 bottom-0 z-0`}
                       style={{
@@ -86,3 +97,5 @@ export default function LittleMovie(props: IProps) {
     </>
   );
 }
+
+export default memo(LittleMovie);

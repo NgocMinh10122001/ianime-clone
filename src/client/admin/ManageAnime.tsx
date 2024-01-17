@@ -184,7 +184,7 @@ export default function ManageAnime(props: IAnimeProps) {
   };
 
   const handleSearchInput = (value: string, event: any, source: any) => {
-    console.log(value);
+    // console.log(value);
     // console.log(source.source);
 
     if (source.source === "input") {
@@ -195,7 +195,7 @@ export default function ManageAnime(props: IAnimeProps) {
         }
       });
       meta.total = animesCopy.length;
-      console.log(animesCopy);
+      // console.log(animesCopy);
       setAnimeL(animesCopy);
       setIsFetching(true);
       setIsPaginate(false);

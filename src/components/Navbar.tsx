@@ -1,23 +1,78 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
-import React, { memo, useEffect, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import NavbarSub from "./NavbarSub";
 import useDarkMode from "./useDarkMode";
 import { FaUserEdit } from "react-icons/fa";
 import Link from "next/link";
 import { IoClose } from "react-icons/io5";
+import DataSearchOnChange from "./re-components/DataSearchOnChange";
+import { searchInputOnChange } from "@/server-action/index";
+import { IDataFetching } from "@/types/index";
 
 function Navbar() {
   const { data: session } = useSession();
   let { isDarkMode, toggleDarkMode } = useDarkMode();
   let [isToggleSubMenu, setToggleSubMenu] = useState(false);
   let [isToggleMenuUser, setToggleMenuUser] = useState(false);
-  let handleToggleSubMenu = () => {
-    setToggleSubMenu(!isToggleSubMenu);
-  };
-  let toggleMenuUser = () => {
+  let [isToggleDeleteSearch, setToggleDeleteSearch] = useState(false);
+  let [inputData, setInputData] = useState("");
+  const [dataFetching, setDataFetching] = useState<IDataFetching[]>([]);
+  const [isToggleDataSearch, setToggleDataSearch] = useState(false);
+  const [isFetching, startTrasition] = useTransition();
+  let toggleMenuUser = useCallback(() => {
     setToggleMenuUser(!isToggleMenuUser);
-  };
+  }, [isToggleMenuUser]);
+
+  let handleToggleSubMenu = useCallback(() => {
+    setToggleSubMenu(!isToggleSubMenu);
+  }, [isToggleSubMenu]);
+
+  const handleToggleInputSearch = useCallback(() => {
+    setToggleDeleteSearch(false);
+    setInputData("");
+    setToggleDataSearch(false);
+  }, [isToggleDeleteSearch]);
+
+  const handleChangeInput = useCallback(
+    (event: any) => {
+      // console.log(event.target.value);
+      setToggleDeleteSearch(true);
+      setInputData(event.target.value);
+
+      startTrasition(async () => {
+        let res = await searchInputOnChange(event.target.value);
+        // console.log(res);
+        if (res && res.length > 0) setDataFetching(res);
+        return;
+      });
+
+      startTrasition(() => {
+        setToggleDataSearch(true);
+      });
+    },
+    [inputData]
+  );
+
+  const handleFindAnime = useCallback(() => {
+    console.log("do validate1", inputData);
+  }, [inputData]);
+
+  const handleKeyDown = useCallback(
+    (event: any) => {
+      if (event.key === "Enter") {
+        console.log("do validate2", inputData);
+      }
+    },
+    [inputData]
+  );
+
   return (
     <header className="w-full z-20 padding-x-4  bg-pink-100 dark:bg-[color:var(--navbar-color)]">
       {isToggleSubMenu ? (
@@ -75,12 +130,23 @@ function Navbar() {
               </svg>
             )}
           </div>
-          <div className="nav__left__title cursor-pointer text-black dark:text-white font-bold sm:text-lg">
+          <Link
+            href={"/layout/home"}
+            className="nav__left__title cursor-pointer text-black dark:text-white font-bold sm:text-lg"
+          >
             iAnime
-          </div>
+          </Link>
         </div>
-        <div className="nav-midle flex items-center  border border-slate-600 dark:border-slate-400 rounded hover:border-black dark:hover:border-black hover:border-1 hover:transition-all duration-600 object-cover">
-          <div className="search__icon ps-3 py-3">
+        <div className="nav-midle relative  w-[40%] flex items-center  ring-1 ring-pink-600 dark:ring-slate-600 rounded-sm py-2  focus-within:ring-2 focus-within:ring-pink-400  focus-within:dark:ring-slate-400 duration-150 ease-in-out">
+          <DataSearchOnChange
+            isToggleDataSearch={isToggleDataSearch}
+            dataFetching={dataFetching}
+          />
+
+          <div
+            className="search__icon px-3 cursor-pointer"
+            onClick={handleFindAnime}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -96,12 +162,35 @@ function Navbar() {
               />
             </svg>
           </div>
-          <div className="search__input">
+          <div className="search__input w-85 relative pe-4 flex items-center">
             <input
+              onChange={(event) => handleChangeInput(event)}
               type="text"
               placeholder="Tim kiem"
-              className="bg-transparent  outline-0 pe-40 sm:pe-44 md:pe-60 lg:pe-72 text-black dark:text-white "
+              className="  bg-transparent w-full h-full  outline-0  text-black dark:text-white  py-1"
+              value={inputData}
+              onKeyDown={(event) => handleKeyDown(event)}
             />
+
+            {isToggleDeleteSearch ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 stroke-black dark:stroke-white cursor-pointer"
+                onClick={handleToggleInputSearch}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="nav-right  flex justify-center items-center  ">
@@ -112,7 +201,7 @@ function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 sm:w-8 sm:h-8 fill-black cursor-pointer"
+              className="w-6 h-6 sm:w-8 sm:h-8 fill-black cursor-pointer "
               onClick={toggleDarkMode}
             >
               <path
@@ -128,7 +217,7 @@ function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 sm:w-8 sm:h-8 cursor-pointer"
+              className="w-6 h-6 sm:w-8 sm:h-8 cursor-pointer "
               onClick={toggleDarkMode}
             >
               <path
@@ -139,7 +228,7 @@ function Navbar() {
             </svg>
           )}
 
-          <div className="text-black dark:text-white relative z-10">
+          <div className="text-black dark:text-white relative z-10 ps-3">
             {isToggleMenuUser ? (
               // <IoClose
               //   size={30}
@@ -153,7 +242,7 @@ function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6  sm:h-8 hover:cursor-pointer z-0 fill-black dark:fill-none"
+                className="w-6 h-6  sm:h-8 hover:cursor-pointer z-0  fill-black dark:fill-none "
               >
                 <path
                   strokeLinecap="round"
@@ -174,7 +263,7 @@ function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6  sm:h-8 hover:cursor-pointer z-0 fill-black dark:fill-none"
+                className="w-6 h-6  sm:h-8 hover:cursor-pointer z-0 fill-black  dark:fill-none"
               >
                 <path
                   strokeLinecap="round"

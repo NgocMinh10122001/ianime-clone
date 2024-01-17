@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     let genre = req.nextUrl.searchParams.get("genre");
     let firm = req.nextUrl.searchParams.get("firm");
     let release = req.nextUrl.searchParams.get("release");
-    // console.log(genre, firm, release);
+    // console.log(genre);
 
     // console.log(req.nextUrl.searchParams);
 

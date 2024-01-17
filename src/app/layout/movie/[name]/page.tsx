@@ -16,13 +16,14 @@ export default async function page(props: any) {
   let release: string = searchParams ? searchParams.release : "";
   let genre: string = searchParams ? searchParams.genre : "";
   let name: string = decodeUrl || "";
+  // console.log(genre);
 
   const res = await fetch(
     `${process.env.HTTP_API_URL}/api/movie?name=${name}&&id=${id}&&firm=${firm}&&release=${release}&&genre=${genre}`,
     {
       headers: { "Access-Control-Allow-Origin": "*" },
       method: "GET",
-      next: { tags: ["search"] },
+      next: { tags: ["movie-anime-detail"] },
       // cache: "no-store",
     }
   );
@@ -31,7 +32,7 @@ export default async function page(props: any) {
 
   return (
     <div className="padding-x-4 w-full grid grid-cols-12 gap-4">
-      <Movie anime={data?.anime ? data.anime : {}} />
+      <Movie anime={data?.anime ? data.anime : []} />
       <LittleMovie
         sameName={data?.sameName ? data.sameName : []}
         sameFirm={data?.sameFirm ? data.sameFirm : []}

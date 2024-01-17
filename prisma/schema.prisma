@@ -41,8 +41,32 @@ model Anime {
   releaseId    String   @db.ObjectId
   locale       Locale   @relation(fields: [localeId], references: [id])
   localeId     String   @db.ObjectId
+  animeJA      AnimeJA?
+  animeEN      AnimeEN?
+  animeVI      AnimeVI?
 
   @@unique([videoUrl, thumbnailUrl])
+}
+
+model AnimeJA {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  name    String @unique
+  anime   Anime  @relation(fields: [animeId], references: [id])
+  animeId String @unique @db.ObjectId
+}
+
+model AnimeEN {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  name    String @unique
+  anime   Anime  @relation(fields: [animeId], references: [id])
+  animeId String @unique @db.ObjectId
+}
+
+model AnimeVI {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  name    String @unique
+  anime   Anime  @relation(fields: [animeId], references: [id])
+  animeId String @unique @db.ObjectId
 }
 
 model Genre {

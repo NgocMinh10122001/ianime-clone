@@ -64,3 +64,8 @@ export interface VideoData {
     };
   }[];
 }
+
+export interface IDataFetching {
+  id: string;
+  title: string;
+}

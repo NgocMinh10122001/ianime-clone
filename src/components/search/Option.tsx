@@ -190,7 +190,7 @@ function Option(props: IProps) {
                 return (
                   <div
                     key={index}
-                    className="flex w-[180px] items-center gap-3  hover:bg-pink-500 hover:dark:bg-[var(--navbar-hover-color)] rounded-lg p-1 duration-200 ease-in-out "
+                    className="flex w-[180px] items-center gap-3  hover:bg-pink-500 hover:dark:bg-[var(--navbar-hover-color2)] rounded-lg p-1 duration-200 ease-in-out "
                     onClick={() => handleSort(item.sort)}
                     style={{
                       backgroundColor: `${

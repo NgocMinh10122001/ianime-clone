@@ -2,7 +2,7 @@
 import { IRelease, ITheFirm } from "@/types/index";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { memo, useReducer } from "react";
+import React, { memo } from "react";
 
 interface IProps {
   theFirm: ITheFirm;
@@ -14,17 +14,13 @@ interface IProps {
 function DetailMovie(props: IProps) {
   let { theFirm, title, release, thumbnailUrl } = props;
   const router = useRouter();
-  const reducer = (state: any, action: string) => {
-    switch (action) {
-      case `${theFirm.id}`:
-        router.push(`/layout/the-firm?theFirm=${theFirm.id}`);
-      case `${release.id}`:
-        router.push(`/layout/release?release=${release.id}`);
-      default:
-        return state;
-    }
+
+  const dispatch1 = (id: string) => {
+    router.push(`/layout/the-firm?theFirm=${id}`);
   };
-  const [anime, dispatch] = useReducer(reducer, 0);
+  const dispatch2 = (id: string) => {
+    router.push(`/layout/release?release=${id}`);
+  };
   return (
     <div className="w-full h-full grid grid-cols-12 gap-4 pt-4 border-t border-pink-600 dark:border-slate-400">
       <div
@@ -38,7 +34,7 @@ function DetailMovie(props: IProps) {
           <p className="text-black dark:text-slate-400 text-sm pb-1">Hãng</p>
           <span
             className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer"
-            onClick={() => dispatch(`${theFirm.id}`)}
+            onClick={() => dispatch1(theFirm.id)}
           >
             {theFirm.name || ""}
           </span>
@@ -57,7 +53,7 @@ function DetailMovie(props: IProps) {
           </p>
           <span
             className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer"
-            onClick={() => dispatch(`${release.id}`)}
+            onClick={() => dispatch2(release.id)}
           >
             {release.year || ""}
           </span>

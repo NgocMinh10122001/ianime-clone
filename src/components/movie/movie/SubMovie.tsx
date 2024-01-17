@@ -8,6 +8,8 @@ interface IProps {
 }
 function SubMovie(props: IProps) {
   let { url, title, view } = props;
+  // console.log(url);
+
   return (
     <div className="h-full w-full ">
       <iframe

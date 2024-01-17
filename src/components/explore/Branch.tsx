@@ -22,7 +22,7 @@ function Branch(props: IProps) {
     if (branch === "anime") {
       router.push(`/layout/search`);
     } else if (branch === "collection") {
-      return;
+      router.push(`https://www.shutterstock.com/vi/search/cosplay`);
     } else if (branch === "genre") {
       router.push(`/layout/genre`);
     } else {
