@@ -26,7 +26,7 @@ function Branch(props: IProps) {
     } else if (branch === "genre") {
       router.push(`/layout/genre`);
     } else {
-      // router.push(`/layout/search`);
+      router.push(`/layout/gacha`);
       return;
     }
   }, []);

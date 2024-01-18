@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     const res = await prismadb.anime.findMany({
       where: {
         firm: {
-          id: theFirm || "",
+          id: (theFirm as string) || "",
         },
       },
 

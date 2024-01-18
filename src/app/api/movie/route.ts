@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
     const anime = await prismadb.anime.findMany({
       where: {
-        id: id || "",
+        id: (id as string) || "",
       },
       include: {
         firm: true,
@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
     const sameName = await prismadb.anime.findMany({
       where: {
         title: {
-          contains: name || "",
+          contains: (name as string) || "",
         },
       },
       include: {
@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     const sameFirm = await prismadb.anime.findMany({
       where: {
         firm: {
-          id: firm || "",
+          id: (firm as string) || "",
         },
       },
       include: {
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
       where: {
         genres: {
           some: {
-            id: genre || "",
+            id: (genre as string) || "",
           },
         },
       },
@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
     const sameRelease = await prismadb.anime.findMany({
       where: {
         release: {
-          id: release || "",
+          id: (release as string) || "",
         },
       },
       include: {
