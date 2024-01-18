@@ -3,31 +3,15 @@ import prismadb from "../../../../lib/prismadb";
 
 export async function GET(req: NextRequest) {
   try {
-    const page = req.nextUrl.searchParams.get("page");
-    const limit = req.nextUrl.searchParams.get("limit");
-    const category = req.nextUrl.searchParams.get("category");
-    // console.log(page, limit, category);
-
+    const random = req.nextUrl.searchParams.get("random");
     const res = await prismadb.anime.findMany({
-      where: {
-        genres: {
-          some: {
-            id: (category as string) || "",
-          },
-        },
-      },
-
-      skip: (+(page as string) - 1) * 24,
-      take: +(limit as string) || 24,
+      orderBy: { id: "asc" },
+      take: +(random as string) || 0,
     });
-    const totalPage = res.length;
-
-    // console.log(res[0].animes);
 
     return NextResponse.json(
       {
         data: res,
-        totalPage: totalPage,
         errCode: 0,
         errMes: "get genre explore success!",
       },

@@ -28,7 +28,7 @@ const FreshLoad = (props: IProps) => {
   }, []);
 
   return (
-    <div className="fresh__load__container  w-full my-12 padding-x-4">
+    <div className="fresh__load__container  w-full py-4 padding-x-4">
       <div className="title flex justify-between  pb-4 w-full">
         <div className="text-black dark:text-white text-3xl tracking-normal">
           {title}
