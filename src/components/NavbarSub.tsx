@@ -181,7 +181,7 @@ function NavbarSub() {
           </Link>
         </div>
         <div className="item hover:bg-pink-200  dark:hover:bg-[color:var(--navbar-hover-color)] py-3 flex items-center ps-7 pe-10 border-b border-pink-200 dark:border-slate-700">
-          <Link className="flex items-center " href={""}>
+          <Link className="flex items-center " href={"/layout/favorite"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

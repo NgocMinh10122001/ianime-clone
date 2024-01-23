@@ -4,6 +4,7 @@ import DetailMovie from "../movie/relate-movie/DetailMovie";
 import SubMovie from "../movie/movie/SubMovie";
 import SumaryMovie from "../movie/relate-movie/SumaryMovie";
 import { IAnime, IGenre, IRelease, ITheFirm } from "@/types/index";
+// import { ToastContainer } from "react-toastify";
 
 interface INewAnime extends IAnime {
   firm: ITheFirm;

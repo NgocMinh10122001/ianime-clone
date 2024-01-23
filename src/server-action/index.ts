@@ -1,8 +1,6 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import { NextResponse } from "next/server";
-import { toast } from "react-toastify";
 import prismadb from "../../lib/prismadb";
 
 export async function createNewUser(values: any) {
