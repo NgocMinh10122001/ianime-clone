@@ -52,7 +52,7 @@ export const options: NextAuthOptions = {
             email: credentials?.email,
           },
         });
-        // console.log("check creidentials", credentials);
+        // console.log("check creidentials", user);
 
         if (!user || !user.password) {
           throw new Error("Email not exist!");
@@ -160,16 +160,19 @@ export const options: NextAuthOptions = {
 
     async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
+      // console.log("session", session);
+      // console.log("token", token);
 
       if (session?.user && token.role === "admin") {
         session.user.role = token.role;
         session.user.accessToken = token.accessToken;
         session.user.id = token?.user?.id || "";
+        // console.log("check sess tion 2", session);
+
         return (session = {
           ...session,
         });
       }
-      // console.log("check sess tion 1", session);
       return (session = { ...session });
     },
   },

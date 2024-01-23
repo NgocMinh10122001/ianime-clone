@@ -29,6 +29,7 @@ function Navbar() {
   let toggleMenuUser = useCallback(() => {
     setToggleMenuUser(!isToggleMenuUser);
   }, [isToggleMenuUser]);
+  // console.log("check session", session);
 
   let handleToggleSubMenu = useCallback(() => {
     setToggleSubMenu(!isToggleSubMenu);
@@ -93,9 +94,9 @@ function Navbar() {
       )}
 
       <nav className="w-full  flex justify-between items-center  py-3 border-b border-white dark:border-black ">
-        <div className="nav__left flex items-center ">
+        <div className="nav__left flex items-center gap-3">
           <div
-            className="nav__left__bar cursor-pointer hover:bg-pink-300 border-none rounded-full  p-3 ms-0 dark:hover:bg-[color:var(--navbar-hover-color)]  relative z-10"
+            className="nav__left__bar cursor-pointer hover:bg-pink-300 border-none rounded-full  p-2  dark:hover:bg-[color:var(--navbar-hover-color)]  relative z-10"
             onClick={handleToggleSubMenu}
           >
             {isToggleSubMenu ? (
@@ -105,7 +106,7 @@ function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 sm:w-8 sm:h-8  stroke-black dark:stroke-white z-0"
+                className="w-5 h-5 sm:w-7 sm:h-7  stroke-black dark:stroke-white z-0"
               >
                 <path
                   strokeLinecap="round"
@@ -120,7 +121,7 @@ function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 sm:w-8 sm:h-8 stroke-black dark:stroke-white z-0"
+                className="w-5 h-5 sm:w-7 sm:h-7 stroke-black dark:stroke-white z-0"
               >
                 <path
                   strokeLinecap="round"
@@ -228,7 +229,7 @@ function Navbar() {
             </svg>
           )}
 
-          <div className="text-black dark:text-white relative z-10 ps-3">
+          <div className="text-black dark:text-white relative z-10 ps-5">
             {isToggleMenuUser ? (
               // <IoClose
               //   size={30}
