@@ -164,6 +164,7 @@ export const options: NextAuthOptions = {
       if (session?.user && token.role === "admin") {
         session.user.role = token.role;
         session.user.accessToken = token.accessToken;
+        session.user.id = token?.user?.id || "";
         return (session = {
           ...session,
         });
