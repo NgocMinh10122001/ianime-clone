@@ -1,11 +1,12 @@
 "use client";
 import { IAnime } from "@/types/index";
 import { useRouter } from "next/navigation";
+import { memo } from "react";
 
 interface IAnimes {
   animes: IAnime[];
 }
-export default function Anime(props: IAnimes) {
+function Anime(props: IAnimes) {
   let { animes } = props;
   // console.log(animes);
   let router = useRouter();
@@ -77,3 +78,5 @@ export default function Anime(props: IAnimes) {
     </div>
   );
 }
+
+export default memo(Anime);
