@@ -1,4 +1,5 @@
 "use client";
+import { storeMovieWatched } from "@/server-action/user";
 import { IAnime } from "@/types/index";
 import { useRouter } from "next/navigation";
 import { memo } from "react";
@@ -13,6 +14,8 @@ function Anime(props: IAnimes) {
 
   const handleRedirect = (item: any) => {
     // console.log(item);
+
+    storeMovieWatched(item?.id);
 
     router.push(
       `/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`
