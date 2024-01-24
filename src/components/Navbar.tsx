@@ -79,7 +79,7 @@ function Navbar() {
       {isToggleSubMenu ? (
         <div
           onClick={handleToggleSubMenu}
-          className="absolute bg-slate-400 opacity-20  top-0 bottom-0 left-0 right-0  cursor-pointer z-10"
+          className="absolute bg-slate-400 opacity-20  top-0 bottom-0 left-0 right-0  cursor-pointer z-30"
         ></div>
       ) : (
         ""
@@ -87,7 +87,7 @@ function Navbar() {
       {isToggleMenuUser ? (
         <div
           onClick={toggleMenuUser}
-          className="absolute bg-slate-400 opacity-20  top-0 bottom-0 left-0 right-0  cursor-pointer z-10"
+          className="absolute bg-slate-400 opacity-20  top-0 bottom-0 left-0 right-0  cursor-pointer z-30"
         ></div>
       ) : (
         ""
@@ -96,7 +96,7 @@ function Navbar() {
       <nav className="w-full  flex justify-between items-center  py-3 border-b border-white dark:border-black ">
         <div className="nav__left flex items-center gap-3">
           <div
-            className="nav__left__bar cursor-pointer hover:bg-pink-300 border-none rounded-full  p-2  dark:hover:bg-[color:var(--navbar-hover-color)]  relative z-10"
+            className="nav__left__bar cursor-pointer hover:bg-pink-300 border-none rounded-full  p-2  dark:hover:bg-[color:var(--navbar-hover-color)]  relative z-30"
             onClick={handleToggleSubMenu}
           >
             {isToggleSubMenu ? (

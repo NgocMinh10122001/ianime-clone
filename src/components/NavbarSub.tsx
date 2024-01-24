@@ -8,7 +8,7 @@ function NavbarSub() {
   // console.log("check", pathname);
 
   return (
-    <div className="navbar__sub absolute bg-pink-50 dark:bg-[color:var(--navbar-color)] object-cover z-20">
+    <div className="navbar__sub absolute bg-pink-50 dark:bg-[color:var(--navbar-color)] object-cover z-30">
       {/* <div className="navbar__sub__items border-b border-slate-600 dark:border-slate-700 mb-4 ps-7 pe-10"></div> */}
       <div className="navbar__sub__items   object-cover">
         {/* <div className="item dark:hover:bg-[color:var(--navbar-hover-color)] border-b border-white dark:border-slate-400 mb-4"></div> */}

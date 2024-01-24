@@ -35,7 +35,7 @@ function AnimeFavorite(props: IAnimes) {
           return (
             <div key={item.id} className="relative w-full h-fit ">
               <div
-                className="absolute bg-red-400 hover:bg-red-500 shadow-sm hover:shadow-black  hover: rounded-full p-3 right-[6px] top-[6px] z-30 text-white"
+                className="absolute bg-red-400 hover:bg-red-500 shadow-sm hover:shadow-black  hover: rounded-full p-3 right-[6px] top-[6px] z-10 text-white"
                 onClick={() => handleDeleteFavoriteMovie(item.id)}
               >
                 <svg
