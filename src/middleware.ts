@@ -31,5 +31,6 @@ export const config = {
     "/admin/manage-user",
     "/layout/movie/:path*",
     "/layout/favorite",
+    "/layout/watched",
   ],
 };

@@ -15,6 +15,7 @@ import { IoClose } from "react-icons/io5";
 import DataSearchOnChange from "./re-components/DataSearchOnChange";
 import { searchInputOnChange } from "@/server-action/index";
 import { IDataFetching } from "@/types/index";
+import { deleteAllMovieWatched } from "@/server-action/user";
 
 function Navbar() {
   const { data: session } = useSession();
@@ -79,7 +80,7 @@ function Navbar() {
       {isToggleSubMenu ? (
         <div
           onClick={handleToggleSubMenu}
-          className="absolute bg-slate-400 opacity-20  top-0 bottom-0 left-0 right-0  cursor-pointer z-30"
+          className="absolute bg-slate-400 opacity-20  top-0 bottom-0 left-0 right-0  cursor-pointer z-20"
         ></div>
       ) : (
         ""
@@ -87,7 +88,7 @@ function Navbar() {
       {isToggleMenuUser ? (
         <div
           onClick={toggleMenuUser}
-          className="absolute bg-slate-400 opacity-20  top-0 bottom-0 left-0 right-0  cursor-pointer z-30"
+          className="absolute bg-slate-400 opacity-20  top-0 bottom-0 left-0 right-0  cursor-pointer z-20"
         ></div>
       ) : (
         ""
@@ -229,7 +230,7 @@ function Navbar() {
             </svg>
           )}
 
-          <div className="text-black dark:text-white relative z-10 ps-5">
+          <div className="text-black dark:text-white relative z-30 ps-5">
             {isToggleMenuUser ? (
               // <IoClose
               //   size={30}
@@ -275,12 +276,12 @@ function Navbar() {
             )}
             <>
               {isToggleMenuUser ? (
-                <div className="absolute bg-pink-200 dark:bg-white ps-2 py-2  sm:py-4 w-24 h-fit top-[48px] sm:top-[54px] -left-[76px] right-0 bottom-0  z-10">
+                <div className="absolute bg-pink-200 dark:bg-white ps-2 py-2  sm:py-4 w-24 h-fit top-[48px] sm:top-[54px] -left-[76px] right-0 bottom-0  z-30">
                   <>
                     {session?.user?.role === "admin" ? (
                       <Link
                         href={"/admin/manage-user"}
-                        className="text-xs text-black dark:text-black hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:text-base sm:py-2"
+                        className="text-xs text-black dark:text-black hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:text-base sm:py-2 z-30"
                       >
                         <span>Dashboard</span>
                       </Link>
@@ -289,9 +290,12 @@ function Navbar() {
                     )}
                   </>
                   <button
-                    className=" dark:text-black text-black text-xs cursor-pointer sm:text-base hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:py-2"
+                    className=" dark:text-black text-black text-xs cursor-pointer sm:text-base hover:border-b-[1px] hover:border-black dark:hover:border-b-[1px] dark:hover:border-black sm:py-2 z-30"
                     type="button"
-                    onClick={() => signOut()}
+                    onClick={() => {
+                      deleteAllMovieWatched();
+                      signOut();
+                    }}
                   >
                     Log out
                   </button>
