@@ -1,9 +1,10 @@
 "use client";
 import { saveFavoriteMovie } from "@/server-action/user";
+import { Modal } from "antd";
 import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -98,27 +99,68 @@ function FeaturesMovie() {
   const { data: session } = useSession();
   const params = useSearchParams();
   let movieId = params.get("id");
+  let [isToggleShare, setToggleShare] = useState(false);
   // console.log(session);
 
+  const showModal = () => {
+    setToggleShare(true);
+  };
+
+  const handleOk = () => {
+    setToggleShare(false);
+  };
+
+  const handleCancel = () => {
+    setToggleShare(false);
+  };
+
   const handleSaveFavoriteMovie = useCallback(
-    async (movieId: string | null, session: Session | null) => {
+    async (movieId: string | null, session: Session | null, id: string) => {
       // console.log("item", item);
       // console.log("session", session);
-      const connected = await saveFavoriteMovie(session?.user?.id, movieId);
-      if (connected) {
-        toast.success("movie saved to Favorite movie!");
-      } else {
-        toast.error("existed favorite movie!");
+      if (id === "save") {
+        const connected = await saveFavoriteMovie(session?.user?.id, movieId);
+        if (connected) {
+          toast.success("movie saved to Favorite movie!");
+        } else {
+          toast.error("existed favorite movie!");
+        }
+      } else if (id === "share") {
+        showModal();
       }
     },
     [movieId, session]
   );
+  const handleCopyButtonClick = () => {
+    // Lấy nội dung cần copy (trong trường hợp này, lấy nội dung của phần tử có id là "contentToCopy")
+    const contentToCopy = document.getElementById("contentToCopy");
+
+    if (contentToCopy) {
+      // Tạo một textarea ẩn để chứa nội dung cần copy
+      const tempTextarea = document.createElement("textarea");
+      tempTextarea.value = contentToCopy.innerText;
+      document.body.appendChild(tempTextarea);
+
+      // Chọn toàn bộ nội dung trong textarea
+      tempTextarea.select();
+      tempTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+      // Sao chép nội dung vào clipboard
+      document.execCommand("copy");
+
+      // Xóa textarea sau khi copy
+      document.body.removeChild(tempTextarea);
+
+      // Thông báo hoặc thực hiện các xử lý khác (nếu cần)
+      toast.success("Sao chép URL thành công!");
+    }
+  };
 
   return (
     <>
       <ToastContainer autoClose={3000} position="bottom-right" />
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center flex-wrap gap-2">
         {featureArray &&
           featureArray.length > 0 &&
           featureArray.map((item, index) => (
@@ -132,7 +174,7 @@ function FeaturesMovie() {
               } dark:bg-[var(--active-dark)]  ${
                 item.id !== "like" && "cursor-pointer"
               }`}
-              onClick={() => handleSaveFavoriteMovie(movieId, session)}
+              onClick={() => handleSaveFavoriteMovie(movieId, session, item.id)}
             >
               {item.id === "like" && (
                 <div className="absolute  bg-pink-500 dark:bg-[var(--navbar-color)] top-0 bottom-0 left-0 right-0 rounded-full z-10 opacity-80"></div>
@@ -149,6 +191,28 @@ function FeaturesMovie() {
               </span>
             </div>
           ))}
+        <Modal
+          title="Chia sẻ"
+          open={isToggleShare}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <div
+            id="contentToCopy"
+            className="p-2 w-full border border-black rounded-md"
+          >
+            <p className="truncate text-black ">Some contents...</p>
+          </div>
+          <div
+            className="w-full flex justify-end"
+            onClick={handleCopyButtonClick}
+          >
+            <button className="text-black bg-orange-400 hover:bg-orange-500 rounded-md py-1 px-2 mt-4">
+              Sao chép URL
+            </button>
+          </div>
+        </Modal>
       </div>
     </>
   );

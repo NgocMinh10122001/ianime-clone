@@ -27,9 +27,9 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession();
   return (
-    <html lang="en">
+    <html lang="en" className="">
       <body
-        className={`relative dark:bg-[var(--bg-explore)] bg-white ${inter.className} `}
+        className={` dark:bg-[var(--bg-explore)] bg-white ${inter.className} h-full`}
       >
         <AuthProvider session={session}>
           <StyledComponentsRegistry>

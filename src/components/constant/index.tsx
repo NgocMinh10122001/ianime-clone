@@ -1,58 +1,58 @@
 export const Ianime = [
   {
     title: "Trang chủ",
-    link: "/",
+    link: "/layout/home",
   },
   {
     title: "Tìm kiếm",
-    link: "/search",
+    link: "/layout/search",
   },
   {
     title: "Khám phá",
-    link: "/explore",
+    link: "/layout/explore",
   },
   {
     title: "Top lượt xem",
-    link: "/topview",
+    link: "/layout/topview",
   },
   {
     title: "Anime Vietsub",
-    link: "/vietsub",
+    link: "/layout/vietsub",
   },
   {
     title: "Anime HD",
-    link: "/hd",
+    link: "/layout/hd",
   },
   {
     title: "18+",
-    link: "/18+",
+    link: "/layout/18+",
   },
   {
     title: "Sắp chiếu",
-    link: "/comming-soon",
+    link: "/layout/comming-soon",
   },
 ];
 
 export const partner = [
   {
     title: "AWS",
-    link: "/",
+    link: "/layout/aws",
   },
   {
     title: "Anime Game",
-    link: "/anime-game",
+    link: "/layout/anime-game",
   },
 ];
 
 export const toy = [
   {
     title: "Saucemoe",
-    link: "/toy",
+    link: "/layout/toy",
   },
 ];
 export const contract = [
   {
     title: "Discord FanClub",
-    link: "/discord",
+    link: "/layout/discord",
   },
 ];

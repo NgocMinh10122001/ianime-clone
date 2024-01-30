@@ -29,7 +29,7 @@ export default async function page() {
     },
   ];
   return (
-    <div className="">
+    <div className="w-full h-fit">
       {nestProps &&
         nestProps.length > 0 &&
         nestProps.map((item: INestProps, index: number) => {

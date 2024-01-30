@@ -1,3 +1,4 @@
+import useResizeSubMovie from "@/custom-hook/useResizeSubMovie";
 import React, { memo } from "react";
 import FeaturesMovie from "./FeaturesMovie";
 
@@ -9,11 +10,12 @@ interface IProps {
 function SubMovie(props: IProps) {
   let { url, title, view } = props;
   // console.log(url);
-
+  useResizeSubMovie();
   return (
     <>
-      <div className="h-full w-full ">
+      <div className="h-fit w-full ">
         <iframe
+          id="movie"
           width="100%"
           height="525px"
           src={`${url}`}
@@ -29,7 +31,7 @@ function SubMovie(props: IProps) {
         <p className="text-slate-700 dark:text-slate-400 text-sm">
           {view} lượt xem
         </p>
-        <div className="video-feature w-full h-full flex flex-wrap gap-4 pt-4">
+        <div className="video-feature w-full  flex flex-wrap gap-y-4 pt-4">
           <FeaturesMovie />
         </div>
       </div>

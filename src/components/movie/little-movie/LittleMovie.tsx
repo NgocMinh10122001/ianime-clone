@@ -1,4 +1,5 @@
 "use client";
+import useResizeLittleMovie from "@/custom-hook/useResizeLittleMovie";
 import { storeMovieWatched } from "@/server-action/user";
 import { IAnime, IRelease, ITheFirm } from "@/types/index";
 import { useRouter } from "next/navigation";
@@ -30,6 +31,7 @@ function LittleMovie(props: IProps) {
     }
     return;
   };
+  useResizeLittleMovie();
   return (
     <>
       <div className="py-2 w-full h-fit">
@@ -42,19 +44,22 @@ function LittleMovie(props: IProps) {
             {theFirm?.name || release?.year || ""}
           </span>
         </p>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           {(animeRelate &&
             animeRelate.length > 0 &&
             animeRelate.map((item) => {
               return (
                 <div
                   key={item.id}
-                  className="grid grid-cols-12 gap-x-4 h-[137px] sm:h-[130px] md:h-[136px] lg:h-[90px] xl:h-[106px]  w-full cursor-pointer"
+                  className="grid grid-cols-12 gap-x-4  h-fit  w-full cursor-pointer overflow-hidden"
                   onClick={() => handleRedirect(item)}
                 >
-                  <div className="h-full col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-5 2xl:col-span-4 relative   after:right-[6px]  after:bottom-[6px]  after:text-red-500 block after:absolute after:w-8 after:flex after:justify-center after:items-center after:h-8 after:rounded-full after:bg-pink-300">
+                  <div
+                    id="littleMovie"
+                    className="h-full col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-5 2xl:col-span-4 relative   after:right-[6px]  after:bottom-[6px]  after:text-red-500 block after:absolute after:w-8 after:flex after:justify-center after:items-center after:h-8 after:rounded-full after:bg-pink-300 after:z-[11]"
+                  >
                     <div
-                      className={`    rounded-md bg-cover bg-top bg-no-repeat w-full  h-full   opacity-80 dark:opacity-40 absolute top-0 left-0 right-0 bottom-0 z-0`}
+                      className={`    rounded-md bg-cover bg-top bg-no-repeat    opacity-80 dark:opacity-40 absolute top-0 left-0 right-0 bottom-0 z-0 `}
                       style={{
                         backgroundImage: `url("${item.thumbnailUrl}")`,
                       }}
@@ -66,7 +71,7 @@ function LittleMovie(props: IProps) {
                       `}</style> */}
                     </div>
                     <div
-                      className={` w-[40%]  bg-[url('https://upload.wikimedia.org/wikipedia/vi/0/00/B%C3%ACa_t%E1%BA%ADp_10_manga_Zon_100.jpg')]  bg-cover bg-top bg-no-repeat  h-full  absolute left-[30%] right-[30%] top-0 bottom-0   z-10`}
+                      className={`    bg-cover bg-top bg-no-repeat    absolute left-[30%] right-[30%] top-0 bottom-0   z-10`}
                       style={{
                         backgroundImage: `url("${item.thumbnailUrl}")`,
                       }}
@@ -77,8 +82,10 @@ function LittleMovie(props: IProps) {
                       }
                     `}</style>
                   </div>
-                  <div className="col-span-7 sm:col-span-8 md:col-span-9 lg:col-span-7 2xl:col-span-8">
-                    <p className="text-black dark:text-white">{item.title}</p>
+                  <div className="col-span-7 sm:col-span-8 md:col-span-9 lg:col-span-7 2xl:col-span-8  h-full">
+                    <p className="text-black dark:text-white truncate xl:whitespace-normal">
+                      {item.title}
+                    </p>
                     <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">
                       {item.firm?.name}
                     </p>

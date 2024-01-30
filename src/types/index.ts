@@ -68,4 +68,7 @@ export interface VideoData {
 export interface IDataFetching {
   id: string;
   title: string;
+  firmId: string;
+  genreIds: string[];
+  releaseId: string;
 }

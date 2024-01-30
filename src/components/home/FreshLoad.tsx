@@ -2,6 +2,7 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import Anime from "../re-components/Anime";
 import axios from "axios";
+import useResizeAnimeElements from "@/custom-hook/useResizeAnimeElements";
 
 interface IProps {
   limit: number;
