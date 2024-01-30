@@ -92,7 +92,7 @@ export default async function page(props: any) {
   );
   const data = await res.json();
   return (
-    <div className="search__container container max-w-[1440px] pb-8 relative">
+    <div className="search__container  w-full padding-x-4 pb-8 relative">
       <Option
         options={options}
         genres={data ? data.genres : []}

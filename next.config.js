@@ -2,9 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   transpilePackages: ["@mui/material/css"],
-  experimental: {
-    serverActions: true,
-  },
+
   images: {
     remotePatterns: [
       {

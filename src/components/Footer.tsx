@@ -6,81 +6,102 @@ import { Ianime, partner, toy, contract } from "./constant/index";
 
 export default function Footer() {
   return (
-    <footer className="bg-[color:var(--bg-footer-sun)] dark:bg-[color:var(--navbar-color)] px-20 sm:px-32 w-full ">
-      <div className="container__footer grid grid-cols-3  pt-14 pb-14 sm:pb-10  sm:grid-cols-5 md:g sm:grid-rows-1">
-        <div className="footer__logo grid col-start-2 col-span-1 justify-center sm:col-span-1  sm:pt-0 sm:col-start-1 ">
-          <Image
-            src="/favicon.ico"
-            width={48}
-            height={48}
-            alt="Picture of the author"
-          />
-        </div>
-        <div className="footer__ianime grid justify-center pt-8 col-start-1 col-span-1 sm:col-span-1  sm:pt-0 sm:col-start-2 gap-y-3 ">
-          <span className="pb-2 flex justify-center text-black dark:text-white sm:justify-normal items-center text-sm font-bold">
-            iAnime
-          </span>
-          {Ianime &&
-            Ianime.length > 0 &&
-            Ianime.map((item, index) => {
-              return (
-                <Link
-                  href={item.link}
-                  key={index}
-                  className="text-xs py-1 flex justify-center text-black dark:text-white sm:justify-normal "
-                >
-                  {item.title}
-                </Link>
-              );
-            })}
-        </div>
-        <div className="footer__partner grid justify-center pt-8  col-start-3 col-span-1 sm:col-span-1  sm:pt-0 sm:col-start-3">
-          <span className=" grid justify-center text-black dark:text-white sm:justify-normal text-sm font-bold">
-            Đối tác
-          </span>
-          {partner &&
-            partner.length > 0 &&
-            partner.map((item, index) => (
-              <Link
-                href={item.link}
-                key={index}
-                className="text-xs  grid justify-center text-black dark:text-white sm:justify-normal"
-              >
-                {item.title}
-              </Link>
-            ))}
-        </div>
-        <div className="footer__toy grid justify-center pt-8  col-start-1 col-span-1 sm:col-span-1  sm:pt-0 sm:col-start-4">
-          <span className="flex justify-center text-black dark:text-white sm:justify-normal text-sm font-bold pb-5 sm:pb-0">
-            Đồ chơi
-          </span>
-          {toy &&
-            toy.length > 0 &&
-            toy.map((item, index) => (
-              <Link
-                href={item.link}
-                key={index}
-                className="text-xs  flex justify-center text-black dark:text-white sm:justify-normal"
-              >
-                {item.title}
-              </Link>
-            ))}
-        </div>
-        <div className="footer__contract grid justify-center pt-8  col-start-3 col-span-1 sm:col-span-1   sm:pt-0 sm:col-start-5">
-          <span className=" flex justify-center text-black dark:text-white sm:justify-normal text-sm font-bold pb-5 sm:pb-0">
-            Liên hệ
-          </span>
-          {contract &&
-            contract.length > 0 &&
-            contract.map((item, index) => (
-              <Link
-                href={item.link}
-                key={index}
-                className="text-xs  flex justify-center text-black dark:text-white sm:justify-normal"
-              >
-                {item.title}
-              </Link>
-            ))}
+    <footer className="bg-[color:var(--bg-footer-sun)] dark:bg-[color:var(--navbar-color)] gap-10 px-[112px] py-10 w-full h-fit grid  grid-cols-5 ">
+      <div className="w-full flex justify-center col-span-5 sm:col-span-1">
+        <Link href={"layout/home"}>
+          <img src="/favicon.ico" alt="no img" width={40} height={40} />
+        </Link>
+      </div>
+      <div className="col-span-5 sm:col-span-4">
+        <div className="grid grid-cols-4 gap-4">
+          <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
+            <p className="text-black dark:text-white text-sm font-sans font-bold">
+              iHentai
+            </p>
+            <ul className="flex flex-col items-center sm:block">
+              {Ianime &&
+                Ianime.length > 0 &&
+                Ianime.map((item, index) => (
+                  <li
+                    key={index}
+                    className="mt-4 flex justify-center-center sm:block"
+                  >
+                    <Link
+                      href={item.link}
+                      className="text-black dark:text-white text-sm font-sans font-light text-center sm:text-left"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
+            <p className="text-black dark:text-white text-sm font-sans font-bold">
+              Đối tác
+            </p>
+            <ul className="flex flex-col items-center sm:block">
+              {partner &&
+                partner.length > 0 &&
+                partner.map((item, index) => (
+                  <li
+                    key={index}
+                    className="mt-4 flex  justify-center-center sm:block"
+                  >
+                    <Link
+                      href={item.link}
+                      className="text-black dark:text-white text-sm font-sans font-light text-center sm:text-left"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
+            <p className="text-black dark:text-white text-sm font-sans font-bold">
+              Đồ chơi
+            </p>
+            <ul className="flex flex-col items-center sm:block">
+              {toy &&
+                toy.length > 0 &&
+                toy.map((item, index) => (
+                  <li
+                    key={index}
+                    className="mt-4 flex  justify-center-center sm:block"
+                  >
+                    <Link
+                      href={item.link}
+                      className="text-black dark:text-white text-sm font-sans font-light text-center sm:text-left"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
+            <p className="text-black dark:text-white text-sm font-sans font-bold">
+              Liên hệ
+            </p>
+            <ul className="flex flex-col items-center sm:block">
+              {contract &&
+                contract.length > 0 &&
+                contract.map((item, index) => (
+                  <li
+                    key={index}
+                    className="mt-4 flex justify-center-center sm:block"
+                  >
+                    <Link
+                      href={item.link}
+                      className="text-black dark:text-white text-sm font-sans font-light text-center sm:text-left"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
         </div>
       </div>
     </footer>

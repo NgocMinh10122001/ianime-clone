@@ -5,9 +5,10 @@ import React, { memo } from "react";
 interface IProps {
   dataFetching: IDataFetching[];
   isToggleDataSearch: boolean;
+  setToggleDataSearch: any;
 }
 function DataSearchOnChange(props: IProps) {
-  let { dataFetching, isToggleDataSearch } = props;
+  let { dataFetching, isToggleDataSearch, setToggleDataSearch } = props;
   // console.log(dataFetching);
 
   return (
@@ -18,9 +19,10 @@ function DataSearchOnChange(props: IProps) {
             dataFetching.length > 0 &&
             dataFetching.map((item) => (
               <Link
-                href={`#`}
+                href={`/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`}
                 key={item.id}
                 className="flex items-center w-full h-fit hover:bg-pink-100 dark:hover:bg-[var(--navbar-hover-color2)] py-2"
+                onClick={() => setToggleDataSearch(false)}
               >
                 <div className="px-3">
                   <svg

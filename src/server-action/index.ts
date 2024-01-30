@@ -311,6 +311,9 @@ export async function searchInputOnChange(values: string) {
       select: {
         id: true,
         title: true,
+        firmId: true,
+        genreIds: true,
+        releaseId: true,
       },
       take: 6,
     });

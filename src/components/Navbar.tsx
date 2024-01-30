@@ -16,6 +16,7 @@ import DataSearchOnChange from "./re-components/DataSearchOnChange";
 import { searchInputOnChange } from "@/server-action/index";
 import { IDataFetching } from "@/types/index";
 import { deleteAllMovieWatched } from "@/server-action/user";
+import useResizeNavbar from "@/custom-hook/useResizeNavbar";
 
 function Navbar() {
   const { data: session } = useSession();
@@ -23,6 +24,8 @@ function Navbar() {
   let [isToggleSubMenu, setToggleSubMenu] = useState(false);
   let [isToggleMenuUser, setToggleMenuUser] = useState(false);
   let [isToggleDeleteSearch, setToggleDeleteSearch] = useState(false);
+  let [isResposive, setResposive] = useState<boolean>(false);
+  let [isResposive2, setResposive2] = useState<boolean>(false);
   let [inputData, setInputData] = useState("");
   const [dataFetching, setDataFetching] = useState<IDataFetching[]>([]);
   const [isToggleDataSearch, setToggleDataSearch] = useState(false);
@@ -49,7 +52,7 @@ function Navbar() {
       setInputData(event.target.value);
 
       startTrasition(async () => {
-        let res = await searchInputOnChange(event.target.value);
+        const res = await searchInputOnChange(event.target.value);
         // console.log(res);
         if (res && res.length > 0) setDataFetching(res);
         return;
@@ -74,6 +77,7 @@ function Navbar() {
     },
     [inputData]
   );
+  useResizeNavbar(setResposive, setResposive2);
 
   return (
     <header className="w-full z-20 padding-x-4  bg-pink-100 dark:bg-[color:var(--navbar-color)]">
@@ -95,94 +99,135 @@ function Navbar() {
       )}
 
       <nav className="w-full  flex justify-between items-center  py-3 border-b border-white dark:border-black ">
-        <div className="nav__left flex items-center gap-3">
-          <div
-            className="nav__left__bar cursor-pointer hover:bg-pink-300 border-none rounded-full  p-2  dark:hover:bg-[color:var(--navbar-hover-color)]  relative z-30"
-            onClick={handleToggleSubMenu}
-          >
-            {isToggleSubMenu ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5 sm:w-7 sm:h-7  stroke-black dark:stroke-white z-0"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5 sm:w-7 sm:h-7 stroke-black dark:stroke-white z-0"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-            )}
-          </div>
-          <Link
-            href={"/layout/home"}
-            className="nav__left__title cursor-pointer text-black dark:text-white font-bold sm:text-lg"
-          >
-            iAnime
-          </Link>
-        </div>
-        <div className="nav-midle relative  w-[40%] flex items-center  ring-1 ring-pink-600 dark:ring-slate-600 rounded-sm py-2  focus-within:ring-2 focus-within:ring-pink-400  focus-within:dark:ring-slate-400 duration-150 ease-in-out">
-          <DataSearchOnChange
-            isToggleDataSearch={isToggleDataSearch}
-            dataFetching={dataFetching}
-          />
-
-          <div
-            className="search__icon px-3 cursor-pointer"
-            onClick={handleFindAnime}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-5 h-5 stroke-black dark:stroke-white"
+        {isResposive2 ? (
+          ""
+        ) : (
+          <div className="nav__left flex items-center gap-3">
+            <div
+              className="nav__left__bar cursor-pointer hover:bg-pink-300 border-none rounded-full  p-2  dark:hover:bg-[color:var(--navbar-hover-color)]  relative z-30"
+              onClick={handleToggleSubMenu}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
+              {isToggleSubMenu ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 sm:w-7 sm:h-7  stroke-black dark:stroke-white z-0"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5 sm:w-7 sm:h-7 stroke-black dark:stroke-white z-0"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+              )}
+            </div>
+            <Link
+              href={"/layout/home"}
+              className="nav__left__title cursor-pointer text-black dark:text-white font-bold sm:text-lg"
+            >
+              iAnime
+            </Link>
           </div>
-          <div className="search__input w-85 relative pe-4 flex items-center">
-            <input
-              onChange={(event) => handleChangeInput(event)}
-              type="text"
-              placeholder="Tim kiem"
-              className="  bg-transparent w-full h-full  outline-0  text-black dark:text-white  py-1"
-              value={inputData}
-              onKeyDown={(event) => handleKeyDown(event)}
+        )}
+        {isResposive ? (
+          <div
+            className={`nav-midle relative  ${
+              isResposive2 ? "w-[80%]" : "w-[40%]"
+            } flex items-center  ring-1 ring-pink-600 dark:ring-slate-600 rounded-sm py-2  focus-within:ring-2 focus-within:ring-pink-400  focus-within:dark:ring-slate-400 duration-150 ease-in-out `}
+          >
+            <DataSearchOnChange
+              isToggleDataSearch={isToggleDataSearch}
+              dataFetching={dataFetching}
+              setToggleDataSearch={setToggleDataSearch}
             />
 
-            {isToggleDeleteSearch ? (
+            <div
+              className="search__icon px-3 cursor-pointer"
+              onClick={handleFindAnime}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6 stroke-black dark:stroke-white cursor-pointer"
-                onClick={handleToggleInputSearch}
+                className="w-5 h-5 stroke-black dark:stroke-white"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+            </div>
+            <div className="search__input w-85 relative pe-4 flex items-center ">
+              <input
+                onChange={(event) => handleChangeInput(event)}
+                type="text"
+                placeholder="Tim kiem"
+                className="  bg-transparent w-full h-full  outline-0  text-black dark:text-white  py-1 "
+                value={inputData}
+                onKeyDown={(event) => handleKeyDown(event)}
+              />
+
+              {isToggleDeleteSearch ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 stroke-black dark:stroke-white cursor-pointer"
+                  onClick={handleToggleInputSearch}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        <div className="nav-right  flex justify-center items-center  ">
+          {isResposive ? (
+            <div
+              className="search__icon px-5 cursor-pointer md:hidden"
+              onClick={() => {
+                setResposive(false);
+                setResposive2(false);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 stroke-black dark:stroke-white"
               >
                 <path
                   strokeLinecap="round"
@@ -190,12 +235,32 @@ function Navbar() {
                   d="M6 18 18 6M6 6l12 12"
                 />
               </svg>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-        <div className="nav-right  flex justify-center items-center  ">
+            </div>
+          ) : (
+            <div
+              className="search__icon px-5 cursor-pointer md:hidden"
+              onClick={() => {
+                setResposive(true);
+                setResposive2(true);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 stroke-black dark:stroke-white"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+            </div>
+          )}
+
           {isDarkMode ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"

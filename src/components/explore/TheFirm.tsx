@@ -21,7 +21,7 @@ function TheFirm(props: IProps) {
   return (
     <>
       <div className="category__container pt-8 ">
-        <div className="border-6 dark:border-white  border-black rounded-lg w-24 sm:w-60"></div>
+        <div className="border-6 dark:border-white  border-black rounded-lg w-[16%]"></div>
         <div className="category__title  text-[var(--text-black)] dark:text-[var(--text-white)] font-bold uppercase text-3xl sm:text-4xl tracking-wide pb-8 pt-5  ">
           Hãng Phim
         </div>

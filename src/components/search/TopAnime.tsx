@@ -4,6 +4,7 @@ import Anime from "../re-components/Anime";
 import { IAnime } from "@/types/index";
 import { Pagination } from "antd";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import useResizeAnimeElements from "@/custom-hook/useResizeAnimeElements";
 
 interface IProps {
   animes: IAnime[] | any[];

@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative h-screen flex flex-col justify-between">
+    <div className="relative h-full flex flex-col justify-between">
       <Navbar />
       {children}
       <Footer />

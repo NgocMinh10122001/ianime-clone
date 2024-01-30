@@ -1,4 +1,5 @@
 "use client";
+import useResizeCategory from "@/custom-hook/useResizeCategory";
 import { useRouter } from "next/navigation";
 import React, { memo } from "react";
 interface IArray {
@@ -20,19 +21,23 @@ function Category(props: IProps) {
   const handleRedirect = (genre: string) => {
     router.push(`/layout/category?category=${genre}`);
   };
+  useResizeCategory();
+  // console.log("check render");
+
   return (
     <>
       <div className="category__container  ">
-        <div className="border-6 dark:border-white  border-black rounded-lg w-24 sm:w-60"></div>
+        <div className="border-6 dark:border-white  border-black rounded-lg w-[16%]"></div>
         <div className="category__title  text-[var(--text-black)] dark:text-[var(--text-white)] font-bold uppercase text-3xl sm:text-4xl tracking-wide pb-8 pt-5  ">
           Thể loại
         </div>
-        <div className="category__content grid grid-cols-2 gap-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-4 lg:gap-3 xl:grid-cols-5 ">
+        <div className="category__content grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-4">
           {genre?.length > 0 &&
             genre.map((item, index: number) => {
               return (
                 <div
-                  className="w-full  h-228 sm:h-206"
+                  className="w-full  h-[230px] sm:h-[182px] md:h-[246px] lg:h-[230px] xl:h-[222px] 2xl:h-[183px]"
+                  id="category"
                   key={item.id}
                   title={item.genre}
                   onClick={() => handleRedirect(item.id)}
@@ -45,10 +50,16 @@ function Category(props: IProps) {
                   >
                     <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 left-0 right-0 rounded-md"></div>
                     <div className="cate__title absolute left-2 bottom-2">
-                      <div className="title text-lg font-medium text-[var(--text-white)] uppercase">
+                      <div
+                        id="titleCate"
+                        className="title text-lg font-medium text-[var(--text-white)] uppercase"
+                      >
                         {item.genre}
                       </div>
-                      <div className="des text-xs text-[var(--text-white)]">
+                      <div
+                        id="desCate"
+                        className="des text-xs text-[var(--text-white)]"
+                      >
                         {item.des}
                       </div>
                     </div>
