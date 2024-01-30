@@ -1,4 +1,5 @@
 "use client";
+import useResizeDetailMovie from "@/custom-hook/useResizeDetailMovie";
 import { IRelease, ITheFirm } from "@/types/index";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -21,9 +22,11 @@ function DetailMovie(props: IProps) {
   const dispatch2 = (id: string) => {
     router.push(`/layout/release?release=${id}`);
   };
+  useResizeDetailMovie();
   return (
     <div className="w-full h-full grid grid-cols-12 gap-4 pt-4 border-t border-pink-600 dark:border-slate-400">
       <div
+        id="imageDetailMovie"
         className="col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-3 2xl:col-span-3   w-full h-[340px] bg-no-repeat bg-cover bg-center rounded-md"
         style={{ backgroundImage: `url("${thumbnailUrl}")` }}
       >

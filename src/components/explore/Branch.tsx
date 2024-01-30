@@ -5,6 +5,7 @@ import { FaTags } from "react-icons/fa";
 import { GiMagicBroom } from "react-icons/gi";
 import { HiFire } from "react-icons/hi";
 import { useRouter } from "next/navigation";
+import useResizeBranch from "@/custom-hook/useResizeBranch";
 
 interface INestBranch {
   titleBranch: string;
@@ -30,13 +31,16 @@ function Branch(props: IProps) {
       return;
     }
   }, []);
+  useResizeBranch();
+  // h-564  md:h-[400px] lg:h-[490px] xl:h-572
   return (
-    <div className="branch__container grid grid-cols-2   md:grid-cols-4 md:px-0 lg:px-16 xl:px-24 gap-0 overflow-hidden mb-8">
+    <div className="branch__container  grid grid-cols-2   md:grid-cols-4 md:px-0 lg:px-16 xl:px-24 gap-0 items-center justify-center w-full overflow-hidden mb-8">
       {branchs?.length > 0 &&
         branchs.map((item, index) => {
           return (
             <div
-              className="w-full  h-564  md:h-[400px] lg:h-[490px] xl:h-572"
+              id="branch"
+              className="w-full h-[570px] sm:h-[602px] md:h-[466px] lg:h-[496px] xl:h-[620px]"
               key={index + 1}
               title={item.titleBranch}
               onClick={() => handleRedirect(item.svg)}
@@ -57,10 +61,17 @@ function Branch(props: IProps) {
                     (item.svg === "gacha" && <GiMagicBroom size={40} />)}
                 </div>
                 <div className="branch__content__name__des   absolute flex flex-col items-center justify-center w-full bottom-8 sm:bottom-9">
-                  <span className="name  text-[var(--text-white)] font-bold uppercase text-2xl sm:text-3xl">
+                  <span
+                    id="titleBranch"
+                    className="name  text-[var(--text-white)] font-bold uppercase  text-3xl"
+                  >
                     {item.titleBranch}
                   </span>
-                  <span className="des text-sm  text-[var(--text-white)] sm:text-lg sm:font-extralight">
+                  <span
+                    id="desBranch"
+                    className="des text-sm  text-[var(--text-white)] sm:text-lg font-extralight"
+                  >
+                    {/* text-sm */}
                     {item.desBranch}
                   </span>
                 </div>
