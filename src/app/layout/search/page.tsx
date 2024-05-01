@@ -81,10 +81,11 @@ export default async function page(props: any) {
   let genre: string = searchParams?.genre ? searchParams.genre : "";
   let firm: string = searchParams?.firm ? searchParams.firm : "";
   let release: string = searchParams?.release ? searchParams.release : "";
+  let name: string = searchParams?.name ? searchParams.name : "";
 
   let page: string | number = searchParams?.page ? searchParams.page : 1;
   const res = await fetch(
-    `${process.env.HTTP_API_URL}/api/search?orderby=${orderby}&&order=${order}&&genre=${genre}&&firm=${firm}&&release=${release}&&page=${page}`,
+    `${process.env.HTTP_API_URL}/api/search?name=${name}&&orderby=${orderby}&&order=${order}&&genre=${genre}&&firm=${firm}&&release=${release}&&page=${page}`,
     {
       method: "GET",
       next: { tags: ["search"] },
@@ -92,7 +93,7 @@ export default async function page(props: any) {
   );
   const data = await res.json();
   return (
-    <div className="search__container  w-full padding-x-4 pb-8 relative">
+    <div className="search__container  w-full mtop-64 padding-x-4 pb-8 relative">
       <Option
         options={options}
         genres={data ? data.genres : []}
@@ -107,6 +108,7 @@ export default async function page(props: any) {
         animes={data ? data.data : []}
         totalPage={data ? data.totalPage : 50}
         page={page as number}
+        // orderBy={orderby || ""}
       />
     </div>
   );

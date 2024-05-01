@@ -1,6 +1,5 @@
 import { withAuth, NextRequestWithAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
-import cors from "./cors";
 
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
@@ -9,6 +8,9 @@ export default withAuth(
       request.nextauth.token?.role !== "admin"
     ) {
       return NextResponse.rewrite(new URL("/error", request.url));
+    }
+    if (request.nextUrl.pathname === "/") {
+      return NextResponse.redirect(new URL("/layout/home", request.url));
     }
     // return cors((req, res) => res.next())(req, res);
   },
@@ -21,10 +23,15 @@ export default withAuth(
 
 export const config = {
   matcher: [
+    "/",
+    "/layout",
+    "/api/auth/login",
     "/layout/home",
     "/layout/explore",
     "/layout/search",
     "/layout/vietsub",
+    "/layout/3D",
+    "/layout/18",
     "/test",
     "/error",
     "/admin/manage-user",
@@ -32,5 +39,10 @@ export const config = {
     "/layout/movie/:path*",
     "/layout/favorite",
     "/layout/watched",
+    "/layout/category",
+    "/layout/genre",
+    "/layout/release",
+    "/layout/the-firm",
+    "/layout/gacha",
   ],
 };

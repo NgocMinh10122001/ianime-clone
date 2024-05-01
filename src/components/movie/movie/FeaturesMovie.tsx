@@ -1,9 +1,13 @@
 "use client";
-import { saveFavoriteMovie } from "@/server-action/user";
+import {
+  disLikeVideo,
+  likeVideo,
+  saveFavoriteMovie,
+} from "@/server-action/user";
 import { Modal } from "antd";
 import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import React, { memo, useCallback, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -100,6 +104,7 @@ function FeaturesMovie() {
   const params = useSearchParams();
   let movieId = params.get("id");
   let [isToggleShare, setToggleShare] = useState(false);
+  const pathName = usePathname();
   // console.log(session);
 
   const showModal = () => {
@@ -114,6 +119,20 @@ function FeaturesMovie() {
     setToggleShare(false);
   };
 
+  const handleLikeMovie = async (
+    animeId: string | null,
+    userId: string | undefined
+  ) => {
+    await likeVideo(animeId || "", userId || "");
+  };
+
+  const handleDislikeMovie = async (
+    animeId: string | null,
+    userId: string | undefined
+  ) => {
+    await disLikeVideo(animeId || "", userId || "");
+  };
+
   const handleSaveFavoriteMovie = useCallback(
     async (movieId: string | null, session: Session | null, id: string) => {
       // console.log("item", item);
@@ -125,6 +144,10 @@ function FeaturesMovie() {
         } else {
           toast.error("existed favorite movie!");
         }
+      } else if (id === "like") {
+        handleLikeMovie(movieId, session?.user?.id);
+      } else if (id === "dislike") {
+        handleDislikeMovie(movieId, session?.user?.id);
       } else if (id === "share") {
         showModal();
       }
@@ -166,8 +189,9 @@ function FeaturesMovie() {
           featureArray.map((item, index) => (
             <div
               key={index}
-              className={`w-fit px-4 py-2 flex gap-2  rounded-full items-center relative  bg-pink-500 ${
-                item.id !== "like" && "hover:bg-pink-400"
+              className={`w-fit px-4 py-2 flex gap-2  rounded-full items-center relative  bg-pink-400 ${
+                item.id !== "like" &&
+                "hover:bg-pink-500 ease-in-out duration-150"
               } ${
                 item.id !== "like" &&
                 "dark:hover:bg-[var(--navbar-hover-color2)]"
@@ -177,7 +201,7 @@ function FeaturesMovie() {
               onClick={() => handleSaveFavoriteMovie(movieId, session, item.id)}
             >
               {item.id === "like" && (
-                <div className="absolute  bg-pink-500 dark:bg-[var(--navbar-color)] top-0 bottom-0 left-0 right-0 rounded-full z-10 opacity-80"></div>
+                <div className="absolute  bg-pink-400 dark:bg-[var(--navbar-color)] top-0 bottom-0 left-0 right-0 rounded-full z-10 opacity-80"></div>
               )}
               {item.svg}
               <span
@@ -202,7 +226,7 @@ function FeaturesMovie() {
             id="contentToCopy"
             className="p-2 w-full border border-black rounded-md"
           >
-            <p className="truncate text-black ">Some contents...</p>
+            <p className="truncate text-black ">{pathName}</p>
           </div>
           <div
             className="w-full flex justify-end"

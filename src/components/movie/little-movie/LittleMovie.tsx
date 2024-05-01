@@ -16,9 +16,9 @@ interface IProps {
 function LittleMovie(props: IProps) {
   let { animeRelate, relate, theFirm, release } = props;
   let router = useRouter();
-  const handleRedirect = (item: any) => {
+  const handleRedirect = async (item: any) => {
     // console.log(item);
-    storeMovieWatched(item?.id);
+    await storeMovieWatched(item?.id);
     router.push(
       `/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`
     );
@@ -33,76 +33,74 @@ function LittleMovie(props: IProps) {
   };
   useResizeLittleMovie();
   return (
-    <>
-      <div className="py-2 w-full h-fit">
-        <p className=" text-black dark:text-white h-fit text-base font-normal pb-2">
-          {relate}{" "}
-          <span
-            className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer uppercase"
-            onClick={() => handlePush(theFirm, release)}
-          >
-            {theFirm?.name || release?.year || ""}
-          </span>
-        </p>
-        <div className="flex flex-col gap-2">
-          {(animeRelate &&
-            animeRelate.length > 0 &&
-            animeRelate.map((item) => {
-              return (
+    <div className="py-2 w-full h-fit">
+      <p className=" text-black dark:text-white h-fit text-base font-normal pb-2">
+        {relate}{" "}
+        <span
+          className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer uppercase"
+          onClick={() => handlePush(theFirm, release)}
+        >
+          {theFirm?.name || release?.year || ""}
+        </span>
+      </p>
+      <div className="flex flex-col gap-2">
+        {(animeRelate &&
+          animeRelate.length > 0 &&
+          animeRelate.map((item) => {
+            return (
+              <div
+                key={item.id}
+                className="grid grid-cols-12 gap-x-4  h-fit  w-full cursor-pointer overflow-hidden"
+                onClick={() => handleRedirect(item)}
+              >
                 <div
-                  key={item.id}
-                  className="grid grid-cols-12 gap-x-4  h-fit  w-full cursor-pointer overflow-hidden"
-                  onClick={() => handleRedirect(item)}
+                  id="littleMovie"
+                  className="h-full col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-5 2xl:col-span-4 relative   after:right-[6px]  after:bottom-[6px]  after:text-red-500 block after:absolute after:w-8 after:flex after:justify-center after:items-center after:h-8 after:rounded-full after:bg-pink-300 after:z-[11]"
                 >
                   <div
-                    id="littleMovie"
-                    className="h-full col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-5 2xl:col-span-4 relative   after:right-[6px]  after:bottom-[6px]  after:text-red-500 block after:absolute after:w-8 after:flex after:justify-center after:items-center after:h-8 after:rounded-full after:bg-pink-300 after:z-[11]"
+                    className={`    rounded-md bg-cover bg-top bg-no-repeat    opacity-80 dark:opacity-40 absolute top-0 left-0 right-0 bottom-0 z-0 `}
+                    style={{
+                      backgroundImage: `url("${item.thumbnailUrl}")`,
+                    }}
                   >
-                    <div
-                      className={`    rounded-md bg-cover bg-top bg-no-repeat    opacity-80 dark:opacity-40 absolute top-0 left-0 right-0 bottom-0 z-0 `}
-                      style={{
-                        backgroundImage: `url("${item.thumbnailUrl}")`,
-                      }}
-                    >
-                      {/* <style jsx>{`
+                    {/* <style jsx>{`
                         .after\:right-\[6px\]::after {
                           content: ${1});
                         }
                       `}</style> */}
-                    </div>
-                    <div
-                      className={`    bg-cover bg-top bg-no-repeat    absolute left-[30%] right-[30%] top-0 bottom-0   z-10`}
-                      style={{
-                        backgroundImage: `url("${item.thumbnailUrl}")`,
-                      }}
-                    ></div>
-                    <style jsx>{`
-                      .after\:right-\[6px\]::after {
-                        content: "${item.rating}";
-                      }
-                    `}</style>
                   </div>
-                  <div className="col-span-7 sm:col-span-8 md:col-span-9 lg:col-span-7 2xl:col-span-8  h-full">
-                    <p className="text-black dark:text-white truncate xl:whitespace-normal">
-                      {item.title}
-                    </p>
-                    <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">
-                      {item.firm?.name}
-                    </p>
-                    <p className="text-slate-700 dark:text-slate-400 text-sm tracking-wider">
-                      {item.view} luot xem
-                    </p>
-                  </div>
+                  <div
+                    className={`    bg-cover bg-top bg-no-repeat    absolute left-[30%] right-[30%] top-0 bottom-0   z-10`}
+                    style={{
+                      backgroundImage: `url("${item.thumbnailUrl}")`,
+                    }}
+                  ></div>
+                  <style jsx>{`
+                    .after\:right-\[6px\]::after {
+                      content: "${item.rating}";
+                    }
+                  `}</style>
                 </div>
-              );
-            })) || (
-            <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">
-              Không có anime!
-            </p>
-          )}
-        </div>
+                <div className="col-span-7 sm:col-span-8 md:col-span-9 lg:col-span-7 2xl:col-span-8  h-full">
+                  <p className="text-black dark:text-white truncate xl:whitespace-normal">
+                    {item.title}
+                  </p>
+                  <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">
+                    {item.firm?.name}
+                  </p>
+                  <p className="text-slate-700 dark:text-slate-400 text-sm tracking-wider">
+                    {item.view} luot xem
+                  </p>
+                </div>
+              </div>
+            );
+          })) || (
+          <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">
+            Không có anime!
+          </p>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 

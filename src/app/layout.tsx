@@ -27,7 +27,7 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession();
   return (
-    <html lang="en" className="">
+    <html lang="en">
       <body
         className={` dark:bg-[var(--bg-explore)] bg-white ${inter.className} h-full`}
       >

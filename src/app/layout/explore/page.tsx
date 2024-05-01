@@ -47,7 +47,10 @@ export default async function page() {
   });
   const data = await res.json();
   return (
-    <div className="explore__container  w-full " style={{ padding: "16px" }}>
+    <div
+      className="explore__container mtop-64 w-full "
+      style={{ padding: "16px" }}
+    >
       <Branch branchs={branchs} />
       <Category genre={data ? data?.data : []} />
       <TheFirm firms={data ? data?.dataFirm : []} />

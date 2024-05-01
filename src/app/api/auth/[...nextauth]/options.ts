@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { GoogleProfile } from "next-auth/providers/google";
 // import { axios } from 'axios';
 import { NextAuthOptions } from "next-auth";
@@ -55,6 +56,7 @@ export const options: NextAuthOptions = {
         // console.log("check creidentials", user);
 
         if (!user || !user.password) {
+          // redirect("/layout/home");
           throw new Error("Email not exist!");
         }
 
@@ -65,6 +67,7 @@ export const options: NextAuthOptions = {
         // console.log("hcek pass word", isCorrectPassword);
 
         if (!isCorrectPassword) {
+          // redirect("/layout/home");
           throw new Error("Incorrect Password!");
         }
         let accessToken = signJwtAccessToken({
@@ -90,6 +93,11 @@ export const options: NextAuthOptions = {
   ],
   pages: {
     signIn: "/api/auth/login",
+    error: "/api/auth/login",
+  },
+  session: {
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
   // jwt: {
   //   maxAge: 1 * 60,

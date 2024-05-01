@@ -2,20 +2,40 @@
 import Input from "@/components/re-components/Input";
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
-import React, { memo, useCallback, useMemo, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Router } from "react-router-dom";
 import { FaGooglePlusG, FaGithub } from "react-icons/fa";
 import axios from "axios";
-function Login() {
+import useResizeLoginForm from "@/custom-hook/useResizeLoginForm";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+interface Iprops {
+  errorLogin: boolean;
+}
+function Login(props: Iprops) {
+  const { errorLogin } = props;
+  const [errLog, setErrLog] = useState<boolean>(errorLogin);
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [variant, setVariant] = useState(true);
+  const buttonRef = useRef(null);
+
+  // useResizeLoginForm();
 
   // thuc ra khong can dung useCallback o cho nay
   const toggleVariant = () => {
     // console.log("hceck variant");
-
+    setErrLog(false);
     setVariant((variant) => {
       return !variant;
     });
@@ -28,14 +48,14 @@ function Login() {
   // }, []);
   const login = async (provider: string) => {
     try {
-      await signIn(provider, {
+      let logined = await signIn(provider, {
         email,
         password,
         redirect: true,
         callbackUrl: "/layout/home",
       });
-      // router.push("/layout/home");
     } catch (error) {
+      toast.error("login failure, try again!");
       console.log("check err", error);
     }
   };
@@ -44,26 +64,74 @@ function Login() {
     console.log("hceck red");
 
     try {
-      await axios.post("/api/register", {
-        email,
-        userName,
-        password,
-      });
+      const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (pattern.test(email)) {
+        let user = await axios.post("/api/register", {
+          email,
+          userName,
+          password,
+        });
+        if (user) {
+          toast.success("register successfully!");
+          setEmail("");
+          setPassword("");
+          setUserName("");
+          return;
+        } else {
+          toast.error("register failure, try again!");
+          return;
+        }
+      } else {
+        toast.error("register failure, try again!");
+        return;
+      }
     } catch (error) {
+      toast.error("register failure, try again!");
       console.log(error);
     }
   }, [email, userName, password]);
   const router = useRouter();
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      // Perform action when Enter key is pressed
+      if (variant) {
+        login("credentials");
+      } else {
+        register();
+      }
+      // You can perform any other action here
+    }
+  };
+
+  const handleEmail = (email: string) => {
+    setEmail(email);
+  };
+
   return (
-    <div className="bg-[url('/blackcat.jpg')] bg-cover bg-center bg-no-repeat w-full h-screen relative">
+    <div className="bg-[url('/riot.jpeg')] bg-cover bg-center bg-no-repeat w-full h-screen relative">
       <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 right-0 left-0 "></div>
       <div className="flex justify-center items-center h-full ">
-        <div className="bg-black bg-opacity-70 px-8 py-8  self-center mt-2  sm:max-w-md rounded-md w-[22rem] sm:w-[24rem]">
+        <div
+          id="login-form"
+          className="bg-black bg-opacity-70 px-8 py-8  self-center mt-2  rounded-md mx-[10%] w-[640px] sm:w-[548px] md:w-[740px] lg:w-[608px] xl:w-[420px]"
+        >
           <h2 className="text-white text-2xl font-semibold mb-5">
             {/* <>{console.log("check")}</> */}
             {variant ? "Sign In" : "Register"}
           </h2>
-          <div className="flex flex-col gap-4 sm:gap-6">
+          {errLog ? (
+            <p className="text-red-500 text-sm font-sans mb-5">
+              Your username or password may be incorrect, or you may need to
+              update to a IAnime Account if you haven’t used in a few months.
+              Check the Can’t sign in link for more info.
+            </p>
+          ) : (
+            ""
+          )}
+          <div
+            className="flex flex-col gap-6"
+            onKeyDown={(event) => handleKeyDown(event)}
+          >
             {variant ? (
               ""
             ) : (
@@ -78,7 +146,7 @@ function Login() {
             )}
             <Input
               label="Email"
-              onChange={(event: any) => setEmail(event.target.value)}
+              onChange={(event: any) => handleEmail(event.target.value)}
               type="email"
               id="email"
               // name="Credentials"
@@ -93,6 +161,7 @@ function Login() {
               value={password}
             />
             <button
+              ref={buttonRef}
               onClick={variant ? () => login("credentials") : register}
               className="bg-red-600 text-white rounded-md border-1 border-transparent py-4 hover:bg-red-700 transition z-10"
             >
@@ -135,6 +204,7 @@ function Login() {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={3000} />
     </div>
   );
 }

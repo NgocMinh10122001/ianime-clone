@@ -43,9 +43,12 @@ model Anime {
   releaseId    String   @db.ObjectId
   locale       Locale   @relation(fields: [localeId], references: [id])
   localeId     String   @db.ObjectId
-  animeJA      AnimeJA?
-  animeEN      AnimeEN?
-  animeVI      AnimeVI?
+  animeJA      AnimeJA? @relation(fields: [animeJAId], references: [id])
+  animeJAId    String?  @db.ObjectId
+  animeEN      AnimeEN? @relation(fields: [animeENId], references: [id])
+  animeENId    String?  @db.ObjectId
+  animeVI      AnimeVI? @relation(fields: [animeVIId], references: [id])
+  animeVIId    String?  @db.ObjectId
   users        User[]   @relation(fields: [userIds], references: [id])
   userIds      String[] @db.ObjectId
 
@@ -53,32 +56,30 @@ model Anime {
 }
 
 model AnimeJA {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  name    String @unique
-  anime   Anime  @relation(fields: [animeId], references: [id])
-  animeId String @unique @db.ObjectId
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String  @unique
+  animes Anime[]
 }
 
 model AnimeEN {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  name    String @unique
-  anime   Anime  @relation(fields: [animeId], references: [id])
-  animeId String @unique @db.ObjectId
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String  @unique
+  animes Anime[]
 }
 
 model AnimeVI {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  name    String @unique
-  anime   Anime  @relation(fields: [animeId], references: [id])
-  animeId String @unique @db.ObjectId
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String  @unique
+  animes Anime[]
 }
 
 model Genre {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  genre    String   @unique
-  des      String
-  animes   Anime[]  @relation(fields: [animeIds], references: [id])
-  animeIds String[] @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  genre     String   @unique
+  des       String
+  thumbnail String   @unique
+  animes    Anime[]  @relation(fields: [animeIds], references: [id])
+  animeIds  String[] @db.ObjectId
 }
 
 model RefreshToken {

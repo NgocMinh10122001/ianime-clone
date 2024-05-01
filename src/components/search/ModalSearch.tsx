@@ -24,11 +24,13 @@ function ModalSearch(props: any) {
   let firm = params.get("firm");
   let release = params.get("release");
   let page = params.get("page");
+  let name = params.get("name");
 
   // console.log(params.get("firm"));
 
   const demand = useCallback(
     (
+      name: string,
       orderby: string,
       order: string,
       genre: string,
@@ -37,7 +39,7 @@ function ModalSearch(props: any) {
       page: string | number
     ) => {
       router.replace(
-        `${pathName}?orderby=${orderby}&&order=${order}&&genre=${genre}&&firm=${firm}&&release=${release}&&page=${page}`
+        `${pathName}?name=${name}&&orderby=${orderby}&&order=${order}&&genre=${genre}&&firm=${firm}&&release=${release}&&page=${page}`
       );
     },
     [router, pathName]
@@ -47,6 +49,7 @@ function ModalSearch(props: any) {
     (item: any) => {
       if (item.genre) {
         demand(
+          name || "",
           "meta_value_max",
           "desc",
           item.genre,
@@ -56,6 +59,7 @@ function ModalSearch(props: any) {
         );
       } else if (item.name) {
         demand(
+          name || "",
           "meta_value_max",
           "desc",
           genre || "",
@@ -65,6 +69,7 @@ function ModalSearch(props: any) {
         );
       } else if (item.year) {
         demand(
+          name || "",
           "meta_value_max",
           "desc",
           genre || "",
@@ -81,6 +86,7 @@ function ModalSearch(props: any) {
     (title: string) => {
       if (title === "genre") {
         demand(
+          name || "",
           "meta_value_max",
           "desc",
           "",
@@ -90,6 +96,7 @@ function ModalSearch(props: any) {
         );
       } else if (title === "firm") {
         demand(
+          name || "",
           "meta_value_max",
           "desc",
           genre || "",
@@ -99,6 +106,7 @@ function ModalSearch(props: any) {
         );
       } else if (title === "release") {
         demand(
+          name || "",
           "meta_value_max",
           "desc",
           genre || "",

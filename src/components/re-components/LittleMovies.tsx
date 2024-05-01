@@ -1,6 +1,6 @@
 "use client";
 import { IAnime, IRelease, ITheFirm } from "@/types/index";
-import React from "react";
+import React, { memo } from "react";
 import LittleMovie from "../movie/little-movie/LittleMovie";
 
 interface INewAnime extends IAnime {
@@ -15,7 +15,7 @@ interface IProps {
   theFirm: ITheFirm;
   release: IRelease;
 }
-export default function LittleMovies(props: IProps) {
+function LittleMovies(props: IProps) {
   let { sameName, sameFirm, sameGenre, sameRelease, theFirm, release } = props;
   return (
     <div className="col-span-12 lg:col-span-4 flex flex-col py-4  h-fit">
@@ -46,3 +46,5 @@ export default function LittleMovies(props: IProps) {
     </div>
   );
 }
+
+export default memo(LittleMovies);
