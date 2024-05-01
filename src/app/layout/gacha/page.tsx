@@ -19,7 +19,7 @@ async function page(props: any) {
   const data = await res.json();
   //   console.log(data);
   return (
-    <div id="firtpage" className="padding-x-4 w-full grid grid-cols-12">
+    <div id="firtpage" className="padding-x-4 mtop-64 w-full grid grid-cols-12">
       <div className="col-span-5 sm:col-span-3 lg:col-span-2">
         <GaCha random={[1, 10, 20, 30]} />
       </div>

@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "../../../../lib/prismadb";
 
@@ -19,6 +20,7 @@ export async function GET(req: NextRequest) {
         firm: true,
         release: true,
         genres: true,
+        animeJA: true,
       },
     });
 
@@ -26,6 +28,9 @@ export async function GET(req: NextRequest) {
       where: {
         title: {
           contains: (name as string) || "",
+        },
+        NOT: {
+          id: id as string,
         },
       },
       include: {
@@ -38,6 +43,9 @@ export async function GET(req: NextRequest) {
       where: {
         firm: {
           id: (firm as string) || "",
+        },
+        NOT: {
+          id: id as string,
         },
       },
       include: {
@@ -53,6 +61,9 @@ export async function GET(req: NextRequest) {
             id: (genre as string) || "",
           },
         },
+        NOT: {
+          id: id as string,
+        },
       },
       include: {
         firm: true,
@@ -64,6 +75,9 @@ export async function GET(req: NextRequest) {
       where: {
         release: {
           id: (release as string) || "",
+        },
+        NOT: {
+          id: id as string,
         },
       },
       include: {
@@ -82,6 +96,7 @@ export async function GET(req: NextRequest) {
     // const totalPage = res[0].animes.length;
 
     // console.log("check", anime);
+    revalidateTag("movie-anime-detail");
 
     return NextResponse.json(
       {

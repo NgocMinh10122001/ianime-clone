@@ -1,7 +1,6 @@
 "use client";
 import useResizeDetailMovie from "@/custom-hook/useResizeDetailMovie";
 import { IRelease, ITheFirm } from "@/types/index";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { memo } from "react";
 
@@ -10,10 +9,11 @@ interface IProps {
   title: string;
   release: IRelease;
   thumbnailUrl: string;
+  otherName: string;
 }
 
 function DetailMovie(props: IProps) {
-  let { theFirm, title, release, thumbnailUrl } = props;
+  let { theFirm, title, release, thumbnailUrl, otherName } = props;
   const router = useRouter();
 
   const dispatch1 = (id: string) => {
@@ -21,6 +21,86 @@ function DetailMovie(props: IProps) {
   };
   const dispatch2 = (id: string) => {
     router.push(`/layout/release?release=${id}`);
+  };
+  const vietnameseCharacters: Record<string, string> = {
+    à: "a",
+    á: "a",
+    ả: "a",
+    ã: "a",
+    ạ: "a",
+    ă: "a",
+    ằ: "a",
+    ắ: "a",
+    ẳ: "a",
+    ẵ: "a",
+    ặ: "a",
+    â: "a",
+    ầ: "a",
+    ấ: "a",
+    ẩ: "a",
+    ẫ: "a",
+    ậ: "a",
+    è: "e",
+    é: "e",
+    ẻ: "e",
+    ẽ: "e",
+    ẹ: "e",
+    ê: "e",
+    ề: "e",
+    ế: "e",
+    ể: "e",
+    ễ: "e",
+    ệ: "e",
+    ì: "i",
+    í: "i",
+    ỉ: "i",
+    ĩ: "i",
+    ị: "i",
+    ò: "o",
+    ó: "o",
+    ỏ: "o",
+    õ: "o",
+    ọ: "o",
+    ô: "o",
+    ồ: "o",
+    ố: "o",
+    ổ: "o",
+    ỗ: "o",
+    ộ: "o",
+    ơ: "o",
+    ờ: "o",
+    ớ: "o",
+    ở: "o",
+    ỡ: "o",
+    ợ: "o",
+    ù: "u",
+    ú: "u",
+    ủ: "u",
+    ũ: "u",
+    ụ: "u",
+    ư: "u",
+    ừ: "u",
+    ứ: "u",
+    ử: "u",
+    ữ: "u",
+    ự: "u",
+    ỳ: "y",
+    ý: "y",
+    ỷ: "y",
+    ỹ: "y",
+    ỵ: "y",
+    đ: "d",
+  };
+
+  const dispatchNameAnime = (nameAnime: string) => {
+    // console.log(nameAnime.toLowerCase());
+    let newValues = nameAnime.replace(
+      /[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/g,
+      (char) =>
+        vietnameseCharacters[char as keyof typeof vietnameseCharacters] || char
+    );
+
+    router.replace(`/layout/search?name=${newValues}`);
   };
   useResizeDetailMovie();
   return (
@@ -36,7 +116,7 @@ function DetailMovie(props: IProps) {
         <div className="">
           <p className="text-black dark:text-slate-400 text-sm pb-1">Hãng</p>
           <span
-            className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer"
+            className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
             onClick={() => dispatch1(theFirm.id)}
           >
             {theFirm.name || ""}
@@ -46,7 +126,10 @@ function DetailMovie(props: IProps) {
           <p className="text-black dark:text-slate-400 text-sm pb-1">
             Tên Anime
           </p>
-          <span className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer">
+          <span
+            className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
+            onClick={() => dispatchNameAnime(title)}
+          >
             {title || ""}
           </span>
         </div>
@@ -55,7 +138,7 @@ function DetailMovie(props: IProps) {
             Năm phát hành
           </p>
           <span
-            className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer"
+            className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
             onClick={() => dispatch2(release.id)}
           >
             {release.year || ""}
@@ -65,8 +148,11 @@ function DetailMovie(props: IProps) {
           <p className="text-black dark:text-slate-400 text-sm pb-1">
             Tên khác
           </p>
-          <span className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer">
-            MamaHolic ~魅惑のママと甘々カンケイ~ THE ANIMATION
+          <span
+            className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
+            onClick={() => dispatchNameAnime(otherName)}
+          >
+            {otherName}
           </span>
         </div>
       </div>

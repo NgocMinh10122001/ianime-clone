@@ -19,7 +19,7 @@ function DataSearchOnChange(props: IProps) {
             dataFetching.length > 0 &&
             dataFetching.map((item) => (
               <Link
-                href={`/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`}
+                href={`/layout/search?name=${item.animeVI?.name}`}
                 key={item.id}
                 className="flex items-center w-full h-fit hover:bg-pink-100 dark:hover:bg-[var(--navbar-hover-color2)] py-2"
                 onClick={() => setToggleDataSearch(false)}

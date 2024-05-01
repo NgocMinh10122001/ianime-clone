@@ -54,6 +54,7 @@ function Option(props: IProps) {
   let release = params.get("release");
   let page = params.get("page");
   let orderBy = params.get("orderby");
+  let name = params.get("name");
 
   const showModal = useCallback((title: string) => {
     setSort(false);
@@ -88,6 +89,7 @@ function Option(props: IProps) {
 
   const demand = useCallback(
     (
+      name: string,
       orderby: string,
       order: string,
       genre: string,
@@ -96,7 +98,7 @@ function Option(props: IProps) {
       page: string | number
     ) => {
       router.replace(
-        `${pathName}?orderby=${orderby}&&order=${order}&&genre=${genre}&&firm=${firm}&&release=${release}&&page=${page}`
+        `${pathName}?name=${name}&&orderby=${orderby}&&order=${order}&&genre=${genre}&&firm=${firm}&&release=${release}&&page=${page}`
       );
     },
     [router, pathName]
@@ -106,6 +108,7 @@ function Option(props: IProps) {
     (sort: string) => {
       if (sort === "new") {
         demand(
+          name || "",
           "new",
           "desc",
           genre || "",
@@ -115,6 +118,7 @@ function Option(props: IProps) {
         );
       } else if (sort === "top") {
         demand(
+          name || "",
           "top",
           "desc",
           genre || "",
@@ -125,6 +129,7 @@ function Option(props: IProps) {
       }
       if (sort === "az") {
         demand(
+          name || "",
           "az",
           "desc",
           genre || "",
@@ -138,10 +143,7 @@ function Option(props: IProps) {
   );
   return (
     <div className="options__container flex flex-wrap  mb-4 py-4  ">
-      <div
-        className="absolute top-0 bottom-0 right-0 left-0 "
-        onClick={() => setSort(false)}
-      ></div>
+      <div className="" onClick={() => setSort(false)}></div>
       {options?.length > 0 &&
         options.map((item, index) => {
           return (
@@ -162,7 +164,7 @@ function Option(props: IProps) {
 
       <div
         onClick={handleToggleSort}
-        className="option relative me-2 mt-2 sm:mt-4 bg-[var(--color-btn-sun)] dark:bg-[var(--navbar-hover-color)] dark:hover:bg-neutral-700 duration-200 ease-in hover:bg-pink-500 w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer z-20"
+        className="option relative me-2 mt-2 sm:mt-4 bg-[var(--color-btn-sun)] dark:bg-[var(--navbar-hover-color)] dark:hover:bg-neutral-700 duration-200 ease-in hover:bg-pink-500 w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer z-[15]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

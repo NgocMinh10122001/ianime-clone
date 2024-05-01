@@ -4,27 +4,37 @@ import prismadb from "../../../../lib/prismadb";
 export async function GET(req: NextRequest) {
   try {
     const res = await prismadb.genre.findMany({
+      orderBy: {
+        id: "asc",
+      },
       select: {
         id: true,
         genre: true,
         des: true,
-        animes: {
-          select: {
-            thumbnailUrl: true,
-          },
+        thumbnail: true,
+        // animes: {
+        //   orderBy: {
+        //     id: "desc",
+        //   },
+        //   select: {
+        //     thumbnailUrl: true,
+        //   },
 
-          take: 1,
-        },
+        //   take: 1,
+        // },
       },
-      //   include: {
-      //     animes: {
-      //       select: {
-      //         thumbnailUrl: true,
-      //       },
-      //       take: 1,
-      //     },
-      //   },
     });
+
+    // const distinctGenre = await prismadb.anime.findMany({
+    //   distinct: ["thumbnailUrl"],
+
+    //   select: {
+    //     thumbnailUrl: true,
+    //     genreIds: true,
+    //   },
+    // });
+
+    // console.log("check", res);
 
     const resFirm = await prismadb.theFirm.findMany();
 

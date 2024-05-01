@@ -1,5 +1,6 @@
 "use client";
-import MenuManage from "@/client/admin/MenuManage";
+
+import MenuManage from "@/components/admin/MenuManage";
 
 export default function DashboardLayout({
   children,

@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+
 import type { Metadata } from "next";
 import "../globals.css";
 
@@ -20,8 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative h-full flex flex-col justify-between">
+    <div className="relative h-full flex flex-col justify-between z-40 ">
       <Navbar />
+
       {children}
       <Footer />
     </div>

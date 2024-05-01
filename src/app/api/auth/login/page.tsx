@@ -1,9 +1,11 @@
 import Login from "./Login";
 
-export default function page() {
+export default function page(props: any) {
+  const { searchParams } = props;
+  const error = searchParams?.error;
   return (
     <>
-      <Login />
+      <Login errorLogin={error ? true : false} />
     </>
   );
 }

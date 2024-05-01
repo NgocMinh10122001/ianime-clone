@@ -1,26 +1,38 @@
 "use client";
 import useResizeAnimeElements from "@/custom-hook/useResizeAnimeElements";
-import { storeMovieWatched } from "@/server-action/user";
+import { addViewVideo, storeMovieWatched } from "@/server-action/user";
 import { IAnime } from "@/types/index";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 
 interface IAnimes {
   animes: IAnime[];
+  commingsoon: string;
 }
 function Anime(props: IAnimes) {
-  let { animes } = props;
+  let { animes, commingsoon } = props;
   // console.log(animes);
   let router = useRouter();
+  const { data: session } = useSession();
+  const [userId, setUserId] = useState<string>("");
+  // console.log(url);
+  useEffect(() => {
+    setUserId(session?.user.id || "");
+  }, []);
 
-  const handleRedirect = (item: any) => {
+  const handleRedirect = async (item: any) => {
     // console.log(item);
 
-    storeMovieWatched(item?.id);
+    await storeMovieWatched(item?.id);
+    await addViewVideo(item?.id, userId);
 
     router.push(
       `/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`
     );
+  };
+  const numberWithCommas = (number: number): string => {
+    return number.toLocaleString();
   };
   useResizeAnimeElements();
   return (
@@ -35,7 +47,7 @@ function Anime(props: IAnimes) {
               title={item.title}
               onClick={() => handleRedirect(item)}
             >
-              <div className="w-full h-[77%]">
+              <div className="w-full h-[77%] relative">
                 <div
                   className={`hover:scale-105 duration-300 hover:cursor-pointer  rounded-t-md  bg-cover bg-center bg-no-repeat w-full  h-full   after:right-[6px]  after:bottom-[6px] relative after:text-red-500 block after:absolute after:w-9 after:flex after:justify-center after:items-center after:h-9 after:rounded-full after:bg-pink-300 `}
                   style={{ backgroundImage: `url("${item.thumbnailUrl}")` }}
@@ -46,6 +58,13 @@ function Anime(props: IAnimes) {
                     }
                   `}</style>
                 </div>
+                {commingsoon !== "" ? (
+                  <p className="absolute h-fit w-full py-1  bottom-0 text-center bg-red-600 text-white font-sans font-medium text-xl uppercase">
+                    {commingsoon}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
 
               <div className="w-full h-fit max-h-[23%] flex flex-col items-center  p-4">
@@ -77,7 +96,7 @@ function Anime(props: IAnimes) {
                     />
                   </svg>
                   <span className="text-gray-700 dark:text-[var(--text-gray-color)] text-sm ">
-                    {item.view}
+                    {numberWithCommas((item?.view as number) || 1)}
                   </span>
                 </div>
               </div>

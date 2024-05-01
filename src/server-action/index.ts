@@ -1,113 +1,288 @@
 "use server";
-
+import { getServerSession } from "next-auth/next";
 import { revalidateTag } from "next/cache";
 import prismadb from "../../lib/prismadb";
+import bcrypt from "bcrypt";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { verifyJwt } from "@/jwt-protected/jwt";
+import { IDataFetching } from "@/types/index";
 
-export async function createNewUser(values: any) {
-  let { name, email, password, role, image } = values;
-  // console.log("check values", values);
+interface IUser {
+  name: string;
+  email: string;
+  oldPassword: string;
+  password: string;
+  image?: string;
+  role: string;
+}
+
+export async function getUser(userId: string) {
   try {
-    await prismadb.user.create({
-      data: {
-        email: email,
-        name: name,
-        image: image ?? null,
-        password: password,
-        role: role,
-      },
-    });
-    revalidateTag("manage-user");
+    const session = await getServerSession(options);
+    // console.log(session);
+    let verifiedToken = verifyJwt(session?.user?.accessToken as string);
+    // console.log("verifiedToken", verifiedToken);
+    if (verifiedToken?.role === "admin") {
+      let user = await prismadb.user.findUnique({
+        where: {
+          id: userId,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          password: true,
+          role: true,
+        },
+      });
 
+      let hashedPassword = await bcrypt.hash(user?.password as string, 12);
+
+      return {
+        data: {
+          ...user,
+          password: hashedPassword,
+        },
+        errCode: 0,
+        mes: "Create user success!",
+      };
+    }
+    return {
+      errCode: -1,
+      mes: "Create user failure!,Error from deleteNewUser",
+    };
     // );
   } catch (error) {
     console.log(error);
+    return {
+      errCode: 1,
+      mes: "Create user failure!,Error from deleteNewUser",
+    };
   }
 }
 
-export async function updateNewUser(values: any, id: string) {
-  let { id: string, name, email, password, role, image } = values;
+export async function createNewUser(values: IUser) {
+  // let { name, email, password, role, image } = values;
   // console.log("check values", values);
+
   try {
-    await prismadb.user.update({
-      where: { id: id },
-      data: {
-        email: email,
-        name: name,
-        image: image ?? null,
-        password: password,
-        role: role,
-      },
-    });
-    revalidateTag("manage-user");
+    const session = await getServerSession(options);
+    // console.log(session);
+    let verifiedToken = verifyJwt(session?.user?.accessToken as string);
+    // console.log("verifiedToken", verifiedToken);
+    if (verifiedToken?.role === "admin") {
+      let userExisting = await prismadb.user.findUnique({
+        where: {
+          email: values?.email,
+        },
+      });
+      if (userExisting) return;
+
+      const hashedPassword = await bcrypt.hash(values?.password, 12);
+      await prismadb.user.create({
+        data: {
+          name: values?.name,
+          email: values?.email,
+          password: hashedPassword,
+          role: values?.role,
+        },
+      });
+
+      revalidateTag("manage-user");
+      return {
+        errCode: 0,
+        mes: "Create user success!",
+      };
+    }
+    return {
+      errCode: -1,
+      mes: "Create user failure!,Error from deleteNewUser",
+    };
+    // );
   } catch (error) {
     console.log(error);
+    return {
+      errCode: 1,
+      mes: "Create user failure!,Error from deleteNewUser",
+    };
   }
 }
 
-export async function deleteNewUser(id: string) {
-  // console.log("check values", values);
+export async function updateUser(values: IUser, userId: string) {
   try {
-    await prismadb.user.delete({
-      where: { id: id },
-    });
-    revalidateTag("manage-user");
+    const session = await getServerSession(options);
+    // console.log(session);
+    let verifiedToken = verifyJwt(session?.user?.accessToken as string);
+    // console.log("verifiedToken", verifiedToken);
+    if (verifiedToken?.role === "admin") {
+      let user = await prismadb.user.findUnique({
+        where: {
+          id: userId,
+        },
+      });
+      let verifyPassword = await bcrypt.compare(
+        values.oldPassword,
+        user?.password as string
+      );
+      if (verifyPassword) {
+        const hashedPassword = await bcrypt.hash(values?.password, 12);
+        await prismadb.user.update({
+          where: {
+            id: userId,
+          },
+          data: {
+            name: values?.name,
+            email: values?.email,
+            password: hashedPassword,
+            role: values?.role,
+          },
+        });
+
+        revalidateTag("manage-user");
+        return {
+          errCode: 0,
+          mes: "Update user success!",
+        };
+      }
+
+      return {
+        errCode: 1,
+        mes: "Update user failure!,Error from deleteNewUser",
+      };
+    }
+    return {
+      errCode: 2,
+      mes: "Update user failure!,Error from deleteNewUser",
+    };
+    // );
   } catch (error) {
     console.log(error);
+    return {
+      errCode: 3,
+      mes: "Update user failure!,Error from deleteNewUser",
+    };
+  }
+}
+
+export async function deleteUserSelected(userIds: string[]) {
+  // console.log("check values", values);
+  try {
+    const session = await getServerSession(options);
+    // console.log(session);
+    let verifiedToken = verifyJwt(session?.user?.accessToken as string);
+    // console.log("verifiedToken", verifiedToken);
+    if (verifiedToken?.role === "admin") {
+      await prismadb.user.deleteMany({
+        where: {
+          id: {
+            in: userIds,
+          },
+        },
+      });
+
+      revalidateTag("manage-user");
+      return {
+        errCode: 0,
+        mes: "Delete success!",
+      };
+    }
+    return {
+      errCode: -1,
+      mes: "Delete failure!",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      errCode: 1,
+      mes: "Delete user failure!, ErrorFrom deleteNewUser",
+    };
+  }
+}
+export async function deleteUser(userId: string) {
+  // console.log("check values", values);
+  try {
+    const session = await getServerSession(options);
+    // console.log(session);
+    let verifiedToken = verifyJwt(session?.user?.accessToken as string);
+    // console.log("verifiedToken", verifiedToken);
+    if (verifiedToken?.role === "admin") {
+      await prismadb.user.delete({
+        where: {
+          id: userId,
+        },
+      });
+
+      revalidateTag("manage-user");
+      return {
+        errCode: 0,
+        mes: "Delete success!",
+      };
+    }
+    return {
+      errCode: -1,
+      mes: "Delete failure!",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      errCode: 1,
+      mes: "Delete user failure!, ErrorFrom deleteNewUser",
+    };
   }
 }
 
 // export async function createNewAnime(params: type) {}
-export async function createNewAnime(values: any) {
-  // console.log("check anime", values);
+// export async function createNewAnime(values: any) {
+//   // console.log("check anime", values);
 
-  let {
-    title,
-    des,
-    duration,
-    videoUrl,
-    thumbnailUrl,
-    view,
-    rating,
-    genre,
-    firms,
-    releases,
-    locales,
-  } = values;
-  // console.log("check values", values);
+//   let {
+//     title,
+//     des,
+//     duration,
+//     videoUrl,
+//     thumbnailUrl,
+//     view,
+//     rating,
+//     genre,
+//     firms,
+//     releases,
+//     locales,
+//   } = values;
+//   // console.log("check values", values);
 
-  let genres = genre.map((item: any) => {
-    return { id: item };
-  });
+//   let genres = genre.map((item: any) => {
+//     return { id: item };
+//   });
 
-  try {
-    await prismadb.anime.create({
-      data: {
-        title,
-        des,
-        duration: duration ?? null,
-        videoUrl,
-        thumbnailUrl,
-        view: +view ?? null,
-        rating: +rating ?? null,
-        genres: {
-          connect: genres,
-        },
-        firm: {
-          connect: { id: firms },
-        },
-        release: {
-          connect: { id: releases },
-        },
-        locale: {
-          connect: { id: locales },
-        },
-      },
-    });
-    revalidateTag("manage-animes");
-  } catch (error) {
-    console.log(error);
-  }
-}
+//   try {
+//     await prismadb.anime.create({
+//       data: {
+//         title,
+//         des,
+//         duration: duration ?? null,
+//         videoUrl,
+//         thumbnailUrl,
+//         view: +view ?? null,
+//         rating: +rating ?? null,
+//         genres: {
+//           connect: genres,
+//         },
+//         firm: {
+//           connect: { id: firms },
+//         },
+//         release: {
+//           connect: { id: releases },
+//         },
+//         locale: {
+//           connect: { id: locales },
+//         },
+//       },
+//     });
+//     revalidateTag("manage-animes");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 export async function updateNewAnime(values: any, id: string) {
   // console.log(values);
@@ -280,7 +455,7 @@ export async function searchInputOnChange(values: string) {
       (char) =>
         vietnameseCharacters[char as keyof typeof vietnameseCharacters] || char
     );
-    // console.log(newValues);
+    // console.log(values);
 
     let response = await prismadb.anime.findMany({
       where: {
@@ -288,21 +463,21 @@ export async function searchInputOnChange(values: string) {
           {
             animeEN: {
               name: {
-                contains: newValues || "",
+                contains: values.toLowerCase(),
               },
             },
           },
           {
             animeJA: {
               name: {
-                contains: newValues || "",
+                contains: values,
               },
             },
           },
           {
             animeVI: {
               name: {
-                contains: newValues || "",
+                contains: newValues.toLowerCase(),
               },
             },
           },
@@ -314,15 +489,32 @@ export async function searchInputOnChange(values: string) {
         firmId: true,
         genreIds: true,
         releaseId: true,
+        animeEN: true,
+        animeJA: true,
+        animeVI: true,
       },
       take: 6,
     });
 
+    const res = getUniqueBooksByTitle(response);
+    // console.log(uniqueBooks);
     // console.log(response);
-    return response;
+    return res;
 
     // revalidateTag("search-input-onchange");
   } catch (error) {
     console.log(error);
   }
+}
+
+function getUniqueBooksByTitle(books: IDataFetching[]): IDataFetching[] {
+  const uniqueTitles = new Set(books.map((book) => book.title));
+  const uniqueBooks: IDataFetching[] = [];
+  uniqueTitles.forEach((title) => {
+    const book = books.find((book) => book.title === title);
+    if (book) {
+      uniqueBooks.push(book);
+    }
+  });
+  return uniqueBooks;
 }

@@ -1,7 +1,7 @@
 import {
   signJwtAccessToken,
   signJwtRefeshToken,
-  verifyJwt,
+  verifyJwtRefresh,
 } from "@/jwt-protected/jwt";
 import { NextResponse } from "next/server";
 export async function POST(request: Request) {
@@ -19,10 +19,7 @@ export async function POST(request: Request) {
           status: 400,
         }
       );
-    const verified = verifyJwt(
-      token as string,
-      process.env.JWT_REFRESH_KEY as string
-    );
+    const verified = verifyJwtRefresh(token as string);
     if (verified) {
       const newAccessToken = signJwtAccessToken({ id: id, role: role });
       // console.log("varify suces");

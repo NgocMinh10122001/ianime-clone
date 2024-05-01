@@ -9,7 +9,7 @@ export default async function page() {
   const data = await res.json();
   return (
     <div
-      className="explore__container container max-w-[1440px] "
+      className="explore__container container mtop-64 max-w-[1440px] "
       style={{ padding: "16px" }}
     >
       <Category genre={data ? data?.data : []} />
