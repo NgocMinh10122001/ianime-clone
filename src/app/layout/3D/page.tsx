@@ -16,7 +16,7 @@ export default async function page(props: any) {
   // console.log(data);
 
   return (
-    <div className="w-full padding-x-4">
+    <div className="w-full mtop-64 padding-x-4">
       <AnimeVietSub
         animes={data ? data.data : []}
         total={data ? data.totalPage : 24}

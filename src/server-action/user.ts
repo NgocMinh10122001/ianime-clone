@@ -171,3 +171,86 @@ export async function deleteAllMovieWatched() {
     return;
   }
 }
+let previousUserId: string | null = "";
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export async function addViewVideo(animeId: string, userId: string) {
+  try {
+    // console.log("minhdz", previousUserId, userId);
+
+    // let user = await prismadb.user.findUnique({
+    //   where: {
+    //     id: userId,
+
+    //   },
+    // });
+
+    // // if (!user) return;
+
+    // setTimeout(async () => {
+    //   await prismadb.anime.update({
+    //     where: { id: animeId },
+    //     data: {
+    //       view: (anime?.view as number) + 1,
+    //     },
+    //   });
+    //   revalidateTag("home");
+    // }, 10000);
+    if (userId === previousUserId) {
+      previousUserId = "";
+      // delay(3000);
+      // console.log("trung user id va doi 10s di ku");
+    } else {
+      previousUserId = userId;
+      // let user = await prismadb.user.findUnique({
+      //   where: { id: userId },
+      // });
+      // console.log("co ne");
+      let anime = await prismadb.anime.findUnique({
+        where: {
+          id: animeId,
+        },
+      });
+      await prismadb.anime.update({
+        where: { id: animeId },
+        data: {
+          view: (anime?.view as number) + 1,
+        },
+      });
+
+      revalidateTag("home");
+      revalidateTag("movie-anime-detail");
+    }
+
+    // Wait for 10 seconds before allowing another query
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+}
+
+export async function likeVideo(animeId: string, userId: string) {
+  try {
+    let user = await prismadb.user.findUnique({
+      where: { id: userId },
+    });
+    if (!user) return;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+}
+
+export async function disLikeVideo(animeId: string, userId: string) {
+  try {
+    let user = await prismadb.user.findUnique({
+      where: { id: userId },
+    });
+    if (!user) return;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+}

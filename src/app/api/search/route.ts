@@ -9,6 +9,9 @@ export async function GET(req: NextRequest) {
     let genre = req.nextUrl.searchParams.get("genre");
     let firm = req.nextUrl.searchParams.get("firm");
     let release = req.nextUrl.searchParams.get("release");
+    let name = req.nextUrl.searchParams.get("name");
+    // console.log(name);
+
     // console.log(genre);
 
     // console.log(req.nextUrl.searchParams);
@@ -20,6 +23,31 @@ export async function GET(req: NextRequest) {
       const res = await prismadb.anime.findMany({
         where: {
           AND: [
+            {
+              OR: [
+                {
+                  animeEN: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+                {
+                  animeJA: {
+                    name: {
+                      contains: name as string,
+                    },
+                  },
+                },
+                {
+                  animeVI: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+              ],
+            },
             {
               genres: {
                 some: {
@@ -47,7 +75,60 @@ export async function GET(req: NextRequest) {
         skip: (+(page as string) - 1) * 24,
         take: 24,
       });
-      const totalPage = res.length;
+      const totalPage = await prismadb.anime.count({
+        where: {
+          AND: [
+            {
+              OR: [
+                {
+                  animeEN: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+                {
+                  animeJA: {
+                    name: {
+                      contains: name as string,
+                    },
+                  },
+                },
+                {
+                  animeVI: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              genres: {
+                some: {
+                  genre: genre ? (genre as string) : {},
+                },
+              },
+            },
+            {
+              firm: {
+                name: firm ? (firm as string) : {},
+              },
+            },
+            {
+              release: {
+                year: release ? +release : {},
+              },
+            },
+          ],
+        },
+        orderBy: {
+          release: {
+            year: "desc",
+          },
+        },
+      });
+      // console.log(totalPage);
 
       return NextResponse.json(
         {
@@ -65,6 +146,31 @@ export async function GET(req: NextRequest) {
       const res = await prismadb.anime.findMany({
         where: {
           AND: [
+            {
+              OR: [
+                {
+                  animeEN: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+                {
+                  animeJA: {
+                    name: {
+                      contains: name as string,
+                    },
+                  },
+                },
+                {
+                  animeVI: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+              ],
+            },
             {
               genres: {
                 some: {
@@ -90,7 +196,59 @@ export async function GET(req: NextRequest) {
         skip: (+(page as string) - 1) * 24,
         take: 24,
       });
-      const totalPage = res.length;
+      const totalPage = await prismadb.anime.count({
+        where: {
+          AND: [
+            {
+              OR: [
+                {
+                  animeEN: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+                {
+                  animeJA: {
+                    name: {
+                      contains: name as string,
+                    },
+                  },
+                },
+                {
+                  animeVI: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              genres: {
+                some: {
+                  genre: genre ? (genre as string) : {},
+                },
+              },
+            },
+            {
+              firm: {
+                name: firm ? (firm as string) : {},
+              },
+            },
+            {
+              release: {
+                year: release ? +release : {},
+              },
+            },
+          ],
+        },
+        orderBy: {
+          release: {
+            year: "asc",
+          },
+        },
+      });
 
       return NextResponse.json(
         {
@@ -108,6 +266,31 @@ export async function GET(req: NextRequest) {
       const res = await prismadb.anime.findMany({
         where: {
           AND: [
+            {
+              OR: [
+                {
+                  animeEN: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+                {
+                  animeJA: {
+                    name: {
+                      contains: name as string,
+                    },
+                  },
+                },
+                {
+                  animeVI: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+              ],
+            },
             {
               genres: {
                 some: {
@@ -133,7 +316,58 @@ export async function GET(req: NextRequest) {
         skip: (+(page as string) - 1) * 24,
         take: 24,
       });
-      const totalPage = res.length;
+      const totalPage = await prismadb.anime.count({
+        where: {
+          AND: [
+            {
+              OR: [
+                {
+                  animeEN: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+                {
+                  animeJA: {
+                    name: {
+                      contains: name as string,
+                    },
+                  },
+                },
+                {
+                  animeVI: {
+                    name: {
+                      contains: (name as string).toLowerCase(),
+                    },
+                  },
+                },
+              ],
+            },
+            {
+              genres: {
+                some: {
+                  genre: genre ? (genre as string) : {},
+                },
+              },
+            },
+            {
+              firm: {
+                name: firm ? (firm as string) : {},
+              },
+            },
+            {
+              release: {
+                year: release ? +release : {},
+              },
+            },
+          ],
+        },
+        orderBy: {
+          view: order === "asc" ? "asc" : "desc",
+        },
+      });
+      // console.log(res);
 
       return NextResponse.json(
         {

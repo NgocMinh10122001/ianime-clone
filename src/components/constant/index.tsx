@@ -25,7 +25,7 @@ export const Ianime = [
   },
   {
     title: "18+",
-    link: "/layout/18+",
+    link: "/layout/18",
   },
   {
     title: "Sắp chiếu",

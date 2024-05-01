@@ -12,6 +12,7 @@
   --navbar-color : #212121;
   --navbar-hover-color : #2a2a2a;
   --navbar-hover-color2: #5b5b5b;
+  --navbar-shadow : #1a1a1a;
   /* --navbar-light : #3C3C3C; */
   --active-dark : #3c3c3c;
   --dark-2 :#1a1a1a;
@@ -33,6 +34,19 @@
   padding-left: 16px;
   padding-right: 16px;
 }
+.mtop-68{
+  margin-top: 72px;
+}
+
+.mtop-64{
+  margin-top: 64px;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
 body {
   box-sizing: border-box;
@@ -40,7 +54,6 @@ body {
   overflow: scroll;
   scroll-behavior: smooth;
   
-  height: 100%;
-  
   /* background: black; */
 }
+

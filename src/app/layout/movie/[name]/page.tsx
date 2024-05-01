@@ -1,6 +1,6 @@
 import LittleMovie from "@/components/re-components/LittleMovies";
 import Movie from "@/components/re-components/Movie";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 import React from "react";
 
 export default async function page(props: any) {
@@ -31,7 +31,7 @@ export default async function page(props: any) {
   // console.log(data.anime);
 
   return (
-    <div className="padding-x-4 w-full grid grid-cols-12 gap-4">
+    <div className="padding-x-4 mtop-64 w-full grid grid-cols-12 gap-4">
       <Movie anime={data?.anime ? data.anime : []} />
       <LittleMovie
         sameName={data?.sameName ? data.sameName : []}

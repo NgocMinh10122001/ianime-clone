@@ -11,6 +11,9 @@ export interface IAnime {
   genreIds: string[];
   firmId: string;
   releaseId: string;
+  animeJAId?: string;
+  animeENId?: string;
+  animeVIId?: string;
 }
 
 export interface IGenre {
@@ -27,6 +30,11 @@ export interface ITheFirm {
 export interface IRelease {
   id: string;
   year: number;
+}
+export interface ILocale {
+  id: string;
+  locale: string;
+  des: string;
 }
 
 // export const ReplaceDemand = (
@@ -65,10 +73,36 @@ export interface VideoData {
   }[];
 }
 
+export interface IAnimeName {
+  id: string;
+  name: string;
+}
 export interface IDataFetching {
   id: string;
   title: string;
   firmId: string;
   genreIds: string[];
   releaseId: string;
+  animeEN: IAnimeName | null;
+  animeJA: IAnimeName | null;
+  animeVI: IAnimeName | null;
+}
+
+export interface IAnimeUpdate {
+  id: string;
+  key: string;
+  title: string;
+  animeJA: string;
+  animeEN: string;
+  animeVI: string;
+  des: string;
+  duration: string;
+  videoUrl: string;
+  thumbnailUrl: string;
+  view: number;
+  rating: number;
+  genres: IGenre[];
+  firm: ITheFirm;
+  release: IRelease;
+  locale: ILocale;
 }

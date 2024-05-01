@@ -34,9 +34,19 @@ export function signJwtRefeshToken(
   return refreshToken;
 }
 
-export function verifyJwt(token: string, secretKey: string) {
+export function verifyJwt(token: string) {
   try {
-    // let secretKey = process.env.JWT_ACCESS_KEY;
+    let secretKey = process.env.JWT_ACCESS_KEY;
+    let decoded = jwt.verify(token, secretKey as string);
+    return decoded as JwtPayload;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function verifyJwtRefresh(token: string) {
+  try {
+    let secretKey = process.env.JWT_REFRESH_KEY;
     let decoded = jwt.verify(token, secretKey as string);
     return decoded as JwtPayload;
   } catch (error) {

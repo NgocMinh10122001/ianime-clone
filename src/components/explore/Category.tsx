@@ -9,6 +9,7 @@ interface ICategory {
   id: string;
   genre: string;
   des: string;
+  thumbnail: string;
   animes: IArray[];
 }
 
@@ -17,6 +18,7 @@ interface IProps {
 }
 function Category(props: IProps) {
   let { genre } = props;
+
   const router = useRouter();
   const handleRedirect = (genre: string) => {
     router.push(`/layout/category?category=${genre}`);
@@ -45,7 +47,11 @@ function Category(props: IProps) {
                   <div
                     className="cate__img  bg-cover bg-top bg-no-repeat w-full h-full relative rounded-md sm:hover:scale-105 sm:hover:cursor-pointer duration-300"
                     style={{
-                      backgroundImage: `url("${genre[index].animes[0]?.thumbnailUrl}")`,
+                      backgroundImage: `url("${
+                        genre[index] && genre[index].thumbnail
+                          ? genre[index].thumbnail
+                          : ""
+                      }")`,
                     }}
                   >
                     <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 left-0 right-0 rounded-md"></div>
