@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative h-full flex flex-col justify-between z-40 ">
+    <div className=" relative dark:bg-[var(--bg-explore)] bg-white flex flex-col justify-between z-40 ">
       <Navbar />
 
       {children}

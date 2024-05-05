@@ -77,7 +77,7 @@ function AnimeFavorite(props: IAnimes) {
                 <div className="w-full h-fit max-h-[23%] flex flex-col items-center pt-[0.75rem] p-1">
                   <p
                     id="title"
-                    className="w-full truncate text-center text-black dark:text-white text-base font-sans font-normal pb-1"
+                    className="w-full truncate text-center text-neutral-900 dark:text-white text-base font-sans font-light pb-1"
                   >
                     {item.title}
                   </p>

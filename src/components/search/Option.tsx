@@ -153,7 +153,7 @@ function Option(props: IProps) {
               onClick={() => showModal(item.title)}
             >
               {item.svg}
-              <span className="ps-2 uppercase text-sm tracking-widest font-medium text-[var(--text-black)] dark:text-[var(--text-white)]">
+              <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-[var(--text-white)]">
                 {(item.title === "genre" && "Thể loại") ||
                   (item.title === "firm" && "Hãng") ||
                   (item.title === "release" && "Năm phát hành")}
@@ -181,7 +181,7 @@ function Option(props: IProps) {
           />
         </svg>
 
-        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-[var(--text-black)] dark:text-[var(--text-white)]">
+        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-[var(--text-white)]">
           Sắp xếp
         </span>
         {sort ? (
@@ -203,7 +203,7 @@ function Option(props: IProps) {
                     }}
                   >
                     <div className="p-1">{item.svg}</div>
-                    <span className="text-black dark:text-white flex flex-nowrap">
+                    <span className="text-neutral-900 dark:text-white flex flex-nowrap">
                       {item.title}
                     </span>
                   </div>
@@ -233,7 +233,7 @@ function Option(props: IProps) {
           />
         </svg>
 
-        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-[var(--text-black)] dark:text-[var(--text-white)]">
+        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-[var(--text-white)]">
           Làm mới
         </span>
       </div>

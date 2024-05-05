@@ -43,7 +43,7 @@ function Anime(props: IAnimes) {
             <div
               key={item.id}
               id="content"
-              className="content  bg-[color:var(--bg-footer-sun)] w-full h-[26.5rem]  dark:bg-[color:var(--navbar-color)] rounded-t-md rounded-b-md overflow-hidden cursor-pointer "
+              className="content  bg-[#FDA7DF] w-full h-[26.5rem]  dark:bg-[color:var(--navbar-color)] rounded-t-md rounded-b-md overflow-hidden cursor-pointer "
               title={item.title}
               onClick={() => handleRedirect(item)}
             >
@@ -70,7 +70,7 @@ function Anime(props: IAnimes) {
               <div className="w-full h-fit max-h-[23%] flex flex-col items-center  p-4">
                 <span
                   id="title"
-                  className="w-full leading-5 truncate 2xl:whitespace-normal text-center text-black dark:text-white text-base font-sans font-normal pb-[0.375rem]"
+                  className="w-full leading-5 truncate 2xl:whitespace-normal text-center text-neutral-900 dark:text-neutral-100 text-base font-sans tracking-wide font-light pb-[0.375rem]"
                 >
                   {item.title}
                 </span>
@@ -82,7 +82,7 @@ function Anime(props: IAnimes) {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-5 h-5 fill-gray-700 dark:fill-none dark:stroke-[var(--text-gray-color)]"
+                    className="w-5 h-5 fill-neutral-900 stroke-[#FDA7DF] dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
                   >
                     <path
                       strokeLinecap="round"
@@ -95,7 +95,7 @@ function Anime(props: IAnimes) {
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <span className="text-gray-700 dark:text-[var(--text-gray-color)] text-sm ">
+                  <span className="text-neutral-900 font-light dark:text-[var(--text-gray-color)] text-sm ">
                     {numberWithCommas((item?.view as number) || 1)}
                   </span>
                 </div>

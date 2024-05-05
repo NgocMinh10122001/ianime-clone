@@ -46,6 +46,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -53,7 +54,13 @@ body {
   color: rgb(var(--foreground-rgb));
   overflow: scroll;
   scroll-behavior: smooth;
-  
+  height: 100%;
+  width: 100%;
   /* background: black; */
+}
+
+.btn{
+  background-image: linear-gradient(to left, #FDA7DF,var(--bg-footer-sun),#FDA7DF);
+  background-size: 400%;
 }
 

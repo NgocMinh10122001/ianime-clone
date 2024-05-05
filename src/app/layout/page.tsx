@@ -6,7 +6,7 @@ export default function page() {
   // console.log("check cookie", cookieToken);
 
   return (
-    <main className=" h-full">
+    <main className=" ">
       {/* <FreshLoad token={cookieToken ? cookieToken : []} />
       <FreshLoad token={cookieToken ? cookieToken : []} /> */}
     </main>

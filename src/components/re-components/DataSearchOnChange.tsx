@@ -40,7 +40,7 @@ function DataSearchOnChange(props: IProps) {
                     />
                   </svg>
                 </div>
-                <p className="text-black dark:text-white cursor-default">
+                <p className="text-neutral-900 dark:text-white cursor-default">
                   {item.title}
                 </p>
               </Link>

@@ -114,7 +114,7 @@ function DetailMovie(props: IProps) {
       </div>
       <div className="col-span-7 sm:col-span-8 md:col-span-9 lg:col-span-9 xl:col-span-9 2xl:col-span-9 flex flex-col gap-6">
         <div className="">
-          <p className="text-black dark:text-slate-400 text-sm pb-1">Hãng</p>
+          <p className="text-neutral-900 dark:text-slate-400 text-sm pb-1">Hãng</p>
           <span
             className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
             onClick={() => dispatch1(theFirm.id)}
@@ -123,7 +123,7 @@ function DetailMovie(props: IProps) {
           </span>
         </div>
         <div>
-          <p className="text-black dark:text-slate-400 text-sm pb-1">
+          <p className="text-neutral-900 dark:text-slate-400 text-sm pb-1">
             Tên Anime
           </p>
           <span
@@ -134,7 +134,7 @@ function DetailMovie(props: IProps) {
           </span>
         </div>
         <div>
-          <p className="text-black dark:text-slate-400 text-sm pb-1">
+          <p className="text-neutral-900 dark:text-slate-400 text-sm pb-1">
             Năm phát hành
           </p>
           <span
@@ -145,7 +145,7 @@ function DetailMovie(props: IProps) {
           </span>
         </div>
         <div>
-          <p className="text-black dark:text-slate-400 text-sm pb-1">
+          <p className="text-neutral-900 dark:text-slate-400 text-sm pb-1">
             Tên khác
           </p>
           <span

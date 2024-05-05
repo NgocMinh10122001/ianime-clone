@@ -40,7 +40,7 @@ function Branch(props: IProps) {
           return (
             <div
               id="branch"
-              className="w-full h-[570px] sm:h-[602px] md:h-[466px] lg:h-[496px] xl:h-[620px]"
+              className="w-full h-[500px] sm:h-[602px] md:h-[466px] lg:h-[496px] xl:h-[572px]"
               key={index + 1}
               title={item.titleBranch}
               onClick={() => handleRedirect(item.svg)}
@@ -52,24 +52,24 @@ function Branch(props: IProps) {
                 }}
               >
                 <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 left-0 right-0"></div>
-                <div className="branch__content__svg absolute bottom-28 sm:bottom-32 flex justify-center w-full ">
-                  {(item.svg === "anime" && <HiFire size={40} />) ||
+                <div className="branch__content__svg absolute bottom-24 sm:bottom-28 flex justify-center w-full ">
+                  {(item.svg === "anime" && <HiFire size={50} />) ||
                     (item.svg === "collection" && (
-                      <MdOutlineCollections size={40} />
+                      <MdOutlineCollections size={50} />
                     )) ||
-                    (item.svg === "genre" && <FaTags size={40} />) ||
-                    (item.svg === "gacha" && <GiMagicBroom size={40} />)}
+                    (item.svg === "genre" && <FaTags size={50} />) ||
+                    (item.svg === "gacha" && <GiMagicBroom size={50} />)}
                 </div>
                 <div className="branch__content__name__des   absolute flex flex-col items-center justify-center w-full bottom-8 sm:bottom-9">
                   <span
                     id="titleBranch"
-                    className="name  text-[var(--text-white)] font-bold uppercase  text-3xl"
+                    className="name  text-[var(--text-white)] font-bold uppercase  text-2xl"
                   >
                     {item.titleBranch}
                   </span>
                   <span
                     id="desBranch"
-                    className="des text-sm  text-[var(--text-white)] sm:text-lg font-extralight"
+                    className="des text-sm  text-[var(--text-white)] sm:text-base font-extralight"
                   >
                     {/* text-sm */}
                     {item.desBranch}

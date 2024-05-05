@@ -35,7 +35,7 @@ function SubMovie(props: IProps) {
           // onClick={() => handleAddViewVideo(id, userId)}
         ></iframe>
 
-        <p className="text-black dark:text-white font-normal text-lg">
+        <p className="text-neutral-900 dark:text-white font-normal text-lg">
           {title}
         </p>
         <p className="text-slate-700 dark:text-slate-400 text-sm">

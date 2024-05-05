@@ -28,9 +28,7 @@ export default async function RootLayout({
   const session = await getServerSession();
   return (
     <html lang="en">
-      <body
-        className={` dark:bg-[var(--bg-explore)] bg-white ${inter.className} h-full`}
-      >
+      <body className={`${inter.className}`}>
         <AuthProvider session={session}>
           <StyledComponentsRegistry>
             <NextNProgressClient />

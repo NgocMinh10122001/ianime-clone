@@ -30,7 +30,7 @@ export default function AnimeVietSub(props: IProps) {
 
   return (
     <div className="w-full pb-6">
-      <p className="text-black dark:text-white text-2xl  py-4">
+      <p className="text-neutral-900 dark:text-white text-2xl  py-4">
         Tìm thấy {total || 0} phim anime
       </p>
       <div className="pt-4 pb-6 w-full flex justify-center">
