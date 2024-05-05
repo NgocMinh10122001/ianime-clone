@@ -72,7 +72,7 @@ function CustomizePagination(props: IProps) {
         <a>
           <span
             className={`${
-              +current === _ ? "" : "text-black dark:text-white"
+              +current === _ ? "" : "text-neutral-900 dark:text-white"
             }  `}
           >
             {_}

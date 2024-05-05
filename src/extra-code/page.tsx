@@ -17,5 +17,5 @@ export default function page() {
   // );
   // const data = await res.json();
   // console.log("check data", data);
-  return <main className=" min-h-screen text-black">404 not found</main>;
+  return <main className=" min-h-screen text-neutral-900 ">404 not found</main>;
 }

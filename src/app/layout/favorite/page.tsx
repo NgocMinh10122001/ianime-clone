@@ -23,7 +23,7 @@ async function page() {
       {data?.data?.length > 0 ? (
         <Favorite id={session?.user?.id ?? ""} />
       ) : (
-        <div className="text-black dark:text-white w-full flex justify-center">
+        <div className="text-neutral-900 dark:text-white w-full flex justify-center">
           Bạn chưa lưu phim nào trên thiết bị này ...!
         </div>
       )}
