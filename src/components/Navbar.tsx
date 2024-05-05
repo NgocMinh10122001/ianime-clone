@@ -140,7 +140,7 @@ function Navbar() {
           isVisible
             ? "translate-y-0 dark:shadow-lg shadow-md dark:shadow-black"
             : "translate-y-[-100%]"
-        } w-full fixed bg-pink-200 dark:bg-[color:var(--navbar-color)]  flex justify-between items-center padding-x-4  py-3  z-40 duration-200`}
+        } w-full fixed bg-[#FDA7DF] dark:bg-[color:var(--navbar-color)]  flex justify-between items-center padding-x-4  py-3  z-40 duration-200`}
       >
         {isResposive2 ? (
           ""
@@ -184,7 +184,7 @@ function Navbar() {
             </div>
             <Link
               href={"/layout/home"}
-              className="nav__left__title cursor-pointer text-black dark:text-white font-bold sm:text-lg z-40"
+              className="nav__left__title cursor-pointer text-neutral-900  dark:text-white font-bold sm:text-lg z-40"
             >
               iAnime
             </Link>
@@ -223,7 +223,7 @@ function Navbar() {
             </div>
             <div className="search__input w-85 relative pe-4 flex items-center ">
               <input
-                className="  bg-transparent w-full h-full  outline-0  text-black dark:text-white text-base  py-1 "
+                className="bg-transparent w-full h-full  outline-0 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-900 placeholder:dark:text-neutral-400 text-sm font-light font-sans  py-1 "
                 onChange={(event) => handleChangeInput(event)}
                 type="text"
                 placeholder="Tìm kiếm..."
@@ -311,7 +311,7 @@ function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 sm:w-8 sm:h-8 cursor-pointer "
+              className="w-6 h-6 sm:w-8  sm:h-8 cursor-pointer "
               onClick={toggleDarkMode}
             >
               <path
@@ -327,7 +327,7 @@ function Navbar() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 sm:w-8 sm:h-8 fill-black cursor-pointer "
+              className="w-6 h-6 sm:w-8 sm:h-8 stroke-[#FDA7DF] fill-black cursor-pointer "
               onClick={toggleDarkMode}
             >
               <path
@@ -386,7 +386,7 @@ function Navbar() {
         </div>
       </nav>
       <div
-        className={`fixed bg-pink-200 dark:bg-white px-2 py-2  rounded-sm  right-0 ${
+        className={`fixed bg-[#FDA7DF] dark:bg-neutral-100 px-2 py-2  rounded-sm  right-0 ${
           isToggleMenuUser ? "translate-x-0" : "translate-x-[100%]"
         } duration-200 ease-in-out z-[35] flex flex-col gap-2  object-cover`}
       >

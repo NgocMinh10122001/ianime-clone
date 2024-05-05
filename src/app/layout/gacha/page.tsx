@@ -30,7 +30,7 @@ async function page(props: any) {
             <div className="w-full flex justify-center ">
               <Link
                 href="#"
-                className="py-2 px-4 flex items-center justify-center h-fit w-fit bg-pink-300 hover:bg-pink-400  text-black gap-2 rounded-md"
+                className="py-2 px-4 flex items-center justify-center h-fit w-fit bg-pink-300 hover:bg-pink-400  text-neutral-900 gap-2 rounded-md"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -46,14 +46,14 @@ async function page(props: any) {
                     d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
                   />
                 </svg>
-                <span className="text-sm uppercase text-black ">
+                <span className="text-sm uppercase text-neutral-900 ">
                   lên đầu trang
                 </span>
               </Link>
             </div>
           </>
         ) : (
-          <div className="text-black dark:text-white italic">
+          <div className="text-neutral-900 dark:text-white italic">
             Chọn số phim bạn muốn GACHA và bấm nút!
           </div>
         )}

@@ -43,7 +43,7 @@ function GaCha(props: IProps) {
                 checked={randomN === item}
                 onChange={() => handleChecked(item)}
               />
-              <label className="text-black dark:text-white cursor-pointer">
+              <label className="text-neutral-900 dark:text-white cursor-pointer">
                 x{item}
               </label>
             </div>
@@ -52,7 +52,7 @@ function GaCha(props: IProps) {
       <div className="pt-4 w-full">
         <button
           type="button"
-          className="flex items-center justify-center gap-2 px-3   py-1 rounded-sm cursor-pointer text-black bg-pink-300 hover:bg-pink-400"
+          className="flex items-center justify-center gap-2 px-3   py-1 rounded-sm cursor-pointer text-neutral-900 bg-pink-300 hover:bg-pink-400"
           onClick={handleGaCha}
         >
           <GiMagicBroom size={26} />

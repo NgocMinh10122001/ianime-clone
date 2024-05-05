@@ -30,7 +30,7 @@ export default async function page(props: any) {
   // console.log(data);
 
   return (
-    <div className="">
+    <div className=" mt-8">
       <ManageAnime
         animes={data?.animes || []}
         genres={data?.genres || []}

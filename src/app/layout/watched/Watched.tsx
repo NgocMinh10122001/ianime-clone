@@ -8,7 +8,7 @@ function Watched() {
   };
   return (
     <div className="flex justify-between items-center mb-8">
-      <p className="uppercase font-bold text-black dark:text-white text-2xl">
+      <p className="uppercase font-bold text-neutral-900 dark:text-white text-2xl">
         PHIM ĐÃ XEM
       </p>
       <button

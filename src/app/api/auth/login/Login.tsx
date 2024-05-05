@@ -108,12 +108,12 @@ function Login(props: Iprops) {
   };
 
   return (
-    <div className="bg-[url('/riot.jpeg')] bg-cover bg-center bg-no-repeat w-full h-screen relative">
+    <div className="bg-[url('/riot.jpeg')] bg-cover bg-center bg-no-repeat w-full h-screen flex justify-center items-center relative">
       <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 right-0 left-0 "></div>
-      <div className="flex justify-center items-center h-full ">
+      <div className="flex justify-center items-center  ">
         <div
           id="login-form"
-          className="bg-black bg-opacity-70 px-8 py-8  self-center mt-2  rounded-md mx-[10%] w-[640px] sm:w-[548px] md:w-[740px] lg:w-[608px] xl:w-[420px]"
+          className="bg-black bg-opacity-70 px-8 py-8  self-center mt-2  rounded-md mx-[10%] w-[640px] sm:w-[548px] md:w-[740px] lg:w-[608px] xl:w-[500px]"
         >
           <h2 className="text-white text-2xl font-semibold mb-5">
             {/* <>{console.log("check")}</> */}

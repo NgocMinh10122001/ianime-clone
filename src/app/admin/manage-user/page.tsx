@@ -37,7 +37,7 @@ export default async function page(props: any) {
   // console.log("check", data);
 
   return (
-    <div className="">
+    <div className=" mt-8">
       <ManageUser
         users={data?.users || []}
         paginateA={{

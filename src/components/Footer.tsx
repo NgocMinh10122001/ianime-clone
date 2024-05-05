@@ -6,7 +6,7 @@ import { Ianime, partner, toy, contract } from "./constant/index";
 
 export default function Footer() {
   return (
-    <footer className="bg-[color:var(--bg-footer-sun)] dark:bg-[color:var(--navbar-color)] gap-10 px-[112px] py-10 w-full h-fit grid  grid-cols-5 ">
+    <footer className="bg-[#FDA7DF] dark:bg-[color:var(--navbar-color)] gap-10 px-[112px] py-10 w-full h-fit grid  grid-cols-5 ">
       <div className="w-full flex justify-center col-span-5 sm:col-span-1">
         <Link href={"layout/home"}>
           <img src="/favicon.ico" alt="no img" width={40} height={40} />
@@ -15,7 +15,7 @@ export default function Footer() {
       <div className="col-span-5 sm:col-span-4">
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
-            <p className="text-black dark:text-white text-sm font-sans font-bold">
+            <p className="text-neutral-900 dark:text-white text-sm font-sans font-bold">
               iHentai
             </p>
             <ul className="flex flex-col items-center sm:block">
@@ -28,7 +28,7 @@ export default function Footer() {
                   >
                     <Link
                       href={item.link}
-                      className="text-black dark:text-white text-sm font-sans font-light text-center sm:text-left"
+                      className="text-neutral-900 dark:text-white text-sm font-sans font-light text-center sm:text-left"
                     >
                       {item.title}
                     </Link>
@@ -37,7 +37,7 @@ export default function Footer() {
             </ul>
           </div>
           <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
-            <p className="text-black dark:text-white text-sm font-sans font-bold">
+            <p className="text-neutral-900 dark:text-white text-sm font-sans font-bold">
               Đối tác
             </p>
             <ul className="flex flex-col items-center sm:block">
@@ -50,7 +50,7 @@ export default function Footer() {
                   >
                     <Link
                       href={item.link}
-                      className="text-black dark:text-white text-sm font-sans font-light text-center sm:text-left"
+                      className="text-neutral-900 dark:text-white text-sm font-sans font-light text-center sm:text-left"
                     >
                       {item.title}
                     </Link>
@@ -59,7 +59,7 @@ export default function Footer() {
             </ul>
           </div>
           <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
-            <p className="text-black dark:text-white text-sm font-sans font-bold">
+            <p className="text-neutral-900 dark:text-white text-sm font-sans font-bold">
               Đồ chơi
             </p>
             <ul className="flex flex-col items-center sm:block">
@@ -72,7 +72,7 @@ export default function Footer() {
                   >
                     <Link
                       href={item.link}
-                      className="text-black dark:text-white text-sm font-sans font-light text-center sm:text-left"
+                      className="text-neutral-900 dark:text-white text-sm font-sans font-light text-center sm:text-left"
                     >
                       {item.title}
                     </Link>
@@ -81,7 +81,7 @@ export default function Footer() {
             </ul>
           </div>
           <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
-            <p className="text-black dark:text-white text-sm font-sans font-bold">
+            <p className="text-neutral-900 dark:text-white text-sm font-sans font-bold">
               Liên hệ
             </p>
             <ul className="flex flex-col items-center sm:block">
@@ -94,7 +94,7 @@ export default function Footer() {
                   >
                     <Link
                       href={item.link}
-                      className="text-black dark:text-white text-sm font-sans font-light text-center sm:text-left"
+                      className="text-neutral-900 dark:text-white text-sm font-sans font-light text-center sm:text-left"
                     >
                       {item.title}
                     </Link>

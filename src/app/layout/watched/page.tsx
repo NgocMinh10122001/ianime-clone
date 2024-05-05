@@ -23,11 +23,11 @@ async function page() {
       {data?.data?.length > 0 ? (
         <Watched />
       ) : (
-        <div className="text-black dark:text-white w-full flex justify-center">
+        <div className="text-neutral-900 dark:text-white w-full flex justify-center">
           Bạn chưa xem phim nào trên thiết bị này ...!
         </div>
       )}
-      <Anime animes={data?.data || []} />
+      <Anime animes={data?.data || []} commingsoon={""} />
     </div>
   );
 }

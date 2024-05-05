@@ -18,7 +18,7 @@ function SumaryMovie(props: IProps) {
             return (
               <div
                 key={index}
-                className="text-black bg-pink-400 hover:bg-pink-500 ease-in-out duration-150  rounded-md dark:text-white dark:bg-[var(--active-dark)] dark:hover:bg-[var(--navbar-hover-color2)] cursor-pointer w-fit h-fit px-3 py-1 text-sm font-light"
+                className="text-neutral-900 bg-pink-400 hover:bg-pink-500 ease-in-out duration-150  rounded-md dark:text-white dark:bg-[var(--active-dark)] dark:hover:bg-[var(--navbar-hover-color2)] cursor-pointer w-fit h-fit px-3 py-1 text-sm font-light"
                 onClick={() =>
                   router.push(`/layout/category?category=${item.id}`)
                 }
@@ -28,7 +28,7 @@ function SumaryMovie(props: IProps) {
             );
           })}
       </div>
-      <p className="text-black dark:text-white text-sm">{des}</p>
+      <p className="text-neutral-900 dark:text-white text-sm">{des}</p>
     </div>
   );
 }

@@ -34,7 +34,7 @@ function LittleMovie(props: IProps) {
   useResizeLittleMovie();
   return (
     <div className="py-2 w-full h-fit">
-      <p className=" text-black dark:text-white h-fit text-base font-normal pb-2">
+      <p className=" text-neutral-900 dark:text-white h-fit text-base font-normal pb-2">
         {relate}{" "}
         <span
           className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer uppercase"
@@ -82,7 +82,7 @@ function LittleMovie(props: IProps) {
                   `}</style>
                 </div>
                 <div className="col-span-7 sm:col-span-8 md:col-span-9 lg:col-span-7 2xl:col-span-8  h-full">
-                  <p className="text-black dark:text-white truncate xl:whitespace-normal">
+                  <p className="text-neutral-900 dark:text-white truncate xl:whitespace-normal">
                     {item.title}
                   </p>
                   <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">

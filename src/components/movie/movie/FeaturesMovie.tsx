@@ -205,7 +205,7 @@ function FeaturesMovie() {
               )}
               {item.svg}
               <span
-                className="text-black dark:text-white z-0 cursor-default text-sm"
+                className="text-neutral-900 dark:text-white z-0 cursor-default text-sm"
                 style={{
                   // opacity: `${item.id !== "like" && 0.5}`,
                   cursor: `${item.id !== "like" && "pointer"}`,
@@ -226,13 +226,13 @@ function FeaturesMovie() {
             id="contentToCopy"
             className="p-2 w-full border border-black rounded-md"
           >
-            <p className="truncate text-black ">{pathName}</p>
+            <p className="truncate text-neutral-900 ">{pathName}</p>
           </div>
           <div
             className="w-full flex justify-end"
             onClick={handleCopyButtonClick}
           >
-            <button className="text-black bg-orange-400 hover:bg-orange-500 rounded-md py-1 px-2 mt-4">
+            <button className="text-neutral-900 bg-orange-400 hover:bg-orange-500 rounded-md py-1 px-2 mt-4">
               Sao chép URL
             </button>
           </div>

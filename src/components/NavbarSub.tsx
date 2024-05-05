@@ -26,7 +26,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 fill-black dark:fill-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -46,7 +46,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 fill-black dark:fill-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -66,7 +66,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 fill-black dark:fill-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -91,7 +91,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 stroke-black dark:stroke-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -111,7 +111,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 fill-black dark:fill-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -131,7 +131,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 fill-black dark:stroke-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -156,7 +156,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 fill-black dark:fill-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -176,7 +176,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 fill-black dark:fill-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -196,7 +196,7 @@ function NavbarSub(props: IProps) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 fill-black dark:fill-white"
+          className="w-6 h-6 fill-neutral-900  dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
         >
           <path
             strokeLinecap="round"
@@ -220,7 +220,7 @@ function NavbarSub(props: IProps) {
   }, []);
   return (
     <div
-      className={`navbar_sub fixed   left-0 h-full  bg-pink-200 dark:bg-[color:var(--navbar-color)] object-cover z-[35]  ${
+      className={`navbar_sub fixed   left-0 h-full  bg-[#FDA7DF] dark:bg-[color:var(--navbar-color)] object-cover z-[35]  ${
         isToggleSubMenu ? "translate-x-0" : "translate-x-[-100%]"
       } duration-200 ease-in-out`}
     >
@@ -231,11 +231,11 @@ function NavbarSub(props: IProps) {
           return (
             <div
               key={index}
-              className={`item hover:bg-pink-100  
+              className={`item hover:bg-pink-200  
             dark:hover:bg-[color:var(--navbar-hover-color)] ${
               activeLink === item.link
-                ? " dark:bg-[color:var(--active-dark)] bg-pink-50"
-                : "dark:bg-[color:var(--navbar-color)] bg-pink-200"
+                ? " dark:bg-[color:var(--active-dark)] bg-pink-100"
+                : "dark:bg-[color:var(--navbar-color)] bg-[#FDA7DF]"
             }
             my-3  ps-4 pe-[5rem] py-2   rounded-md duration-150  z-[35]`}
             >
@@ -245,7 +245,7 @@ function NavbarSub(props: IProps) {
                 onClick={() => handleActiveLink(item.link)}
               >
                 {item.svg}
-                <label className="cursor-pointer text-sm ms-8 text-black dark:text-white">
+                <label className="cursor-pointer text-sm ms-6 text-neutral-900  dark:text-white">
                   {item.title}
                 </label>
               </Link>
