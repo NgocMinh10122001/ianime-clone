@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   try {
     let orderBy = req.nextUrl.searchParams.get("orderby");
     let order = req.nextUrl.searchParams.get("order");
-    let page = req.nextUrl.searchParams.get("page");
+    let page = req.nextUrl.searchParams.get("page") || 1;
     let genre = req.nextUrl.searchParams.get("genre");
     let firm = req.nextUrl.searchParams.get("firm");
     let release = req.nextUrl.searchParams.get("release");

@@ -14,14 +14,14 @@ function DataSearchOnChange(props: IProps) {
   return (
     <>
       {isToggleDataSearch ? (
-        <div className="absolute right-0 left-0 top-[110%] h-fit py-4 bg-pink-200 dark:bg-[var(--navbar-hover-color)] rounded-md flex items-center flex-col justify-center z-20">
+        <div className="absolute right-0 left-0 top-[110%] h-fit py-4 bg-pink-400 dark:bg-[var(--navbar-hover-color)] rounded-md flex items-center flex-col justify-center z-20">
           {dataFetching &&
             dataFetching.length > 0 &&
             dataFetching.map((item) => (
               <Link
                 href={`/layout/search?name=${item.animeVI?.name}`}
                 key={item.id}
-                className="flex items-center w-full h-fit hover:bg-pink-100 dark:hover:bg-[var(--navbar-hover-color2)] py-2"
+                className="flex items-center w-full h-fit hover:bg-pink-300 dark:hover:bg-[var(--navbar-hover-color2)] py-2"
                 onClick={() => setToggleDataSearch(false)}
               >
                 <div className="px-3">

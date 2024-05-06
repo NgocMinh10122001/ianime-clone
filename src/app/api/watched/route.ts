@@ -9,34 +9,53 @@ export async function GET(req: NextRequest) {
     // const moives = req.cookies.get("movieWatched");
     // console.log(token);
 
-    let moviesWatched: string[] = JSON.parse(moviesIds as string);
-    // console.log("check movie2", moviesWatched);
+    if (
+      moviesIds &&
+      moviesIds.length > 0 &&
+      moviesIds !== undefined &&
+      moviesIds !== "undefined"
+    ) {
+      // console.log("check1", moviesIds);
 
-    const res = await prismadb.anime.findMany({
-      include: {
-        firm: true,
-        release: true,
-        genres: true,
-      },
-    });
-    const matchingObjects = res.filter((item) =>
-      moviesWatched.includes(item.id)
-    );
+      let moviesWatched: string[] = JSON.parse(moviesIds as string);
+      // console.log("check movie2", moviesWatched);
 
-    // Extract id and title from the matching objects
-    const result = matchingObjects.map((item) => item);
+      const res = await prismadb.anime.findMany({
+        include: {
+          firm: true,
+          release: true,
+          genres: true,
+        },
+      });
+      const matchingObjects = res.filter((item) =>
+        moviesWatched.includes(item.id)
+      );
 
-    // // Output the result
-    // console.log("Matching IDs and Titles:", result);
+      // Extract id and title from the matching objects
+      const result = matchingObjects.map((item) => item);
 
-    return NextResponse.json(
-      {
-        data: result,
-        errCode: 0,
-        errMes: "get genre explore success!",
-      },
-      { status: 200 }
-    );
+      // // Output the result
+      // console.log("Matching IDs and Titles:", result);
+
+      return NextResponse.json(
+        {
+          data: result,
+          errCode: 0,
+          errMes: "get genre explore success!",
+        },
+        { status: 200 }
+      );
+    } else {
+      // console.log("check2");
+      return NextResponse.json(
+        {
+          data: [],
+          errCode: 0,
+          errMes: "get genre explore success!",
+        },
+        { status: 200 }
+      );
+    }
   } catch (error) {
     console.log(error);
     return NextResponse.json(

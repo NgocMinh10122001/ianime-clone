@@ -21,11 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className=" relative dark:bg-[var(--bg-explore)] bg-white flex flex-col justify-between z-40 ">
-      <Navbar />
+    <div className="relative  h-full">
+      <div className="fixed dark:bg-[var(--bg-explore)] bg-white top-0 left-0 bottom-0 right-0"></div>
+      <div className="relative  flex flex-col justify-between z-40 h-full">
+        <Navbar />
 
-      {children}
-      <Footer />
+        {children}
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -136,15 +136,17 @@ function ModalSearch(props: any) {
               return (
                 <div
                   key={item.id}
-                  className="py-2 px-3 w-fit bg-[var(--navbar-color)] border border-yellow-300 text-white hover:text-yellow-300 hover:bg-[var(--navbar-hover-color)] rounded-2xl cursor-pointer"
+                  className="py-2 px-3 w-fit text-[#FFC312] border border-[#FFC312]  hover:bg-neutral-900 duration-200 ease-in rounded-2xl cursor-pointer"
                   style={{
                     backgroundColor: `${
-                      (item.genre === genre &&
-                        "rgb(236 72 153 / var(--tw-bg-opacity))") ||
-                      (item.name === firm &&
-                        "rgb(236 72 153 / var(--tw-bg-opacity))") ||
-                      (item.year?.toString() === release &&
-                        "rgb(236 72 153 / var(--tw-bg-opacity))")
+                      (item.genre === genre && "#FFC312") ||
+                      (item.name === firm && "#FFC312") ||
+                      (item.year?.toString() === release && "#FFC312")
+                    }`,
+                    color: `${
+                      (item.genre === genre && "#fff") ||
+                      (item.name === firm && "#fff") ||
+                      (item.year?.toString() === release && "#fff")
                     }`,
                   }}
                   onClick={() => handleDemand(item)}

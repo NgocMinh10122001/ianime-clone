@@ -5,8 +5,8 @@ import prismadb from "../../../../../lib/prismadb";
 
 export async function GET(req: NextRequest) {
   const accessToken = req.headers.get("token");
-  let page = req.nextUrl.searchParams.get("page");
-  let limit = req.nextUrl.searchParams.get("limit");
+  let page = req.nextUrl.searchParams.get("page") || 1;
+  let limit = req.nextUrl.searchParams.get("limit") || 6;
   let search = req.nextUrl.searchParams.get("search");
   try {
     // console.log("check ", req.query);

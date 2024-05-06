@@ -23,6 +23,7 @@ export default async function page(props: any) {
         animes={data ? data.data : []}
         total={data ? data.totalPage : 24}
         page={page as number}
+        title={data ? data.title : ""}
         limit={limit}
       />
     </div>

@@ -39,23 +39,33 @@ function TopAnime(props: IProps) {
   return (
     <div className="top__anime__container ">
       <div className="pb-4 w-full flex justify-center">
-        <CustomizePagination
-          current={page}
-          totalPage={totalPage}
-          pageSize={24}
-          onChangePage={handleChangePaginate}
-        />
+        {animes && animes.length > 0 ? (
+          <CustomizePagination
+            current={page}
+            totalPage={totalPage}
+            pageSize={24}
+            onChangePage={handleChangePaginate}
+          />
+        ) : (
+          <span className="text-neutral-900 dark:text-neutral-100 font-light tracking-wide text-xl">
+            Không tìm thấy anime nào!
+          </span>
+        )}
       </div>
       {loading ? <Spin size="large" fullscreen={true} /> : ""}
 
       <Anime animes={animes} commingsoon={""} />
       <div className="pt-4 w-full flex justify-center">
-        <CustomizePagination
-          current={page}
-          totalPage={totalPage}
-          pageSize={24}
-          onChangePage={handleChangePaginate}
-        />
+        {animes && animes.length > 0 ? (
+          <CustomizePagination
+            current={page}
+            totalPage={totalPage}
+            pageSize={24}
+            onChangePage={handleChangePaginate}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
