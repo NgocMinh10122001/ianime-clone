@@ -10,11 +10,12 @@ interface IProps {
   animes: IAnime[];
   total: number;
   limit: number;
+  title: string;
   page: number;
 }
 
 export default function AnimeVietSub(props: IProps) {
-  let { animes, total, limit, page } = props;
+  let { animes, total, limit, page, title } = props;
   // console.log(limit);
 
   const router = useRouter();
@@ -31,26 +32,36 @@ export default function AnimeVietSub(props: IProps) {
   return (
     <div className="w-full pb-6">
       <p className="text-neutral-900 dark:text-white text-2xl  py-4">
-        Tìm thấy {total || 0} phim anime
+        {animes && animes.length > 0
+          ? `Tìm thấy ${animes?.length || 0} phim anime ${title}`
+          : `Không tìm thấy phim anime ${title} nào`}
       </p>
-      <div className="pt-4 pb-6 w-full flex justify-center">
-        <CustomizePagination
-          current={page}
-          totalPage={total}
-          pageSize={limit}
-          onChangePage={handleChangePaginate}
-        />
-      </div>
+      {animes && animes.length > 0 ? (
+        <div className="pt-4 pb-6 w-full flex justify-center">
+          <CustomizePagination
+            current={page}
+            totalPage={total}
+            pageSize={limit}
+            onChangePage={handleChangePaginate}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <>{loading ? <Spin size="large" fullscreen={true} /> : ""}</>
       <Anime animes={animes} commingsoon={""} />
-      <div className="pt-6 w-full flex justify-center">
-        <CustomizePagination
-          current={page}
-          totalPage={total}
-          pageSize={limit}
-          onChangePage={handleChangePaginate}
-        />
-      </div>
+      {animes && animes.length > 0 ? (
+        <div className="pt-6 w-full flex justify-center">
+          <CustomizePagination
+            current={page}
+            totalPage={total}
+            pageSize={limit}
+            onChangePage={handleChangePaginate}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

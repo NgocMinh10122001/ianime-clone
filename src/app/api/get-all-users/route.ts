@@ -6,7 +6,7 @@ import { options } from "../auth/[...nextauth]/options";
 
 export async function GET(req: NextRequest) {
   const accessToken = req.headers.get("token");
-  let page = req.nextUrl.searchParams.get("page");
+  let page = req.nextUrl.searchParams.get("page") || 1;
   let limit = req.nextUrl.searchParams.get("limit");
   let search = req.nextUrl.searchParams.get("search");
   try {

@@ -3,7 +3,7 @@ import prismadb from "../../../../lib/prismadb";
 
 export async function GET(req: NextRequest) {
   try {
-    const page = req.nextUrl.searchParams.get("page");
+    const page = req.nextUrl.searchParams.get("page") || 1;
     const res = await prismadb.anime.findMany({
       where: {
         locale: {
@@ -32,6 +32,7 @@ export async function GET(req: NextRequest) {
       {
         data: res,
         totalPage: totalPage,
+        title: "vietsub",
         errCode: 0,
         errMes: "get genre explore success!",
       },

@@ -20,6 +20,7 @@ export default async function page(props: any) {
       <AnimeVietSub
         animes={data ? data.data : []}
         total={data ? data.totalPage : 24}
+        title={data ? data.title : ""}
         page={page as number}
         limit={limit}
       />

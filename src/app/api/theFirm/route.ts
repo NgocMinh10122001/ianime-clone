@@ -3,7 +3,7 @@ import prismadb from "../../../../lib/prismadb";
 
 export async function GET(req: NextRequest) {
   try {
-    const page = req.nextUrl.searchParams.get("page");
+    const page = req.nextUrl.searchParams.get("page") || 1;
     const limit = req.nextUrl.searchParams.get("limit");
     const theFirm = req.nextUrl.searchParams.get("theFirm");
     console.log(theFirm);
