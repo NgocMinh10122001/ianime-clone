@@ -13,15 +13,15 @@ export const Ianime = [
   },
   {
     title: "Top lượt xem",
-    link: "/layout/topview",
+    link: "/layout/search",
   },
   {
     title: "Anime Vietsub",
     link: "/layout/vietsub",
   },
   {
-    title: "Anime HD",
-    link: "/layout/hd",
+    title: "Anime 3D",
+    link: "/layout/3D",
   },
   {
     title: "18+",
@@ -29,30 +29,30 @@ export const Ianime = [
   },
   {
     title: "Sắp chiếu",
-    link: "/layout/comming-soon",
+    link: "/layout/search?genre=commingsoon",
   },
 ];
 
 export const partner = [
   {
     title: "AWS",
-    link: "/layout/aws",
+    link: "",
   },
   {
     title: "Anime Game",
-    link: "/layout/anime-game",
+    link: "",
   },
 ];
 
 export const toy = [
   {
     title: "Saucemoe",
-    link: "/layout/toy",
+    link: "",
   },
 ];
 export const contract = [
   {
     title: "Discord FanClub",
-    link: "/layout/discord",
+    link: "",
   },
 ];

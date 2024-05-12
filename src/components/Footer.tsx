@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#FDA7DF] dark:bg-[color:var(--navbar-color)] gap-10 px-[112px] py-10 w-full h-fit grid  grid-cols-5 ">
       <div className="w-full flex justify-center col-span-5 sm:col-span-1">
-        <Link href={"layout/home"}>
+        <Link href={"/layout/home"}>
           <img src="/favicon.ico" alt="no img" width={40} height={40} />
         </Link>
       </div>
