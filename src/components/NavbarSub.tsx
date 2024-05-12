@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 // import { usePathname } from "next/navigation";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import Link from "../../node_modules/next/link";
@@ -15,8 +16,7 @@ interface IProps {
 }
 function NavbarSub(props: IProps) {
   let { isToggleSubMenu, isVisible } = props;
-  // let pathname = usePathname();
-  // console.log("check", pathname);
+  let pathname = usePathname();
   const navbarSubs: INavbarSub[] = [
     {
       svg: (
@@ -209,15 +209,7 @@ function NavbarSub(props: IProps) {
       title: "Saucemoe",
     },
   ];
-  const [activeLink, setActiveLink] = useState<string>("/layout/home");
 
-  // const pathName = usePathname();
-  // useEffect(() => {
-  //   console.log(pathName);
-  // }, [pathName]);
-  const handleActiveLink = useCallback((link: string) => {
-    setActiveLink(link);
-  }, []);
   return (
     <div
       className={`navbar_sub fixed   left-0 h-full  bg-[#FDA7DF] dark:bg-[color:var(--navbar-color)] object-cover z-[35]  ${
@@ -233,17 +225,13 @@ function NavbarSub(props: IProps) {
               key={index}
               className={`item hover:bg-pink-200  
             dark:hover:bg-[color:var(--navbar-hover-color)] ${
-              activeLink === item.link
+              pathname === item.link
                 ? " dark:bg-[color:var(--active-dark)] bg-pink-100"
                 : "dark:bg-[color:var(--navbar-color)] bg-[#FDA7DF]"
             }
             my-3  ps-4 pe-[5rem] py-2   rounded-md duration-150  z-[35]`}
             >
-              <Link
-                className="flex items-center"
-                href={`${item.link}`}
-                onClick={() => handleActiveLink(item.link)}
-              >
+              <Link className="flex items-center" href={`${item.link}`}>
                 {item.svg}
                 <label className="cursor-pointer text-sm ms-6 text-neutral-900  dark:text-white">
                   {item.title}

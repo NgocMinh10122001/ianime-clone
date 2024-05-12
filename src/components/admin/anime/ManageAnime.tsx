@@ -586,7 +586,7 @@ function ManageAnime(props: IProps) {
         loading={loading}
       />
       <Modal
-        title={`${isEdit ? "Update User" : "New User"}`}
+        title={`${isEdit ? "Update Anime" : "New Anime"}`}
         open={isModalOpen}
         width={1000}
         // onOk={handleOk}
