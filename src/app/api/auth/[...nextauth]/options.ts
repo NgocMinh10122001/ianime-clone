@@ -139,7 +139,7 @@ export const options: NextAuthOptions = {
       } else if (token.role === "admin") {
         console.log("refreshing token");
         const res = await fetch(
-          "http://localhost:3000/api/auth/refreshtoken",
+          `${process.env.HTTP_API_URL}/api/auth/refreshtoken`,
 
           {
             method: "POST",
