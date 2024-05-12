@@ -10,7 +10,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Router } from "react-router-dom";
 import { FaGooglePlusG, FaGithub } from "react-icons/fa";
 import axios from "axios";
 import useResizeLoginForm from "@/custom-hook/useResizeLoginForm";
