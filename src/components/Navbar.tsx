@@ -58,21 +58,27 @@ function Navbar() {
   }, [isToggleDeleteSearch]);
 
   const handleChangeInput = useCallback(
-    async (event: any) => {
+    (event: any) => {
       // console.log(event.target.value);
       setToggleDeleteSearch(true);
       setInputData(event.target.value);
 
-      const res = await searchInputOnChange(event.target.value);
-      // console.log(res);
-      if (res && res.length > 0) {
-        setDataFetching(res);
-        setToggleDataSearch(true);
+      startTrasition(async () => {
+        const res = await searchInputOnChange(event.target.value);
+        // console.log(res);
+        if (res && res.length > 0) {
+          setDataFetching(res);
+          startTrasition(() => {
+            setToggleDataSearch(true);
+          });
+          return;
+        }
+        setDataFetching([]);
+        startTrasition(() => {
+          setToggleDataSearch(true);
+        });
         return;
-      }
-      setDataFetching([]);
-      setToggleDataSearch(true);
-      return;
+      });
 
       // startTrasition(() => {
       //   setToggleDataSearch(true);
@@ -84,7 +90,9 @@ function Navbar() {
   const handleFindAnime = useCallback(() => {
     console.log("do validate1", inputData);
     router.replace(`/layout/search?name=${inputData}`);
-    setToggleDataSearch(false);
+    startTrasition(() => {
+      setToggleDataSearch(false);
+    });
   }, [inputData]);
 
   const handleToggleSubMenu = useCallback(() => {
