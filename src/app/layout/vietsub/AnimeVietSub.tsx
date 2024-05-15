@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Spin } from "antd";
 import Anime from "@/components/re-components/Anime";
 import { IAnime } from "@/types/index";
@@ -14,7 +14,7 @@ interface IProps {
   page: number;
 }
 
-export default function AnimeVietSub(props: IProps) {
+function AnimeVietSub(props: IProps) {
   let { animes, total, limit, page, title } = props;
   // console.log(limit);
 
@@ -65,3 +65,5 @@ export default function AnimeVietSub(props: IProps) {
     </div>
   );
 }
+
+export default memo(AnimeVietSub);

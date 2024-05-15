@@ -1,8 +1,9 @@
 "use client";
 import useResizeAnimeElements from "@/custom-hook/useResizeAnimeElements";
-import { addViewVideo, storeMovieWatched } from "@/server-action/user";
+import { storeMovieWatched } from "@/server-action/user";
 import { IAnime } from "@/types/index";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { memo, useEffect, useState } from "react";
 
@@ -12,25 +13,14 @@ interface IAnimes {
 }
 function Anime(props: IAnimes) {
   let { animes, commingsoon } = props;
+  const { data: session } = useSession();
+  const [userId, setUserId] = useState<string>(session?.user?.id || "");
   // console.log(animes);
   let router = useRouter();
-  const { data: session } = useSession();
-  const [userId, setUserId] = useState<string>("");
-  // console.log(url);
-  useEffect(() => {
-    setUserId(session?.user.id || "");
-  }, []);
-
-  const handleRedirect = async (item: any) => {
-    // console.log(item);
-
-    await storeMovieWatched(item?.id);
-    await addViewVideo(item?.id, userId);
-
-    router.push(
-      `/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`
-    );
+  const handleStoreMovie = async (id: string) => {
+    await storeMovieWatched(id);
   };
+
   const numberWithCommas = (number: number): string => {
     return number.toLocaleString();
   };
@@ -40,12 +30,13 @@ function Anime(props: IAnimes) {
       {animes?.length > 0 &&
         animes.map((item) => {
           return (
-            <div
+            <Link
+              href={`/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`}
               key={item.id}
               id="content"
               className="content  bg-[#FDA7DF] w-full h-[26.5rem]  dark:bg-[color:var(--navbar-color)] rounded-t-md rounded-b-md overflow-hidden cursor-pointer "
               title={item.title}
-              onClick={() => handleRedirect(item)}
+              onClick={() => handleStoreMovie(item?.id)}
             >
               <div className="w-full h-[77%] relative">
                 <div
@@ -100,7 +91,7 @@ function Anime(props: IAnimes) {
                   </span>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
     </div>
