@@ -47,7 +47,7 @@ function LittleMovie(props: IProps) {
           animeRelate.map((item) => {
             return (
               <Link
-                href={`/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`}
+                href={`/layout/movie?id=${item?.id}`}
                 key={item.id}
                 className="grid grid-cols-12 gap-x-4  h-fit  w-full cursor-pointer overflow-hidden"
                 onClick={() => handleRedirect(item)}

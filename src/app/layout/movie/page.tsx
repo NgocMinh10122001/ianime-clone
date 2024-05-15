@@ -25,15 +25,12 @@ export default async function page(props: any) {
   // storeMovieWatched(id);
   await addViewVideo(id, session?.user?.id || "");
 
-  const res = await fetch(
-    `${process.env.HTTP_API_URL}/api/movie?name=${name}&&id=${id}&&firm=${firm}&&release=${release}&&genre=${genre}`,
-    {
-      headers: { "Access-Control-Allow-Origin": "*" },
-      method: "GET",
-      next: { tags: ["movie-anime-detail"] },
-      // cache: "no-store",
-    }
-  );
+  const res = await fetch(`${process.env.HTTP_API_URL}/api/movie?id=${id}`, {
+    headers: { "Access-Control-Allow-Origin": "*" },
+    method: "GET",
+    next: { tags: ["movie-anime-detail"] },
+    // cache: "no-store",
+  });
   const data = await res.json();
   // console.log(data.anime);
 
