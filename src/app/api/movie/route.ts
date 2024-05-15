@@ -5,14 +5,8 @@ import prismadb from "../../../../lib/prismadb";
 export async function GET(req: NextRequest) {
   try {
     const id = req.nextUrl.searchParams.get("id");
-    const name = req.nextUrl.searchParams.get("name");
-    const firm = req.nextUrl.searchParams.get("firm");
-    const release = req.nextUrl.searchParams.get("release");
-    const genre = req.nextUrl.searchParams.get("genre");
 
-    // console.log(id);
-
-    const anime = await prismadb.anime.findMany({
+    const anime = await prismadb.anime.findUnique({
       where: {
         id: (id as string) || "",
       },
@@ -21,13 +15,15 @@ export async function GET(req: NextRequest) {
         release: true,
         genres: true,
         animeJA: true,
+        animeVI: true,
       },
     });
+    // console.log(anime);
 
     const sameName = await prismadb.anime.findMany({
       where: {
         title: {
-          contains: (name as string) || "",
+          contains: anime?.title || "",
         },
         NOT: {
           id: id as string,
@@ -42,7 +38,7 @@ export async function GET(req: NextRequest) {
     const sameFirm = await prismadb.anime.findMany({
       where: {
         firm: {
-          id: (firm as string) || "",
+          id: anime?.firm.id || "",
         },
         NOT: {
           id: id as string,
@@ -58,7 +54,7 @@ export async function GET(req: NextRequest) {
       where: {
         genres: {
           some: {
-            id: (genre as string) || "",
+            id: anime?.genres[0].id || "",
           },
         },
         NOT: {
@@ -74,7 +70,7 @@ export async function GET(req: NextRequest) {
     const sameRelease = await prismadb.anime.findMany({
       where: {
         release: {
-          id: (release as string) || "",
+          id: anime?.release.id || "",
         },
         NOT: {
           id: id as string,
@@ -85,22 +81,12 @@ export async function GET(req: NextRequest) {
       },
       take: 5,
     });
-    // const res = await prismadb.genre.findMany({
-    //   where: { genre: "18+" },
-    //   select: {
-    //     animes: true,
-    //   },
-    //   skip: (+(page as string) - 1) * 24,
-    //   take: 24,
-    // });
-    // const totalPage = res[0].animes.length;
 
-    // console.log("check", anime);
     revalidateTag("movie-anime-detail");
 
     return NextResponse.json(
       {
-        anime: anime[0],
+        anime: anime,
         sameName: sameName,
         sameFirm: sameFirm,
         sameGenre: sameGenre,

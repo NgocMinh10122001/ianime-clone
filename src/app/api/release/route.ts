@@ -18,13 +18,28 @@ export async function GET(req: NextRequest) {
       skip: (+(page as string) - 1) * 24,
       take: +(limit as string) || 24,
     });
-    const totalPage = res.length;
+    const totalPage = await prismadb.anime.count({
+      where: {
+        release: {
+          id: (release as string) || "",
+        },
+      },
+    });
+    const releaseName = await prismadb.release.findUnique({
+      where: {
+        id: (release as string) || "",
+      },
+      select: {
+        year: true,
+      },
+    });
 
     // console.log(res[0].animes);
 
     return NextResponse.json(
       {
         data: res,
+        title: releaseName?.year,
         totalPage: totalPage,
         errCode: 0,
         errMes: "get genre explore success!",
