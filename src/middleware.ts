@@ -36,7 +36,7 @@ export const config = {
     "/error",
     "/admin/manage-user",
     "/admin/manage-user",
-    "/layout/movie/:path*",
+    "/layout/movie",
     "/layout/favorite",
     "/layout/watched",
     "/layout/category",

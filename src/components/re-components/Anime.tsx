@@ -31,7 +31,7 @@ function Anime(props: IAnimes) {
         animes.map((item) => {
           return (
             <Link
-              href={`/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`}
+              href={`/layout/movie?id=${item?.id}`}
               key={item.id}
               id="content"
               className="content  bg-[#FDA7DF] w-full h-[26.5rem]  dark:bg-[color:var(--navbar-color)] rounded-t-md rounded-b-md overflow-hidden cursor-pointer "
