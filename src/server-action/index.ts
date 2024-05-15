@@ -484,22 +484,19 @@ export async function searchInputOnChange(values: string) {
         ],
       },
       select: {
-        id: true,
-        title: true,
-        firmId: true,
-        genreIds: true,
-        releaseId: true,
-        animeEN: true,
-        animeJA: true,
         animeVI: true,
+        title: true,
       },
       take: 6,
     });
 
-    const res = getUniqueBooksByTitle(response);
+    // const res = getUniqueBooksByTitle(response);
+
+    // console.log(res);
+
     // console.log(uniqueBooks);
     // console.log(response);
-    return res;
+    return response;
 
     // revalidateTag("search-input-onchange");
   } catch (error) {
@@ -507,14 +504,14 @@ export async function searchInputOnChange(values: string) {
   }
 }
 
-function getUniqueBooksByTitle(books: IDataFetching[]): IDataFetching[] {
-  const uniqueTitles = new Set(books.map((book) => book.title));
-  const uniqueBooks: IDataFetching[] = [];
-  uniqueTitles.forEach((title) => {
-    const book = books.find((book) => book.title === title);
-    if (book) {
-      uniqueBooks.push(book);
-    }
-  });
-  return uniqueBooks;
-}
+// function getUniqueBooksByTitle(books: IDataFetching[]): IDataFetching[] {
+//   const uniqueTitles = new Set(books.map((book) => book.title));
+//   const uniqueBooks: IDataFetching[] = [];
+//   uniqueTitles.forEach((title) => {
+//     const book = books.find((book) => book.title === title);
+//     if (book) {
+//       uniqueBooks.push(book);
+//     }
+//   });
+//   return uniqueBooks;
+// }

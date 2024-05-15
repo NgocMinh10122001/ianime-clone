@@ -78,13 +78,8 @@ export interface IAnimeName {
   name: string;
 }
 export interface IDataFetching {
-  id: string;
   title: string;
-  firmId: string;
-  genreIds: string[];
-  releaseId: string;
-  animeEN: IAnimeName | null;
-  animeJA: IAnimeName | null;
+
   animeVI: IAnimeName | null;
 }
 
