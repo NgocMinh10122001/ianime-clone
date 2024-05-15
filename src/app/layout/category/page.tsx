@@ -15,7 +15,6 @@ export default async function page(props: any) {
     }
   );
   const data = await res.json();
-  // console.log(data);
 
   return (
     <div className="w-full mtop-64 padding-x-4">

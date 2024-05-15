@@ -310,8 +310,7 @@ function Navbar() {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 sm:w-8  sm:h-8 cursor-pointer "
+              className="w-6 h-6 sm:w-8  sm:h-8 cursor-pointer stroke-neutral-100"
               onClick={toggleDarkMode}
             >
               <path
@@ -326,7 +325,6 @@ function Navbar() {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="currentColor"
               className="w-6 h-6 sm:w-8 sm:h-8 stroke-[#FDA7DF] fill-black cursor-pointer "
               onClick={toggleDarkMode}
             >

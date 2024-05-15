@@ -1,7 +1,10 @@
 "use client";
 import useResizeAnimeElements from "@/custom-hook/useResizeAnimeElements";
 import { IAnime } from "@/types/index";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface IAnimes {
   animes: IAnime[];
@@ -11,13 +14,6 @@ export default function AnimeGaCha(props: IAnimes) {
   // console.log(animes);
   let router = useRouter();
 
-  const handleRedirect = (item: any) => {
-    // console.log(item);
-
-    router.push(
-      `/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`
-    );
-  };
   useResizeAnimeElements();
 
   return (
@@ -25,12 +21,12 @@ export default function AnimeGaCha(props: IAnimes) {
       {animes?.length > 0 &&
         animes.map((item) => {
           return (
-            <div
+            <Link
+              href={`/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`}
               key={item.id}
               id="content"
               className="content  bg-[color:var(--bg-footer-sun)] w-full h-[26.5rem] dark:bg-[color:var(--navbar-color)] rounded-t-md rounded-b-md overflow-hidden cursor-pointer"
               title={item.title}
-              onClick={() => handleRedirect(item)}
             >
               <div className="w-full h-[77%]">
                 <div
@@ -78,7 +74,7 @@ export default function AnimeGaCha(props: IAnimes) {
                   </span>
                 </p>
               </div>
-            </div>
+            </Link>
           );
         })}
     </div>
