@@ -53,12 +53,18 @@ function Branch(props: IProps) {
               >
                 <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 left-0 right-0"></div>
                 <div className="branch__content__svg absolute bottom-24 sm:bottom-28 flex justify-center w-full ">
-                  {(item.svg === "anime" && <HiFire size={50} />) ||
+                  {(item.svg === "anime" && (
+                    <HiFire size={50} color={"#fff"} />
+                  )) ||
                     (item.svg === "collection" && (
-                      <MdOutlineCollections size={50} />
+                      <MdOutlineCollections size={50} color={"#fff"} />
                     )) ||
-                    (item.svg === "genre" && <FaTags size={50} />) ||
-                    (item.svg === "gacha" && <GiMagicBroom size={50} />)}
+                    (item.svg === "genre" && (
+                      <FaTags size={50} color={"#fff"} />
+                    )) ||
+                    (item.svg === "gacha" && (
+                      <GiMagicBroom size={50} color={"#fff"} />
+                    ))}
                 </div>
                 <div className="branch__content__name__des   absolute flex flex-col items-center justify-center w-full bottom-8 sm:bottom-9">
                   <span

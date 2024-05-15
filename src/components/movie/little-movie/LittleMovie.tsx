@@ -2,6 +2,7 @@
 import useResizeLittleMovie from "@/custom-hook/useResizeLittleMovie";
 import { storeMovieWatched } from "@/server-action/user";
 import { IAnime, IRelease, ITheFirm } from "@/types/index";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { memo } from "react";
 interface INewAnime extends IAnime {
@@ -19,9 +20,6 @@ function LittleMovie(props: IProps) {
   const handleRedirect = async (item: any) => {
     // console.log(item);
     await storeMovieWatched(item?.id);
-    router.push(
-      `/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`
-    );
   };
   const handlePush = (theFirm: any, release: any) => {
     if (theFirm && theFirm.id) {
@@ -48,7 +46,8 @@ function LittleMovie(props: IProps) {
           animeRelate.length > 0 &&
           animeRelate.map((item) => {
             return (
-              <div
+              <Link
+                href={`/layout/movie/${item?.title}?id=${item?.id}&&firm=${item?.firmId}&&release=${item?.releaseId}&&genre=${item?.genreIds[0]}`}
                 key={item.id}
                 className="grid grid-cols-12 gap-x-4  h-fit  w-full cursor-pointer overflow-hidden"
                 onClick={() => handleRedirect(item)}
@@ -92,7 +91,7 @@ function LittleMovie(props: IProps) {
                     {item.view} luot xem
                   </p>
                 </div>
-              </div>
+              </Link>
             );
           })) || (
           <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">

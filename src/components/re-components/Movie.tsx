@@ -1,9 +1,11 @@
 "use client";
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import DetailMovie from "../movie/relate-movie/DetailMovie";
 import SubMovie from "../movie/movie/SubMovie";
 import SumaryMovie from "../movie/relate-movie/SumaryMovie";
 import { IAnime, IAnimeName, IGenre, IRelease, ITheFirm } from "@/types/index";
+import { useSession } from "next-auth/react";
+import { addViewVideo, storeMovieWatched } from "@/server-action/user";
 // import { ToastContainer } from "react-toastify";
 
 interface INewAnime extends IAnime {

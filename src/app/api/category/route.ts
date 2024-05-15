@@ -20,13 +20,31 @@ export async function GET(req: NextRequest) {
       skip: (+(page as string) - 1) * 24,
       take: +(limit as string) || 24,
     });
-    const totalPage = res.length;
+    // const totalPage = res.length;
+    const totalPage = await prismadb.anime.count({
+      where: {
+        genres: {
+          some: {
+            id: (category as string) || "",
+          },
+        },
+      },
+    });
+    const genreName = await prismadb.genre.findUnique({
+      where: {
+        id: (category as string) || "",
+      },
+      select: {
+        genre: true,
+      },
+    });
 
     // console.log(res[0].animes);
 
     return NextResponse.json(
       {
         data: res,
+        title: genreName?.genre,
         totalPage: totalPage,
         errCode: 0,
         errMes: "get genre explore success!",

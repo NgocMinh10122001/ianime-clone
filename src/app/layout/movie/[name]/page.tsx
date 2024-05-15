@@ -1,5 +1,8 @@
+import { options } from "@/app/api/auth/[...nextauth]/options";
 import LittleMovie from "@/components/re-components/LittleMovies";
 import Movie from "@/components/re-components/Movie";
+import { addViewVideo, storeMovieWatched } from "@/server-action/user";
+import { getServerSession } from "next-auth";
 // import { headers } from "next/headers";
 import React from "react";
 
@@ -17,6 +20,10 @@ export default async function page(props: any) {
   let genre: string = searchParams ? searchParams.genre : "";
   let name: string = decodeUrl || "";
   // console.log(genre);
+  const session = await getServerSession(options);
+
+  // storeMovieWatched(id);
+  await addViewVideo(id, session?.user?.id || "");
 
   const res = await fetch(
     `${process.env.HTTP_API_URL}/api/movie?name=${name}&&id=${id}&&firm=${firm}&&release=${release}&&genre=${genre}`,

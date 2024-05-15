@@ -23,17 +23,17 @@ interface IProps {
 
 const sortTitle = [
   {
-    svg: <MdFiberNew size={20} />,
+    svg: <MdFiberNew size={20} color={"fff"} />,
     sort: "new",
     title: "Mới tải lên",
   },
   {
-    svg: <HiFire size={20} />,
+    svg: <HiFire size={20} color={"fff"} />,
     sort: "top",
     title: "Xem nhiều nhất",
   },
   {
-    svg: <FcAlphabeticalSortingAz size={20} />,
+    svg: <FcAlphabeticalSortingAz size={20} color={"fff"} />,
     sort: "az",
     title: "Bảng chữ cái",
   },
@@ -153,7 +153,7 @@ function Option(props: IProps) {
               onClick={() => showModal(item.title)}
             >
               {item.svg}
-              <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-[var(--text-white)]">
+              <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-white">
                 {(item.title === "genre" && "Thể loại") ||
                   (item.title === "firm" && "Hãng") ||
                   (item.title === "release" && "Năm phát hành")}
@@ -171,8 +171,7 @@ function Option(props: IProps) {
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-5 h-5"
+          className="w-5 h-5 stroke-white"
         >
           <path
             strokeLinecap="round"
@@ -181,7 +180,7 @@ function Option(props: IProps) {
           />
         </svg>
 
-        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-[var(--text-white)]">
+        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-white">
           Sắp xếp
         </span>
         {sort ? (
@@ -223,8 +222,7 @@ function Option(props: IProps) {
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-5 h-5"
+          className="w-5 h-5 stroke-white"
         >
           <path
             strokeLinecap="round"
@@ -233,7 +231,7 @@ function Option(props: IProps) {
           />
         </svg>
 
-        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-[var(--text-white)]">
+        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-white">
           Làm mới
         </span>
       </div>

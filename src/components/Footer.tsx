@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-2 flex flex-col items-center sm:block md:col-span-1">
             <p className="text-neutral-900 dark:text-white text-sm font-sans font-bold">
-              iHentai
+              iAnime
             </p>
             <ul className="flex flex-col items-center sm:block">
               {Ianime &&
