@@ -57,43 +57,30 @@ function Navbar() {
     setToggleDataSearch(false);
   }, [isToggleDeleteSearch]);
 
-  const handleChangeInput = useCallback(
-    (event: any) => {
-      // console.log(event.target.value);
-      setToggleDeleteSearch(true);
-      setInputData(event.target.value);
+  const handleChangeInput = useCallback(async (event: any) => {
+    // console.log(event.target.value);
+    setToggleDeleteSearch(true);
+    setInputData(event.target.value);
 
-      startTrasition(async () => {
-        const res = await searchInputOnChange(event.target.value);
-        // console.log(res);
-        if (res && res.length > 0) {
-          setDataFetching(res);
-          startTrasition(() => {
-            setToggleDataSearch(true);
-          });
-          return;
-        }
-        setDataFetching([]);
-        startTrasition(() => {
-          setToggleDataSearch(true);
-        });
-        return;
-      });
+    const res = await searchInputOnChange(event.target.value);
+    if (res && res.length > 0) {
+      setDataFetching(res);
+      setToggleDataSearch(true);
+      return;
+    }
+    setDataFetching([]);
+    setToggleDataSearch(true);
+    return;
 
-      // startTrasition(() => {
-      //   setToggleDataSearch(true);
-      // });
-    },
-    [inputData]
-  );
+    // startTrasition(() => {
+    //   setToggleDataSearch(true);
+    // });
+  }, []);
 
   const handleFindAnime = useCallback(() => {
-    console.log("do validate1", inputData);
+    setToggleDataSearch(false);
     router.replace(`/layout/search?name=${inputData}`);
-    startTrasition(() => {
-      setToggleDataSearch(false);
-    });
-  }, [inputData]);
+  }, []);
 
   const handleToggleSubMenu = useCallback(() => {
     setToggleSubMenu(!isToggleSubMenu);
@@ -102,18 +89,16 @@ function Navbar() {
     setToggleMenuUser(!isToggleMenuUser);
   }, [isToggleMenuUser]);
 
-  const handleKeyDown = useCallback(
-    (event: any) => {
-      if (event.key === "Enter") {
-        // console.log("do validate2", inputData);
-        router.replace(`/layout/search?name=${inputData}`);
-        startTrasition(() => {
-          setToggleDataSearch(false);
-        });
-      }
-    },
-    [inputData]
-  );
+  const handleKeyDown = useCallback((event: any) => {
+    if (event.key === "Enter") {
+      // console.log("do validate2", inputData);
+      router.replace(`/layout/search?name=${inputData}`);
+      startTrasition(() => {
+        setToggleDataSearch(false);
+      });
+    }
+  }, []);
+
   useResizeNavbar(setResposive, setResposive2);
 
   return (
