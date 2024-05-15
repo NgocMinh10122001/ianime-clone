@@ -6,7 +6,6 @@ export async function GET(req: NextRequest) {
     const page = req.nextUrl.searchParams.get("page") || 1;
     const limit = req.nextUrl.searchParams.get("limit");
     const category = req.nextUrl.searchParams.get("category");
-    // console.log(page, limit, category);
 
     const res = await prismadb.anime.findMany({
       where: {
@@ -38,8 +37,6 @@ export async function GET(req: NextRequest) {
         genre: true,
       },
     });
-
-    // console.log(res[0].animes);
 
     return NextResponse.json(
       {
