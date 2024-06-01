@@ -7,6 +7,7 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --bg-explore: #121212;
+ 
   --bg-footer-sun: #fde7f4;
   --linear-g-black: linear-gradient(to bottom, #434343 0%, black 100%);
   --navbar-color : #212121;
@@ -19,7 +20,15 @@
   --text-white: #fff;
   --text-black:#000;
   --color-btn-sun: #f9a8d4;
-  --text-gray-color:#bdbdbd
+  --text-gray-color:#bdbdbd;
+  /* light mode */
+  --bg-light-mode: #f5f5f5;
+    --super-white: #ffffff;
+  --bg-active-light-submenu : #e6e6e6;
+  --shadow-light-mode: rgba(0, 0, 0, .1);
+  --text-color-light : #5a5a5a;
+  --bg-purple-ligth : #7a59ff;
+  --bg-yellow-light : rgb(240, 189, 48);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,7 +48,8 @@
 }
 
 .mtop-64{
-  margin-top: 64px;
+  margin-top: 80px;
+  margin-bottom: 16px;
 }
 
 html {
@@ -60,7 +70,7 @@ body {
 }
 
 .btn{
-  background-image: linear-gradient(to left, #FDA7DF,var(--bg-footer-sun),#FDA7DF);
+  background-image: linear-gradient(to left, var(--bg-purple-ligth), var(--super-white),var(--bg-purple-ligth));
   background-size: 400%;
 }
 

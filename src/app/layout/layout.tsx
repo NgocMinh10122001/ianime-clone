@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <div className="relative  h-full">
-      <div className="fixed dark:bg-[var(--bg-explore)] bg-white top-0 left-0 bottom-0 right-0"></div>
+      <div className="fixed dark:bg-[var(--bg-explore)] bg-[var(--bg-light-mode)] top-0 left-0 bottom-0 right-0 font-sans"></div>
       <div className="relative  flex flex-col justify-between z-40 h-full">
         <Navbar />
 
