@@ -43,9 +43,9 @@ const FreshLoad = (props: IProps) => {
     router.replace(`/layout/search?genre=${genreId}`);
   };
   return (
-    <div className="fresh__load__container  w-full py-4 padding-x-4">
+    <div className="fresh__load__container  w-full py-4 padding-x-4 font-sans">
       <div className="title flex justify-between  pb-4 w-full">
-        <h1 className="text-neutral-900 dark:text-white text-3xl tracking-normal">
+        <h1 className="text-neutral-900 dark:text-white text-3xl tracking-wide font-bold">
           {title}
         </h1>
         <button
@@ -54,7 +54,7 @@ const FreshLoad = (props: IProps) => {
 
           onClick={handleShowAnime}
         >
-          <span className="text-neutral-950 dark:text-neutral-100 tracking-wide font-light h-full w-full block ">
+          <span className="text-black font-semibold dark:text-[var(--super-white)] tracking-wide  h-full w-full block ">
             Tất cả
           </span>
         </button>

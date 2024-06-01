@@ -26,7 +26,7 @@ function Anime(props: IAnimes) {
   };
   useResizeAnimeElements();
   return (
-    <div className="w-full grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 ">
+    <div className="w-full grid grid-cols-2 gap-2 xl:gap-4 2xl:gap-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 font-sans">
       {animes?.length > 0 &&
         animes.map((item) => {
           return (
@@ -34,13 +34,13 @@ function Anime(props: IAnimes) {
               href={`/layout/movie?id=${item?.id}`}
               key={item.id}
               id="content"
-              className="content  bg-[#FDA7DF] w-full h-[26.5rem]  dark:bg-[color:var(--navbar-color)] rounded-t-md rounded-b-md overflow-hidden cursor-pointer "
+              className="content  bg-[var(--super-white)] w-full h-[26.5rem]  dark:bg-[color:var(--navbar-color)] font-sans rounded-t-md rounded-b-md overflow-hidden cursor-pointer shadow-[var(--shadow-light-mode)]  shadow-lg hover:shadow-2xl duration-200 ease-in "
               title={item.title}
               onClick={() => handleStoreMovie(item?.id)}
             >
               <div className="w-full h-[77%] relative">
                 <div
-                  className={`hover:scale-105 duration-300 hover:cursor-pointer  rounded-t-md  bg-cover bg-center bg-no-repeat w-full  h-full   after:right-[6px]  after:bottom-[6px] relative after:text-red-500 block after:absolute after:w-9 after:flex after:justify-center after:items-center after:h-9 after:rounded-full after:bg-pink-300 `}
+                  className={`hover:scale-105 duration-300 hover:cursor-pointer  rounded-t-md  bg-cover bg-center bg-no-repeat w-full  h-full   after:right-[6px]  after:bottom-[6px] relative after:text-[var(--super-white)] block after:absolute after:w-9 after:flex after:justify-center after:items-center after:h-9 after:rounded-full after:bg-[var(--bg-purple-ligth)]`}
                   style={{ backgroundImage: `url("${item.thumbnailUrl}")` }}
                 >
                   <style jsx>{`
@@ -58,10 +58,10 @@ function Anime(props: IAnimes) {
                 )}
               </div>
 
-              <div className="w-full h-fit max-h-[23%] flex flex-col items-center  p-4">
+              <div className="w-full h-fit max-h-[23%] flex flex-col items-center  p-4 pt-5">
                 <span
                   id="title"
-                  className="w-full leading-5 truncate 2xl:whitespace-normal text-center text-neutral-900 dark:text-neutral-100 text-base font-sans tracking-wide font-light pb-[0.375rem]"
+                  className="w-full leading-5 truncate  text-center text-black font-bold  dark:text-neutral-100  text-sm sm:text-sm md:text-sm lg:text-base xl:text-sm  tracking-wide  pb-[0.375rem]"
                 >
                   {item.title}
                 </span>
@@ -73,7 +73,7 @@ function Anime(props: IAnimes) {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-5 h-5 fill-neutral-900 stroke-[#FDA7DF] dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
+                    className="w-5 h-5 fill-neutral-900 stroke-[var(--super-white)] dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
                   >
                     <path
                       strokeLinecap="round"
@@ -86,7 +86,7 @@ function Anime(props: IAnimes) {
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <span className="text-neutral-900 font-light dark:text-[var(--text-gray-color)] text-sm ">
+                  <span className="text-[var(--text-color-light)] dark:text-[var(--text-gray-color)] text-xs  ">
                     {numberWithCommas((item?.view as number) || 1)}
                   </span>
                 </div>

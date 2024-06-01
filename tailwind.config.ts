@@ -11,6 +11,11 @@ const config: Config = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ["system-ui", "Helvetica", "Arial"],
+
+      body: ["system-ui", "Helvetica", "Arial"],
+    },
     container: {
       padding: "1rem",
     },
@@ -19,6 +24,9 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      colors: {
+        black: "#000000",
       },
       width: {
         "0375": "0.375rem",
