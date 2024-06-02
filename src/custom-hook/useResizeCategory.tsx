@@ -26,7 +26,7 @@ const useResizeCategory = () => {
 
             // title.style.fontSize = newTitleSize + "px";
           } else {
-            title.style.fontSize = "18px";
+            title.style.fontSize = "20px";
           }
         }
       });
@@ -44,7 +44,7 @@ const useResizeCategory = () => {
 
             // title.style.fontSize = newTitleSize + "px";
           } else {
-            des.style.fontSize = "12px";
+            des.style.fontSize = "14px";
           }
         }
       });

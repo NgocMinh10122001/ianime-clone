@@ -19,7 +19,7 @@ async function page() {
   // console.log("check data", data);
 
   return (
-    <div className="w-full mtop-64 padding-x-4 py-4 flex flex-col justify-center">
+    <div className="w-full mtop-64 padding-x-4 py-4 flex flex-col justify-center font-sans">
       {data?.data?.length > 0 ? (
         <Watched />
       ) : (

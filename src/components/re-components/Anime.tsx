@@ -26,7 +26,7 @@ function Anime(props: IAnimes) {
   };
   useResizeAnimeElements();
   return (
-    <div className="w-full grid grid-cols-2 gap-2 xl:gap-4 2xl:gap-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 font-sans">
+    <div className="w-full grid grid-cols-2 gap-2 sm:gap-2 lg:gap-5 xl:gap-5 2xl:gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 font-sans">
       {animes?.length > 0 &&
         animes.map((item) => {
           return (
@@ -34,7 +34,7 @@ function Anime(props: IAnimes) {
               href={`/layout/movie?id=${item?.id}`}
               key={item.id}
               id="content"
-              className="content  bg-[var(--super-white)] w-full h-[26.5rem]  dark:bg-[color:var(--navbar-color)] font-sans rounded-t-md rounded-b-md overflow-hidden cursor-pointer shadow-[var(--shadow-light-mode)]  shadow-lg hover:shadow-2xl duration-200 ease-in "
+              className="content  bg-[var(--super-white)] w-full h-[26.5rem]  dark:bg-[color:var(--navbar-color)] font-sans rounded-t-md rounded-b-md overflow-hidden cursor-pointer shadow-[var(--shadow-light-mode)] dark:ring-0 dark:hover:ring-0   ring-1 ring-[var(--super-white)] hover:ring-2 shadow-md hover:shadow-2xl duration-200 ease-in "
               title={item.title}
               onClick={() => handleStoreMovie(item?.id)}
             >
@@ -58,10 +58,10 @@ function Anime(props: IAnimes) {
                 )}
               </div>
 
-              <div className="w-full h-fit max-h-[23%] flex flex-col items-center  p-4 pt-5">
+              <div className="w-full h-fit max-h-[23%] flex flex-col items-center  p-4 pt-5 2xl:pt-6">
                 <span
                   id="title"
-                  className="w-full leading-5 truncate  text-center text-black font-bold  dark:text-neutral-100  text-sm sm:text-sm md:text-sm lg:text-base xl:text-sm  tracking-wide  pb-[0.375rem]"
+                  className="w-full leading-5 truncate  text-center text-black font-bold  dark:text-neutral-100  text-sm sm:text-sm md:text-sm lg:text-base xl:text-sm 2xl:text-base tracking-wide  pb-[0.375rem]"
                 >
                   {item.title}
                 </span>
@@ -73,7 +73,7 @@ function Anime(props: IAnimes) {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-5 h-5 fill-neutral-900 stroke-[var(--super-white)] dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
+                    className="w-5 h-5 2xl:w-6 2xl:h-6 fill-black stroke-[var(--super-white)] dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
                   >
                     <path
                       strokeLinecap="round"
@@ -86,7 +86,7 @@ function Anime(props: IAnimes) {
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <span className="text-[var(--text-color-light)] dark:text-[var(--text-gray-color)] text-xs  ">
+                  <span className="text-[var(--text-color-light)] dark:text-[var(--text-gray-color)] text-xs 2xl:text-sm  ">
                     {numberWithCommas((item?.view as number) || 1)}
                   </span>
                 </div>

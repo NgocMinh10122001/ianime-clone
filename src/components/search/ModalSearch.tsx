@@ -160,14 +160,14 @@ function ModalSearch(props: any) {
         </div>
         <div className="flex justify-end gap-3 pt-6">
           <button
-            className="p-1 px-2 text-neutral-900 bg-yellow-500 dark:bg-var(--navbar-color)  dark:border-none rounded-md hover:bg-yellow-400 cursor-pointer duration-200"
+            className="p-2 px-4 text-black text-base font-medium bg-yellow-500 dark:bg-var(--navbar-color)  dark:border-none rounded-md hover:bg-yellow-400 cursor-pointer duration-200"
             onClick={handleCancel}
           >
             Cancel
           </button>
           <button
             // onClick={apply}
-            className="p-1 px-2 text-neutral-900 bg-blue-500  dark:bg-var(--navbar-color)   dark:border-none rounded-md hover:bg-blue-400 cursor-pointer duration-200"
+            className="p-2 px-4 text-black text-base font-medium bg-blue-500  dark:bg-var(--navbar-color)   dark:border-none rounded-md hover:bg-blue-400 cursor-pointer duration-200"
             onClick={() => handleRefresh(titleModal)}
           >
             Refresh
