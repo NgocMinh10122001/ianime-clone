@@ -30,7 +30,7 @@ function Category(props: IProps) {
     <>
       <div className="category__container  ">
         <div className="border-6 dark:border-white  border-black rounded-lg w-[16%]"></div>
-        <div className="category__title  text-neutral-900 dark:text-[var(--text-white)] font-bold uppercase text-3xl sm:text-4xl tracking-wide pb-8 pt-5  ">
+        <div className="category__title  text-black dark:text-[var(--super-white)] font-bold uppercase text-3xl sm:text-4xl tracking-wide pb-8 pt-3  ">
           Thể loại
         </div>
         <div className="category__content grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-4">
@@ -58,7 +58,7 @@ function Category(props: IProps) {
                     <div className="cate__title absolute left-2 bottom-2">
                       <div
                         id="titleCate"
-                        className="title text-lg font-medium text-[var(--text-white)] uppercase"
+                        className="title text-lg md:text-xl font-semibold text-[var(--text-white)] uppercase"
                       >
                         {item.genre}
                       </div>

@@ -98,7 +98,7 @@ const useResizeBranch = () => {
             const newTitle = containerWidth * 0.017578125;
             des.style.fontSize = newTitle + "px";
           } else {
-            des.style.fontSize = "18px";
+            des.style.fontSize = "16px";
           }
         }
       });

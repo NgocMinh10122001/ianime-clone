@@ -5,6 +5,8 @@ import { MdFiberNew } from "react-icons/md";
 import { FcAlphabeticalSortingAz } from "react-icons/fc";
 import { HiFire } from "react-icons/hi";
 import ModalSearch from "./ModalSearch";
+import { HiSortAscending } from "react-icons/hi";
+import { IoMdRefreshCircle } from "react-icons/io";
 interface IOption {
   svg: any;
   title: string;
@@ -23,17 +25,29 @@ interface IProps {
 
 const sortTitle = [
   {
-    svg: <MdFiberNew size={20} color={"fff"} />,
+    svg: (
+      <MdFiberNew
+        size={20}
+        className="text-black dark:text-[var(--super-white)]"
+      />
+    ),
     sort: "new",
     title: "Mới tải lên",
   },
   {
-    svg: <HiFire size={20} color={"fff"} />,
+    svg: (
+      <HiFire size={20} className="text-black dark:text-[var(--super-white)]" />
+    ),
     sort: "top",
     title: "Xem nhiều nhất",
   },
   {
-    svg: <FcAlphabeticalSortingAz size={20} color={"fff"} />,
+    svg: (
+      <FcAlphabeticalSortingAz
+        size={20}
+        className="text-black dark:text-[var(--super-white)]"
+      />
+    ),
     sort: "az",
     title: "Bảng chữ cái",
   },
@@ -142,14 +156,14 @@ function Option(props: IProps) {
     [demand, genre, firm, release, page]
   );
   return (
-    <div className="options__container flex flex-wrap  mb-4 py-4  ">
+    <div className="options__container flex flex-wrap  mb-4 py-4  font-sans">
       <div className="" onClick={() => setSort(false)}></div>
       {options?.length > 0 &&
         options.map((item, index) => {
           return (
             <div
               key={index}
-              className="option me-2 mt-2 sm:mt-4 bg-[var(--color-btn-sun)] dark:bg-[var(--navbar-hover-color)] dark:hover:bg-neutral-700 duration-200 ease-in hover:bg-pink-500 w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer z-10"
+              className="option me-2 mt-2 sm:mt-4 bg-[var(--super-white)] dark:bg-[var(--navbar-hover-color)] dark:hover:bg-neutral-700 duration-200 ease-in shadow-[var(--shadow-light-mode)] dark:ring-0 dark:hover:ring-0  shadow-md ring-1 ring-[var(--super-white)] hover:ring-2 hover:shadow-lg w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer z-10"
               onClick={() => showModal(item.title)}
             >
               {item.svg}
@@ -164,74 +178,49 @@ function Option(props: IProps) {
 
       <div
         onClick={handleToggleSort}
-        className="option relative me-2 mt-2 sm:mt-4 bg-[var(--color-btn-sun)] dark:bg-[var(--navbar-hover-color)] dark:hover:bg-neutral-700 duration-200 ease-in hover:bg-pink-500 w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer z-[15]"
+        className="relative option me-2 mt-2 sm:mt-4 bg-[var(--super-white)] dark:bg-[var(--navbar-hover-color)] dark:hover:bg-neutral-700 duration-200 ease-in shadow-[var(--shadow-light-mode)] dark:ring-0 dark:hover:ring-0  shadow-md ring-1 ring-[var(--super-white)] hover:ring-2 hover:shadow-lg w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer z-[15]"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          className="w-5 h-5 stroke-white"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12"
-          />
-        </svg>
+        <HiSortAscending className="w-6 h-6 text-black dark:text-[var(--super-white)]" />
 
         <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-white">
           Sắp xếp
         </span>
-        {sort ? (
-          <div className="absolute top-full left-0 w-fit p-2 bg-pink-300 dark:bg-[var(--navbar-color)] rounded-sm  z-20">
-            {sortTitle &&
-              sortTitle.length > 0 &&
-              sortTitle.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="flex w-[180px] items-center gap-3  hover:bg-pink-500 hover:dark:bg-[var(--navbar-hover-color2)] rounded-lg p-1 duration-200 ease-in-out "
-                    onClick={() => handleSort(item.sort)}
-                    style={{
-                      backgroundColor: `${
-                        orderBy === item.sort
-                          ? "rgb(236 72 153 / var(--tw-bg-opacity))"
-                          : ""
-                      }`,
-                    }}
-                  >
-                    <div className="p-1">{item.svg}</div>
-                    <span className="text-neutral-900 dark:text-white flex flex-nowrap">
-                      {item.title}
-                    </span>
-                  </div>
-                );
-              })}
-          </div>
-        ) : (
-          ""
-        )}
+
+        <div
+          className={`absolute  ${
+            sort ? "opacity-1 translate-x-0" : "opacity-0 translate-x-full"
+          } top-[130%] left-0 border-t-[2px] border-[var(--bg-purple-ligth)] w-fit p-2 bg-[var(--super-white)] dark:bg-[var(--navbar-color)] rounded-b-lg duration-300 z-20`}
+        >
+          {sortTitle &&
+            sortTitle.length > 0 &&
+            sortTitle.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`group   flex w-[180px] items-center gap-3  hover:bg-[var(--bg-purple-ligth)]  hover:dark:bg-[var(--navbar-hover-color2)] rounded-lg p-2 my-2 duration-200 ease-in-out`}
+                  onClick={() => handleSort(item.sort)}
+                  style={{
+                    backgroundColor: `${
+                      orderBy === item.sort ? "#7a59ff" : ""
+                    }`,
+                  }}
+                >
+                  <div className="p-1">{item.svg}</div>
+                  <span className="group-hover:text-[var(--super-white)] text-black dark:text-[var(--super-white)] flex flex-nowrap">
+                    {item.title}
+                  </span>
+                </div>
+              );
+            })}
+        </div>
       </div>
       <div
-        className="option mt-2 sm:mt-4 bg-[var(--color-btn-sun)] hover:bg-pink-500 dark:bg-pink-900 dark:hover:bg-pink-500 duration-200 ease-in w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer z-10"
+        className="option me-2 mt-2 sm:mt-4 bg-[var(--bg-purple-ligth)] duration-200 ease-in shadow-[var(--shadow-light-mode)] dark:ring-0 dark:hover:ring-0  shadow-md ring-1 ring-[var(--bg-purple-ligth)] hover:ring-2 hover:shadow-lg w-fit flex items-center rounded-md py-2 px-4 hover:cursor-pointer z-10"
         onClick={handleRefresh}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          className="w-5 h-5 stroke-white"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-          />
-        </svg>
+        <IoMdRefreshCircle className="w-6 h-6 text-black dark:text-[var(--super-white)]" />
 
-        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-neutral-900  dark:text-white">
+        <span className="ps-2 uppercase text-sm tracking-widest font-medium text-[var(--super-white)] ">
           Làm mới
         </span>
       </div>

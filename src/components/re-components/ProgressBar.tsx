@@ -5,7 +5,7 @@ import NextTopLoader from "nextjs-toploader";
 const NextNProgressClient = () => {
   return (
     <NextTopLoader
-      color="rgb(236, 72, 153)"
+      color="#7a59ff"
       initialPosition={0.08}
       crawlSpeed={500}
       height={3}

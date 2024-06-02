@@ -22,21 +22,21 @@ export default async function page() {
       desBranch: "Tìm nguồn ảnh gái xinh",
       svg: "collection",
       thumnail:
-        "https://upload.wikimedia.org/wikipedia/vi/8/84/B%C3%ACa_t%E1%BA%ADp_1_b%E1%BB%99_truy%E1%BB%87n_Sono_Bisuku_Doru_wa_Koi_o_Suru.jpg",
+        "https://upload.wikimedia.org/wikipedia/en/f/f5/Cyber_Hunter_Icon.png",
     },
     {
       titleBranch: "Thể loại",
       desBranch: "Tổng hợp tất cả thể loại",
       svg: "genre",
       thumnail:
-        "https://upload.wikimedia.org/wikipedia/vi/c/c7/Naruto_Volume_1_manga_cover.jpg",
+        "https://upload.wikimedia.org/wikipedia/vi/c/cb/DotALoadScreen.JPG",
     },
     {
       titleBranch: "Gacha",
       desBranch: "Thử tí vận may chứ?",
       svg: "gacha",
       thumnail:
-        "https://upload.wikimedia.org/wikipedia/en/3/3e/Sword_Art_Online_light_novel_volume_1_cover.jpg",
+        "https://upload.wikimedia.org/wikipedia/vi/0/0a/Genshin_Impact_cover.jpg",
     },
   ];
 
@@ -48,7 +48,7 @@ export default async function page() {
   const data = await res.json();
   return (
     <div
-      className="explore__container mtop-64 w-full "
+      className="explore__container mtop-64 w-full font-sans"
       style={{ padding: "16px" }}
     >
       <Branch branchs={branchs} />
