@@ -54,19 +54,14 @@ const useResizeAnimeElements = () => {
           content.style.height = newHeight + "px";
           // title.style.fontSize = newTitleSize + "px";
         } else if (containerWidth >= 370) {
-          const newHeight = containerWidth * 0.9; // 16:9 aspect ratio
-          // const newTitleSize = containerWidth * 0.0250783699;
-          content.style.height = newHeight + "px";
-          // title.style.fontSize = newTitleSize + "px";
-        } else if (containerWidth >= 300) {
-          const newHeight = containerWidth * 1; // 16:9 aspect ratio
+          const newHeight = containerWidth * 0.76744186046; // 16:9 aspect ratio
           // const newTitleSize = containerWidth * 0.0250783699;
           content.style.height = newHeight + "px";
           // title.style.fontSize = newTitleSize + "px";
         } else {
           // Calculate the new height based on a 16:9 aspect ratio
 
-          const newHeight = containerWidth * 1.2; // 16:9 aspect ratio
+          const newHeight = containerWidth * 0.76744186046; // 16:9 aspect ratio
           // const newTitleSize = containerWidth * 0.0250783699;
           content.style.height = newHeight + "px";
           // title.style.fontSize = newTitleSize + "px";
