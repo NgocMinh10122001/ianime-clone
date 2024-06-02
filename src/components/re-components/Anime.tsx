@@ -58,7 +58,7 @@ function Anime(props: IAnimes) {
                 )}
               </div>
 
-              <div className="w-full h-fit max-h-[23%] flex flex-col items-center  p-4 pt-5 2xl:pt-6">
+              <div className="w-full h-fit max-h-[23%] flex flex-col  items-center max-[420px]:pt-[12px]  max-[375px]:pt-[10px]  p-4 pt-5 sm:pt-5 2xl:pt-6">
                 <span
                   id="title"
                   className="w-full leading-5 truncate  text-center text-black font-bold  dark:text-neutral-100  text-sm sm:text-sm md:text-sm lg:text-base xl:text-sm 2xl:text-base tracking-wide  pb-[0.375rem]"
