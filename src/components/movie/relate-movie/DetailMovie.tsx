@@ -104,7 +104,7 @@ function DetailMovie(props: IProps) {
   };
   useResizeDetailMovie();
   return (
-    <div className="w-full h-full grid grid-cols-12 gap-4 pt-4 border-t border-pink-600 dark:border-slate-400">
+    <div className="w-full h-full grid grid-cols-12 gap-4 pt-4 border-t border-[var(--bg-purple-ligth)] dark:border-slate-400">
       <div
         id="imageDetailMovie"
         className="col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-3 2xl:col-span-3   w-full h-[340px] bg-no-repeat bg-cover bg-center rounded-md"
@@ -114,42 +114,44 @@ function DetailMovie(props: IProps) {
       </div>
       <div className="col-span-7 sm:col-span-8 md:col-span-9 lg:col-span-9 xl:col-span-9 2xl:col-span-9 flex flex-col gap-6">
         <div className="">
-          <p className="text-neutral-900 dark:text-slate-400 text-sm pb-1">Hãng</p>
+          <p className="text-black dark:text-slate-400 font-bold text-base pb-1">
+            Hãng
+          </p>
           <span
-            className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
+            className="text-[var(--bg-purple-ligth)] text-base font-normal dark:text-yellow-500 hover:text-[#a29bfe] ease-in duration-150 dark:hover:text-yellow-600 cursor-pointer"
             onClick={() => dispatch1(theFirm.id)}
           >
             {theFirm.name || ""}
           </span>
         </div>
         <div>
-          <p className="text-neutral-900 dark:text-slate-400 text-sm pb-1">
+          <p className="text-black dark:text-slate-400 text-base font-bold pb-1">
             Tên Anime
           </p>
           <span
-            className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
+            className="text-[var(--bg-purple-ligth)] text-base font-normal dark:text-yellow-500 hover:text-[#a29bfe] ease-in duration-150 dark:hover:text-yellow-600 cursor-pointer"
             onClick={() => dispatchNameAnime(title)}
           >
             {title || ""}
           </span>
         </div>
         <div>
-          <p className="text-neutral-900 dark:text-slate-400 text-sm pb-1">
+          <p className="text-black dark:text-slate-400 text-base font-bold pb-1">
             Năm phát hành
           </p>
           <span
-            className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
+            className="text-[var(--bg-purple-ligth)] text-base font-normal dark:text-yellow-500 hover:text-[#a29bfe] ease-in duration-150 dark:hover:text-yellow-600 cursor-pointer"
             onClick={() => dispatch2(release.id)}
           >
             {release.year || ""}
           </span>
         </div>
         <div>
-          <p className="text-neutral-900 dark:text-slate-400 text-sm pb-1">
+          <p className="text-black dark:text-slate-400 text-base font-bold pb-1">
             Tên khác
           </p>
           <span
-            className="text-pink-500 dark:text-yellow-500 hover:text-pink-600 ease-in-out duration-150 dark:hover:text-yellow-600 cursor-pointer"
+            className="text-[var(--bg-purple-ligth)] text-base font-normal dark:text-yellow-500 hover:text-[#a29bfe] ease-in duration-150 dark:hover:text-yellow-600 cursor-pointer"
             onClick={() => dispatchNameAnime(otherName)}
           >
             {otherName}

@@ -35,7 +35,7 @@ export default async function page(props: any) {
   // console.log(data.anime);
 
   return (
-    <div className="padding-x-4 mtop-64 w-full grid grid-cols-12 gap-4">
+    <div className="padding-x-4 mtop-64 w-full grid grid-cols-12 gap-4 font-sans">
       <Movie anime={data?.anime ? data.anime : []} />
       <LittleMovie
         sameName={data?.sameName ? data.sameName : []}
