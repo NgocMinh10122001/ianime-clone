@@ -42,7 +42,7 @@ function Movie(props: IProps) {
       />
       <SumaryMovie genres={anime?.genres || []} des={anime?.des || ""} />
       <div className="w-full flex justify-center">
-        <div className=" w-fit h-fit px-6 py-3 rounded-full  ease-in duration-200  bg-yellow-400 hover:bg-yellow-500 dark:bg-yellow-600 hover:dark:bg-yellow-500 text-base font-normal cursor-pointer ">
+        <div className=" w-fit px-6 py-3 2xl:py-3 flex  shadow-md  hover:shadow-lg  hover:cursor-pointer  duration-200 ease-in shadow-[var(--shadow-light-mode)]  rounded-full items-center   bg-[var(--bg-purple-ligth)] hover:bg-[var(--bg-purple-ligth-2)] dark:bg-yellow-600 hover:dark:bg-yellow-500 text-base text-[var(--super-white)] font-normal cursor-pointer ">
           Tham gia nhom discord
         </div>
       </div>

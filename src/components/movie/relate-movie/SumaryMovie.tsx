@@ -18,7 +18,7 @@ function SumaryMovie(props: IProps) {
             return (
               <div
                 key={index}
-                className="text-black bg-[#a29bfe] hover:bg-[var(--bg-purple-ligth)] hover:text-[var(--super-white)] ease-in duration-200  rounded-md dark:text-white dark:bg-[var(--active-dark)] dark:hover:bg-[var(--navbar-hover-color2)] cursor-pointer w-fit h-fit px-4 py-2 text-base font-normal"
+                className="  ease-in duration-200  rounded-md text-white bg-[var(--active-dark)] hover:bg-[var(--navbar-hover-color2)] cursor-pointer w-fit h-fit px-4 py-2 text-sm font-normal"
                 onClick={() =>
                   router.push(`/layout/category?category=${item.id}`)
                 }
