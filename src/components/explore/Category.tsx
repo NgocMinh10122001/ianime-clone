@@ -58,7 +58,7 @@ function Category(props: IProps) {
                     <div className="cate__title absolute left-2 bottom-2">
                       <div
                         id="titleCate"
-                        className="title text-lg md:text-xl font-semibold text-[var(--text-white)] uppercase"
+                        className="title text-base md:text-lg  font-bold text-[var(--text-white)] uppercase"
                       >
                         {item.genre}
                       </div>
