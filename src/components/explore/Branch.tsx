@@ -91,6 +91,7 @@ function Branch(props: IProps) {
                   >
                     {/* text-sm */}
                     {item.desBranch}
+                    <></>
                   </span>
                 </div>
               </div>
