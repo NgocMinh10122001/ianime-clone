@@ -107,7 +107,7 @@ function Login(props: Iprops) {
   };
 
   return (
-    <div className="bg-[url('/riot.jpeg')] bg-cover bg-center bg-no-repeat w-full h-screen flex justify-center items-center relative">
+    <div className="bg-[url('/riot.jpeg')] bg-cover bg-center bg-no-repeat w-full h-screen flex justify-center items-center relative font-sans">
       <div className=" bg-gradient-to-b from-transparent to-black opacity-95 absolute top-0 bottom-0 right-0 left-0 "></div>
       <div className="flex justify-center items-center  ">
         <div

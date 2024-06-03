@@ -10,7 +10,7 @@ function SumaryMovie(props: IProps) {
   let { genres, des } = props;
   const router = useRouter();
   return (
-    <div className="w-full h-fit p-4 grid gap-4 bg-pink-100  dark:bg-[var(--navbar-color)] rounded-md">
+    <div className="w-full h-fit p-4 grid gap-4 bg-[var(--super-white)]  dark:bg-[var(--navbar-color)] rounded-md">
       <div className="category flex flex-wrap gap-2 ">
         {genres &&
           genres.length > 0 &&
@@ -18,7 +18,7 @@ function SumaryMovie(props: IProps) {
             return (
               <div
                 key={index}
-                className="text-neutral-900 bg-pink-400 hover:bg-pink-500 ease-in-out duration-150  rounded-md dark:text-white dark:bg-[var(--active-dark)] dark:hover:bg-[var(--navbar-hover-color2)] cursor-pointer w-fit h-fit px-3 py-1 text-sm font-light"
+                className="text-black bg-[#a29bfe] hover:bg-[var(--bg-purple-ligth)] hover:text-[var(--super-white)] ease-in duration-200  rounded-md dark:text-white dark:bg-[var(--active-dark)] dark:hover:bg-[var(--navbar-hover-color2)] cursor-pointer w-fit h-fit px-4 py-2 text-base font-normal"
                 onClick={() =>
                   router.push(`/layout/category?category=${item.id}`)
                 }
@@ -28,7 +28,9 @@ function SumaryMovie(props: IProps) {
             );
           })}
       </div>
-      <p className="text-neutral-900 dark:text-white text-sm">{des}</p>
+      <p className="text-black dark:text-[var(--super-white)] text-base tracking-wide">
+        {des}
+      </p>
     </div>
   );
 }

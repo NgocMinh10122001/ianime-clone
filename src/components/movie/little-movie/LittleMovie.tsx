@@ -32,16 +32,16 @@ function LittleMovie(props: IProps) {
   useResizeLittleMovie();
   return (
     <div className="py-2 w-full h-fit">
-      <p className=" text-neutral-900 dark:text-white h-fit text-base font-normal pb-2">
+      <p className=" text-black dark:text-[var(--super-white)] h-fit text-base font-normal pb-2">
         {relate}{" "}
         <span
-          className="text-pink-600 dark:text-yellow-500 hover:text-pink-400 dark:hover:text-yellow-600 cursor-pointer uppercase"
+          className="text-[var(--bg-purple-ligth)] dark:text-yellow-500 duration-150 ease-in hover:text-[var(--bg-purple-ligth-2)] dark:hover:text-yellow-600 cursor-pointer font-semibold xl:font-semibold 2xl:font-semibold text-lg uppercase"
           onClick={() => handlePush(theFirm, release)}
         >
           {theFirm?.name || release?.year || ""}
         </span>
       </p>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4 ">
         {(animeRelate &&
           animeRelate.length > 0 &&
           animeRelate.map((item) => {
@@ -54,7 +54,7 @@ function LittleMovie(props: IProps) {
               >
                 <div
                   id="littleMovie"
-                  className="h-full col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-5 2xl:col-span-4 relative   after:right-[6px]  after:bottom-[6px]  after:text-red-500 block after:absolute after:w-8 after:flex after:justify-center after:items-center after:h-8 after:rounded-full after:bg-pink-300 after:z-[11]"
+                  className="h-full col-span-5 sm:col-span-4 md:col-span-3 lg:col-span-5 2xl:col-span-4 relative   after:right-[6px]  after:bottom-[6px]  after:text-[var(--super-white)] block after:absolute after:w-8 after:flex after:justify-center after:items-center after:h-8 after:rounded-full after:bg-[var(--bg-purple-ligth)] after:z-[11]"
                 >
                   <div
                     className={`    rounded-md bg-cover bg-top bg-no-repeat    opacity-80 dark:opacity-40 absolute top-0 left-0 right-0 bottom-0 z-0 `}
@@ -81,20 +81,20 @@ function LittleMovie(props: IProps) {
                   `}</style>
                 </div>
                 <div className="col-span-7 sm:col-span-8 md:col-span-9 lg:col-span-7 2xl:col-span-8  h-full">
-                  <p className="text-neutral-900 dark:text-white truncate xl:whitespace-normal">
+                  <p className="text-black dark:text-[var(--super-white)] font-semibold xl:font-medium  2xl:font-semibold dark:font-normal truncate xl:whitespace-normal">
                     {item.title}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">
+                  <p className="text-black dark:text-slate-400 font-medium xl:font-light 2xl:font-semibold dark:font-medium  text-sm tracking-wider">
                     {item.firm?.name}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-400 text-sm tracking-wider">
+                  <p className="text-black dark:text-slate-400 font-light xl:font-extralight 2xl:font-light dark:font-normal text-sm tracking-wider">
                     {item.view} luot xem
                   </p>
                 </div>
               </Link>
             );
           })) || (
-          <p className="text-slate-700 dark:text-slate-400  text-sm tracking-wider">
+          <p className="text-black dark:text-slate-400  text-sm tracking-wider">
             Không có anime!
           </p>
         )}

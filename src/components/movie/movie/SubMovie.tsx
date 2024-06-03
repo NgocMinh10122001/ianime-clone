@@ -31,15 +31,18 @@ function SubMovie(props: IProps) {
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
-          className="row-span-12 md:row-span-12 lg:row-span-12 pb-4 "
+          className="row-span-12 md:row-span-12 lg:row-span-12 mb-4 rounded-lg"
           // onClick={() => handleAddViewVideo(id, userId)}
         ></iframe>
 
-        <p className="text-neutral-900 dark:text-white font-normal text-lg">
+        <p className="text-black dark:text-[var(--super-white)] font-semibold text-2xl">
           {title}
         </p>
-        <p className="text-slate-700 dark:text-slate-400 text-sm">
-          {view} lượt xem
+        <p className="text-black dark:text-slate-400 text-sm font-light">
+          <span className="text-black dark:text-slate-300 text-sm font-normal">
+            {view}
+          </span>{" "}
+          lượt xem
         </p>
         <div className="video-feature w-full  flex flex-wrap gap-y-4 pt-4">
           <FeaturesMovie />
