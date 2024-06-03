@@ -15,21 +15,21 @@ export default async function page() {
       desBranch: "Phim nhiều lượt xem nhất",
       svg: "anime",
       thumnail:
-        "https://upload.wikimedia.org/wikipedia/vi/8/82/Jujutsu_Kaisen_vol_1_cover.jpeg",
+        "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data_live/bdbed4e6ca66f10b86f4dbc41db2d5c066ab9168-496x560.jpg?auto=format&fit=fill&q=80&w=496",
     },
     {
       titleBranch: "Bộ sưu tập",
       desBranch: "Tìm nguồn ảnh gái xinh",
       svg: "collection",
       thumnail:
-        "https://upload.wikimedia.org/wikipedia/en/f/f5/Cyber_Hunter_Icon.png",
+        "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Seraphine_0.jpg",
     },
     {
       titleBranch: "Thể loại",
       desBranch: "Tổng hợp tất cả thể loại",
       svg: "genre",
       thumnail:
-        "https://upload.wikimedia.org/wikipedia/vi/c/cb/DotALoadScreen.JPG",
+        "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data_live/c1a9aa77bfcc93fbe32e0f2d85168c875ae81bc7-496x560.jpg?auto=format&fit=fill&q=80&w=496",
     },
     {
       titleBranch: "Gacha",

@@ -51,7 +51,7 @@ function Branch(props: IProps) {
                   backgroundImage: `url("${item.thumnail}")`,
                 }}
               >
-                <div className=" bg-gradient-to-b from-transparent to-black opacity-70 dark:opacity-95 absolute top-0 bottom-0 left-0 right-0"></div>
+                <div className=" bg-gradient-to-b from-transparent to-black opacity-80 dark:opacity-95 absolute top-0 bottom-0 left-0 right-0"></div>
                 <div className="branch__content__svg absolute bottom-20 sm:bottom-28 2xl:bottom-32 flex justify-center w-full ">
                   {(item.svg === "anime" && (
                     <HiFire
