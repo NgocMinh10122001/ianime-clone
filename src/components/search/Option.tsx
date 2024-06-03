@@ -188,8 +188,10 @@ function Option(props: IProps) {
 
         <div
           className={`absolute  ${
-            sort ? "opacity-1 translate-x-0" : "opacity-0 translate-x-full"
-          } top-[130%] left-0 border-t-[2px] border-[var(--bg-purple-ligth)] w-fit p-2 bg-[var(--super-white)] dark:bg-[var(--navbar-color)] rounded-b-lg duration-300 z-20`}
+            sort
+              ? "opacity-1 translate-x-0 z-20"
+              : "opacity-0 -translate-x-[400%] -z-50"
+          } top-[130%] left-0 border-t-[2px] border-[var(--bg-purple-ligth)] w-fit p-2 bg-[var(--super-white)] dark:bg-[var(--navbar-color)] rounded-b-lg duration-300 `}
         >
           {sortTitle &&
             sortTitle.length > 0 &&
