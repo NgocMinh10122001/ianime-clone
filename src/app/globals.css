@@ -71,7 +71,7 @@ body {
 }
 
 .btn{
-  background-image: linear-gradient(to left, var(--bg-purple-ligth), var(--super-white),var(--bg-purple-ligth));
+  background-image: linear-gradient(to left, var(--bg-purple-ligth),var(--bg-purple-ligth),var(--super-white), var(--bg-purple-ligth),var(--bg-purple-ligth));
   background-size: 400%;
 }
 

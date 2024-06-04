@@ -49,13 +49,16 @@ const FreshLoad = (props: IProps) => {
           {title}
         </h1>
         <button
-          className="px-6 py-2 rounded-sm border-none cursor-pointer btn hover:bg-right duration-300 ease-in-out"
+          className="group w-[96px] h-[40px] text-center rounded-md border-none cursor-pointer btn hover:bg-right duration-700    ease-in-out"
           // text-neutral-900 dark:text-white text-sm font-normal  uppercase rounded-sm ease-in-out duration-150  px-6 py-2 dark:border-white tracking-widest bg-pink-300 hover:bg-pink-400 dark:bg-pink-400 dark:hover:bg-pink-300
 
           onClick={handleShowAnime}
         >
-          <span className="text-black font-semibold dark:text-[var(--super-white)] tracking-wide  h-full w-full block ">
+          <span className="group-hover:hidden duration-300 ease-in font-semibold text-[var(--super-white)] tracking-wide text-base   w-full block ">
             Tất cả
+          </span>
+          <span className=" hidden group-hover:block duration-300 ease-in font-semibold text-[var(--super-white)] tracking-wide text-base   w-full  ">
+            Xem
           </span>
         </button>
       </div>

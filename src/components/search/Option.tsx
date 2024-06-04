@@ -210,7 +210,6 @@ function Option(props: IProps) {
                   <div className="p-1">{item.svg}</div>
                   <span className="group-hover:text-[var(--super-white)] text-black dark:text-[var(--super-white)] flex flex-nowrap">
                     {item.title}
-                    <></>
                   </span>
                 </div>
               );
