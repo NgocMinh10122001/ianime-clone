@@ -123,7 +123,7 @@ function Navbar() {
       <nav
         className={`${
           isVisible
-            ? "translate-y-0 shadow-[var(--shadow-light-mode)] shadow-md dark:shadow-md"
+            ? "translate-y-0 shadow-[var(--shadow-light-mode)] shadow-sm dark:shadow-md"
             : "translate-y-[-100%]"
         } w-full fixed bg-[var(--super-white)] dark:bg-[color:var(--navbar-color)]  flex justify-between items-center padding-x-4  py-3  z-40 duration-200`}
       >
