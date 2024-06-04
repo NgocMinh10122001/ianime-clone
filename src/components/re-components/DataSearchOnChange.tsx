@@ -6,14 +6,16 @@ interface IProps {
   dataFetching: IDataFetching[];
   isToggleDataSearch: boolean;
   setToggleDataSearch: any;
+  isClose: boolean;
 }
 function DataSearchOnChange(props: IProps) {
-  let { dataFetching, isToggleDataSearch, setToggleDataSearch } = props;
+  let { dataFetching, isToggleDataSearch, setToggleDataSearch, isClose } =
+    props;
   // console.log(dataFetching);
 
   return (
     <>
-      {isToggleDataSearch ? (
+      {isToggleDataSearch && isClose ? (
         <div className="absolute font-sans right-0 left-0 top-[110%] h-fit py-4 bg-[var(--super-white)] dark:bg-[var(--navbar-hover-color)] rounded-md flex items-center flex-col justify-center z-20">
           {dataFetching &&
             dataFetching.length > 0 &&

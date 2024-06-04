@@ -182,7 +182,8 @@ function Navbar() {
             } flex items-center  ring-1 ring-[var(--navbar-hover-color2)] dark:ring-[var(--navbar-hover-color2)] rounded-sm py-2 hover:ring-black dark:hover:ring-white focus-within:ring-2 focus-within:ring-black  focus-within:dark:ring-white duration-200 ease-in-out `}
           >
             <DataSearchOnChange
-              isToggleDataSearch={isToggleDeleteSearch}
+              isToggleDataSearch={isToggleDataSearch}
+              isClose={isToggleDeleteSearch}
               dataFetching={dataFetching}
               setToggleDataSearch={setToggleDataSearch}
             />
