@@ -16,30 +16,40 @@ const useResizeAnimeElements = () => {
         // Get the current width of the contentContainer
         const containerWidth = window.innerWidth;
 
-        if (containerWidth >= 1536) {
+        if (containerWidth >= 2049) {
           // Calculate the new height based on a 16:9 aspect ratio
-          const newHeight = containerWidth * 0.28822381262; // 16:9 aspect ratio
+          const newHeight = containerWidth * 0.24169921875; // 16:9 aspect ratio
           // Set the height of the content element
           content.style.height = newHeight + "px";
-        } else if (containerWidth >= 1280) {
+        } else if (containerWidth >= 1921) {
+          // Calculate the new height based on a 16:9 aspect ratio
+          const newHeight = containerWidth * 0.2587890625; // 16:9 aspect ratio
+          // Set the height of the content element
+          content.style.height = newHeight + "px";
+        } else if (containerWidth >= 1537) {
+          // Calculate the new height based on a 16:9 aspect ratio
+          const newHeight = containerWidth * 0.27083333333; // 16:9 aspect ratio
+          // Set the height of the content element
+          content.style.height = newHeight + "px";
+        } else if (containerWidth >= 1281) {
           // Calculate the new height based on a 16:9 aspect ratio
           const newHeight = containerWidth * 0.28822381262; // 16:9 aspect ratio
 
           // Set the height of the content element
           content.style.height = newHeight + "px";
-        } else if (containerWidth >= 1024) {
+        } else if (containerWidth >= 1025) {
           // Calculate the new height based on a 16:9 aspect ratio
           const newHeight = containerWidth * 0.39937353171; // 16:9 aspect ratio
 
           // Set the height of the content element
           content.style.height = newHeight + "px";
-        } else if (containerWidth >= 768) {
+        } else if (containerWidth >= 769) {
           // Calculate the new height based on a 16:9 aspect ratio
           const newHeight = containerWidth * 0.41095890411; // 16:9 aspect ratio
 
           // Set the height of the content element
           content.style.height = newHeight + "px";
-        } else if (containerWidth >= 640) {
+        } else if (containerWidth >= 641) {
           // console.log(containerWidth);
 
           // Calculate the new height based on a 16:9 aspect ratio
@@ -53,7 +63,7 @@ const useResizeAnimeElements = () => {
           // const newTitleSize = containerWidth * 0.0250783699;
           content.style.height = newHeight + "px";
           // title.style.fontSize = newTitleSize + "px";
-        } else if (containerWidth >= 370) {
+        } else if (containerWidth >= 371) {
           const newHeight = containerWidth * 0.76744186046; // 16:9 aspect ratio
           // const newTitleSize = containerWidth * 0.0250783699;
           content.style.height = newHeight + "px";
