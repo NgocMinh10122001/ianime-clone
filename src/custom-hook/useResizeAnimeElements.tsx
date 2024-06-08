@@ -28,7 +28,7 @@ const useResizeAnimeElements = () => {
           content.style.height = newHeight + "px";
         } else if (containerWidth >= 1537) {
           // Calculate the new height based on a 16:9 aspect ratio
-          const newHeight = containerWidth * 0.27083333333; // 16:9 aspect ratio
+          const newHeight = containerWidth * 0.26041666666; // 16:9 aspect ratio
           // Set the height of the content element
           content.style.height = newHeight + "px";
         } else if (containerWidth >= 1281) {

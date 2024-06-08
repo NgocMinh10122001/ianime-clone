@@ -58,10 +58,10 @@ function Anime(props: IAnimes) {
                 )}
               </div>
 
-              <div className="w-full h-fit max-h-[23%] flex flex-col  items-center max-[420px]:pt-[12px]  max-[375px]:pt-[10px]  p-4 pt-5 sm:pt-5 2xl:pt-6  min-[2000px]:pt-7 min-[2200px]:pt-8  min-[2500px]:pt-9 min-[2690px]:pt-10 min-[2500px]:gap-[4px] min-[2690px]:gap-[4px]">
+              <div className="w-full h-fit max-h-[23%] flex flex-col  items-center max-[420px]:pt-[12px]  max-[375px]:pt-[10px]  p-[6%] pt-[7.7%] ">
                 <span
                   id="title"
-                  className="w-full leading-5 truncate  text-center text-black font-bold  dark:text-neutral-100  text-sm sm:text-sm md:text-sm lg:text-base xl:text-sm 2xl:text-base tracking-wide  pb-[0.375rem] min-[1920px]:text-lg min-[2500px]:text-2xl"
+                  className="w-full leading-5 truncate  text-center text-black font-bold  dark:text-neutral-100  text-sm sm:text-sm md:text-sm lg:text-base xl:text-sm 2xl:text-base tracking-wide  pb-[2.5%] 2xl:pb-[1.5%] min-[1920px]:pb-[1%] min-[1920px]:text-lg min-[2500px]:text-2xl"
                 >
                   {item.title}
                 </span>
