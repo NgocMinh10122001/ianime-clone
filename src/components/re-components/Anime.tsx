@@ -26,7 +26,7 @@ function Anime(props: IAnimes) {
   };
   useResizeAnimeElements();
   return (
-    <div className="w-full grid grid-cols-2 gap-2 sm:gap-2 lg:gap-5 xl:gap-5 2xl:gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5  min-[2400px]:grid-cols-6 min-[2400px]:gap-4 font-sans">
+    <div className="w-full grid grid-cols-2 gap-2 sm:gap-2 lg:gap-4 xl:gap-4 2xl:gap-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6   min-[1921px]:gap-2  font-sans">
       {animes?.length > 0 &&
         animes.map((item) => {
           return (
@@ -61,7 +61,7 @@ function Anime(props: IAnimes) {
               <div className="w-full h-fit max-h-[23%] flex flex-col  items-center max-[420px]:pt-[12px]  max-[375px]:pt-[10px]  p-4 pt-5 sm:pt-5 2xl:pt-6  min-[2000px]:pt-7 min-[2200px]:pt-8  min-[2500px]:pt-9 min-[2690px]:pt-10 min-[2500px]:gap-[4px] min-[2690px]:gap-[4px]">
                 <span
                   id="title"
-                  className="w-full leading-5 truncate  text-center text-black font-bold  dark:text-neutral-100  text-sm sm:text-sm md:text-sm lg:text-base xl:text-sm 2xl:text-base tracking-wide  pb-[0.375rem] min-[2000px]:text-xl min-[2500px]:text-2xl"
+                  className="w-full leading-5 truncate  text-center text-black font-bold  dark:text-neutral-100  text-sm sm:text-sm md:text-sm lg:text-base xl:text-sm 2xl:text-base tracking-wide  pb-[0.375rem] min-[1920px]:text-lg min-[2500px]:text-2xl"
                 >
                   {item.title}
                 </span>
@@ -73,7 +73,7 @@ function Anime(props: IAnimes) {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-5 h-5 2xl:w-6 2xl:h-6  min-[2000px]:w-7 min-[2000px]:h-7 min-[2500px]:w-8 min-[2500px]:h-8 fill-black stroke-[var(--super-white)] dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
+                    className="w-5 h-5 2xl:w-6 2xl:h-6  min-[1920px]:w-7 min-[1920px]:h-7 min-[2500px]:w-8 min-[2500px]:h-8 fill-black stroke-[var(--super-white)] dark:fill-neutral-100 dark:stroke-[color:var(--navbar-color)]"
                   >
                     <path
                       strokeLinecap="round"
@@ -86,7 +86,7 @@ function Anime(props: IAnimes) {
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <span className="text-[var(--text-color-light)] dark:text-[var(--text-gray-color)] text-xs 2xl:text-sm min-[2000px]:text-lg min-[2500px]:text-xl ">
+                  <span className="text-[var(--text-color-light)] dark:text-[var(--text-gray-color)] text-xs 2xl:text-sm min-[1920px]:text-base min-[2500px]:text-xl ">
                     {numberWithCommas((item?.view as number) || 1)}
                   </span>
                 </div>
